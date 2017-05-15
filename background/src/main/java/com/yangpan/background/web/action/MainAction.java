@@ -1,15 +1,10 @@
 package com.yangpan.background.web.action;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.yangpan.background.service.IMenuService;
-import com.yangpan.core.domain.Menu;
-import com.yangpan.core.domain.User;
 
 /**
  *	主页Action

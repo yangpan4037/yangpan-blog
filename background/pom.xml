@@ -41,11 +41,11 @@
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<version>1.0.0.Final</version>
 		</dependency>
-		<dependency>
-			<groupId>org.jboss</groupId>
-			<artifactId>jandex</artifactId>
-			<version>1.1.0.Final</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jboss</groupId> -->
+<!-- 			<artifactId>jandex</artifactId> -->
+<!-- 			<version>1.1.0.Final</version> -->
+<!-- 		</dependency> -->
 
 		<!-- struts2 -->
 		<dependency>
@@ -53,11 +53,11 @@
 			<artifactId>struts2-core</artifactId>
 			<version>2.3.20</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.struts.xwork</groupId>
-			<artifactId>xwork-core</artifactId>
-			<version>2.3.20</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.struts.xwork</groupId> -->
+<!-- 			<artifactId>xwork-core</artifactId> -->
+<!-- 			<version>2.3.20</version> -->
+<!-- 		</dependency> -->
 		
 		<!-- struts2注解 -->
 <!-- 		<dependency> -->
@@ -74,38 +74,20 @@
 		</dependency>
 
 		<!-- hibernate映射执行hql -->
-		<dependency>
-			<groupId>org.antlr</groupId>
-			<artifactId>antlr</artifactId>
-			<version>3.5.2</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.antlr</groupId> -->
+<!-- 			<artifactId>antlr</artifactId> -->
+<!-- 			<version>3.5.2</version> -->
+<!-- 		</dependency> -->
 
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-webapp</artifactId>
-			<version>9.2.6.v20141205</version>
-			<scope>provided</scope>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.eclipse.jetty</groupId> -->
+<!-- 			<artifactId>jetty-webapp</artifactId> -->
+<!-- 			<version>9.2.6.v20141205</version> -->
+<!-- 			<scope>provided</scope> -->
+<!-- 		</dependency> -->
 
 	</dependencies>
 
 
-	<build>
-		<pluginManagement>
-			<plugins>
-				<!-- 配置加入jetty服务器，开发时我们一般使用jetty服务器 -->
-				<plugin>
-					<groupId>org.mortbay.jetty</groupId>
-					<artifactId>jetty-maven-plugin</artifactId>
-					<configuration>
-						<!-- 设置扫描target/classes内部文件变化时间间隔 -->
-						<scanIntervalSeconds>2</scanIntervalSeconds>
-						<webApp>
-							<contextPath>/admin</contextPath>
-						</webApp>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
 </project>
