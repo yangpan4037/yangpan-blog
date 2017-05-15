@@ -1,7 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="/struts-tags" prefix="s"%>
-<%@include file="/WEB-INF/include/header.jsp"%>
+
 <!-- start: Content -->
 <div class="main">
 
@@ -283,7 +280,7 @@
 					</div>
 					<!--/.col-->
 
-					<div class="col-xs-7 text-left temp">15째C</div>
+					<div class="col-xs-7 text-left temp">15캜</div>
 					<!--/.col-->
 
 				</div>
@@ -296,21 +293,21 @@
 				<div class="col-xs-4">
 					<i class="climacon lightning sun"></i>
 					<span class="label label-primary">MON</span>
-					<p>40째C</p>
+					<p>40캜</p>
 				</div>
 				<!--/.col-->
 
 				<div class="col-xs-4">
 					<i class="climacon snow moon"></i>
 					<span class="label label-primary">TUE</span>
-					<p>18째C</p>
+					<p>18캜</p>
 				</div>
 				<!--/.col-->
 
 				<div class="col-xs-4">
 					<i class="climacon hail sun"></i>
 					<span class="label label-primary">WED</span>
-					<p>25째C</p>
+					<p>25캜</p>
 				</div>
 				<!--/.col-->
 
@@ -344,7 +341,7 @@
 					</div>
 					<!--/.col-->
 
-					<div class="col-xs-7 text-left temp">18째C</div>
+					<div class="col-xs-7 text-left temp">18캜</div>
 					<!--/.col-->
 
 				</div>
@@ -357,21 +354,21 @@
 				<div class="col-xs-4">
 					<i class="climacon lightning sun"></i>
 					<span class="label label-primary">MON</span>
-					<p>35째C</p>
+					<p>35캜</p>
 				</div>
 				<!--/.col-->
 
 				<div class="col-xs-4">
 					<i class="climacon fog sun"></i>
 					<span class="label label-primary">TUE</span>
-					<p>28째C</p>
+					<p>28캜</p>
 				</div>
 				<!--/.col-->
 
 				<div class="col-xs-4">
 					<i class="climacon rain"></i>
 					<span class="label label-primary">WED</span>
-					<p>17째C</p>
+					<p>17캜</p>
 				</div>
 				<!--/.col-->
 
@@ -918,5 +915,3 @@
 
 </div>
 <!-- end: Content -->
-
-<%@include file="/WEB-INF/include/footer.jsp"%>
