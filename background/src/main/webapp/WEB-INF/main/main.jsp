@@ -2,7 +2,7 @@
 <%@include file="/WEB-INF/include/header.jsp"%>
 
 <%-- 菜单 --%>
-<%@include file="/WEB-INF/main/sidebar.jsp"%>
+<%@include file="/WEB-INF/include/sidebar.jsp"%>
 
 <%-- 主要内容 --%>
 <%@include file="/WEB-INF/main/content.jsp"%>
@@ -26,3 +26,7 @@
 
 <%-- 尾部 --%>
 <%@include file="/WEB-INF/include/footer.jsp"%>
+
+<!-- inline scripts related to this page -->
+<script src="${contextPath}/resources/assets/js/pages/index.js"></script>	
+<!-- end: JavaScript-->

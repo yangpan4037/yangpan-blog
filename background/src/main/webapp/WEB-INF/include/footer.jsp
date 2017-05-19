@@ -120,6 +120,9 @@
 	<script src="${contextPath}/resources/assets/plugins/jvectormap/js/jquery-jvectormap-world-mill-en.js"></script>
 	<script src="${contextPath}/resources/assets/plugins/jvectormap/js/gdp-data.js"></script>	
 	<script src="${contextPath}/resources/assets/plugins/gauge/gauge.min.js"></script>
+	<!-- bootstrap-table -->
+	<script src="${contextPath}/resources/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="${contextPath}/resources/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 	
 	
 	<!-- theme scripts -->
@@ -127,11 +130,6 @@
 	<script src="${contextPath}/resources/assets/js/jquery.mmenu.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/core.min.js"></script>
 	<script src="${contextPath}/resources/assets/plugins/d3/d3.min.js"></script>	
-	
-	<!-- inline scripts related to this page -->
-	<script src="${contextPath}/resources/assets/js/pages/index.js"></script>	
-	
-	<!-- end: JavaScript-->
 	
 </body>
 </html>

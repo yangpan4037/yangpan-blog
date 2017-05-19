@@ -55,61 +55,61 @@ public class PageList {
 	/**
 	 *	返回分页html代码的方法 
 	 */
-	public String getPage() {
-		StringBuilder builder = new StringBuilder();
-		// 处理首页
-		if (this.currentPage == 1) {
-			builder.append("<li class='prev disabled'><a href='javascript:;'>首页</a></li>");
-			builder.append("<li class='prev disabled'><a href='javascript:;'>上一页</a></li>");
-		} else {
-			builder.append("<li class='prev'><a href='javascript:;' onclick='go(1);'>首页</a></li>");
-			builder.append("<li class='prev'><a href='javascript:;' onclick='go(" + (this.currentPage - 1) + ");'>上一页</a></li>");
-		}
-		/**
-		 * 处理中间页码
-		 * 中间页 类似123...15
-		 */
-		if(this.totalPage <= 5){
-			for (int i = 1; i <= this.totalPage; i++) {
-				if (this.currentPage == i) {
-					builder.append("<li class='active'><a href='javascript:;'>" + i + "</a></li>");
-				} else {
-					builder.append("<li class='prev'><a href='javascript:;' onclick='go(" + i + ");'>" + i + "</a></li>");
-				}
-			}
-		}else{
-			if(this.currentPage + 5 <= this.totalPage){
-				builder.append("<li class='prev active'><a href='javascript:;' onclick='go(" + this.currentPage + ");'>" + this.currentPage + "</a></li>");
-				builder.append("<li class='prev'><a href='javascript:;' onclick='go(" + (this.currentPage+1) + ");'>" + (this.currentPage+1) + "</a></li>");
-				builder.append("<li class='prev'><a href='javascript:;' onclick='go(" + (this.currentPage+2) + ");'>" + (this.currentPage+2) + "</a></li>");
-				builder.append("<li class='prev disabled'><a href='javascript:;'>...</a></li>");
-				builder.append("<li class='prev'><a href='javascript:;' onclick='go(" + this.totalPage + ");'>" + this.totalPage + "</a></li>");
-			}else{
-				for (int i = this.totalPage-4; i <= this.totalPage; i++) {
-					if(i == this.totalPage-3){
-						builder.append("<li class='prev disabled'><a href='javascript:;'>...</a></li>");
-					}else{
-						if (this.currentPage == i) {
-							builder.append("<li class='active'><a href='javascript:;'>" + i + "</a></li>");
-						} else {
-							builder.append("<li class='prev'><a href='javascript:;' onclick='go(" + i + ");'>" + i + "</a></li>");
-						}
-					}
-				}
-			}
-		}
-		
-
-		// 处理尾页
-		if (this.currentPage == this.totalPage) {
-			builder.append("<li class='next disabled'><a href='javascript:;'>下一页</a></li>");
-			builder.append("<li class='next disabled'><a href='javascript:;'>尾页</a></li>");
-		} else {
-			builder.append("<li class='next'><a href='javascript:;' onclick='go(" + (this.currentPage + 1) + ");'>下一页</a></li>");
-			builder.append("<li class='next'><a href='javascript:;' onclick='go(" + this.totalPage + ");'>尾页</a></li>");
-		}
-		return builder.toString();
-	}
+//	public String getPage() {
+//		StringBuilder builder = new StringBuilder();
+//		// 处理首页
+//		if (this.currentPage == 1) {
+//			builder.append("<li class='prev disabled'><a href='javascript:;'>首页</a></li>");
+//			builder.append("<li class='prev disabled'><a href='javascript:;'>上一页</a></li>");
+//		} else {
+//			builder.append("<li class='prev'><a href='javascript:;' onclick='go(1);'>首页</a></li>");
+//			builder.append("<li class='prev'><a href='javascript:;' onclick='go(" + (this.currentPage - 1) + ");'>上一页</a></li>");
+//		}
+//		/**
+//		 * 处理中间页码
+//		 * 中间页 类似123...15
+//		 */
+//		if(this.totalPage <= 5){
+//			for (int i = 1; i <= this.totalPage; i++) {
+//				if (this.currentPage == i) {
+//					builder.append("<li class='active'><a href='javascript:;'>" + i + "</a></li>");
+//				} else {
+//					builder.append("<li class='prev'><a href='javascript:;' onclick='go(" + i + ");'>" + i + "</a></li>");
+//				}
+//			}
+//		}else{
+//			if(this.currentPage + 5 <= this.totalPage){
+//				builder.append("<li class='prev active'><a href='javascript:;' onclick='go(" + this.currentPage + ");'>" + this.currentPage + "</a></li>");
+//				builder.append("<li class='prev'><a href='javascript:;' onclick='go(" + (this.currentPage+1) + ");'>" + (this.currentPage+1) + "</a></li>");
+//				builder.append("<li class='prev'><a href='javascript:;' onclick='go(" + (this.currentPage+2) + ");'>" + (this.currentPage+2) + "</a></li>");
+//				builder.append("<li class='prev disabled'><a href='javascript:;'>...</a></li>");
+//				builder.append("<li class='prev'><a href='javascript:;' onclick='go(" + this.totalPage + ");'>" + this.totalPage + "</a></li>");
+//			}else{
+//				for (int i = this.totalPage-4; i <= this.totalPage; i++) {
+//					if(i == this.totalPage-3){
+//						builder.append("<li class='prev disabled'><a href='javascript:;'>...</a></li>");
+//					}else{
+//						if (this.currentPage == i) {
+//							builder.append("<li class='active'><a href='javascript:;'>" + i + "</a></li>");
+//						} else {
+//							builder.append("<li class='prev'><a href='javascript:;' onclick='go(" + i + ");'>" + i + "</a></li>");
+//						}
+//					}
+//				}
+//			}
+//		}
+//		
+//
+//		// 处理尾页
+//		if (this.currentPage == this.totalPage) {
+//			builder.append("<li class='next disabled'><a href='javascript:;'>下一页</a></li>");
+//			builder.append("<li class='next disabled'><a href='javascript:;'>尾页</a></li>");
+//		} else {
+//			builder.append("<li class='next'><a href='javascript:;' onclick='go(" + (this.currentPage + 1) + ");'>下一页</a></li>");
+//			builder.append("<li class='next'><a href='javascript:;' onclick='go(" + this.totalPage + ");'>尾页</a></li>");
+//		}
+//		return builder.toString();
+//	}
 	
 	public int getPageSize() {
 		return pageSize;

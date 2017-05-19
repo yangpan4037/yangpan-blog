@@ -1,39 +1,58 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="/struts-tags" prefix="s"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>员工列表</title>
-</head>
-<body>
-	<a href="<s:url action="bar" namespace="/foo"/>/employee_input">添加员工</a>
-	<table border="1" cellpadding="15" cellspacing="0">
-		<tr>
-			<th>id</th>
-			<th>用户名</th>
-			<th>部门</th>
-			<th>操作</th>
-		</tr>
-		<s:iterator value="#emps">
+<%-- 头部 --%>
+<%@include file="/WEB-INF/include/header.jsp"%>
+
+<%-- 菜单 --%>
+<%@include file="/WEB-INF/include/sidebar.jsp"%>
+
+<%-- 主要内容 --%>
+<!-- start: Content -->
+<div class="main sidebar-minified">
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h3 class="page-header"> <i class="fa fa-table"></i>
+				Tables
+			</h3>
+			<ol class="breadcrumb">
+				<li> <i class="fa fa-home"></i>
+					<a href="index.html">Home</a>
+				</li>
+				<li>
+					<i class="fa fa-table"></i>
+					Tables
+				</li>
+			</ol>
+		</div>
+	</div>
+
+	<%-- 工具栏 --%>
+	<div id="toolbar">
+		<div class="btn-group">
+			<button type="button" class="btn btn-danger btn-sm">Left</button>
+			<button type="button" class="btn btn-primary btn-sm">Middle</button>
+			<button type="button" class="btn btn-success btn-sm">Right</button>
+		</div>
+	</div>
+
+	<%-- 列表 --%>
+	<table class="table table-striped table-bordered" data-toolbar="#toolbar" data-search="true" data-show-header="true" data-toggle="table" data-url="${contextPath}/menu_list">
+		<thead>
 			<tr>
-				<td>
-					<s:property value="id"/>
-				</td>
-				<td>
-					<s:property value="name"/>
-				</td>
-				<td>
-					<s:property value="dept.name"/>
-				</td>
-				<td>
-					<a href="${pageContext.request.contextPath}/employee_input?employee.id=${id }">编辑</a>
-					<a href="${pageContext.request.contextPath}/employee_delete?employee.id=${id }">删除</a>
-				</td>
+				<th data-field="id">ID</th>
+				<th data-field="name">NAME</th>
+				<th data-field="url">url</th>
+				<th data-field="icon">icon</th>
+				<th data-field="parent.name">parent</th>
 			</tr>
-		</s:iterator>
+		</thead>
 	</table>
 
-</body>
-</html>
+</div>
+<!-- end: Content -->
+
+<%-- 尾部 --%>
+<%@include file="/WEB-INF/include/footer.jsp"%>
+
+<!-- inline scripts related to this page -->
+<script src="${contextPath}/resources/assets/js/pages/table.js"></script>
+<!-- end: JavaScript-->

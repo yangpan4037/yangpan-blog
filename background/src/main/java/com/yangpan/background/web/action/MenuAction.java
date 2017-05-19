@@ -15,6 +15,7 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
 import com.yangpan.background.query.MenuQuery;
@@ -49,8 +50,9 @@ public class MenuAction extends CRUDAction<Menu> {
 	 * 父类会回调这个方法，并在execute()内调用这个方法
 	 */
 	@Override
-	protected void list() throws Exception {
+	public String list() throws Exception {
 		pageList = menuService.findByQuery(baseQuery);
+		return "pageList";
 	}
 	
 	/**
@@ -194,47 +196,6 @@ public class MenuAction extends CRUDAction<Menu> {
 		this.menuName = menuName;
 	}
 
-	/**
-	 * ajax修改名称
-	 */
-	public String changeName() throws Exception {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		PrintWriter out = response.getWriter();
-		if (pk != null && value != null) {
-			Menu tempMenu = menuService.get(pk);
-			String tempName = tempMenu.getName();
-			if (tempName != null && tempName.equals(value)) {
-				out.print("{\"msg\":true}");
-			} else {
-				tempMenu.setName(value);
-				menuService.saveOrUpdate(tempMenu);
-			}
-		}
-		return NONE;
-	}
-	
-	//X-editable的需要注入
-	private String value;
-	
-	private Long pk;
-	
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-	
-	public Long getPk() {
-		return pk;
-	}
-
-	public void setPk(Long pk) {
-		this.pk = pk;
-	}
-	
-	
 	/************ 导出xlsx文件开始*******************************************************************/
 	
 	private InputStream inputStream;

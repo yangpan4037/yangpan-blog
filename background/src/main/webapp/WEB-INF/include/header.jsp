@@ -16,14 +16,24 @@
 		<link rel="shortcut icon" href="${contextPath}/resources/assetsico/favicon.ico" type="image/x-icon" />    
 
 	    <!-- Css files -->
-	    <link href="${contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet">		
+	    <link href="${contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet">
+	    <!-- bootstrap-table -->
+	    <link href="${contextPath}/resources/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<!-- 滑动菜单 -->
 		<link href="${contextPath}/resources/assets/css/jquery.mmenu.css" rel="stylesheet">		
+		<!-- 字体图标 -->
 		<link href="${contextPath}/resources/assets/css/font-awesome.min.css" rel="stylesheet">
+		<!-- 图标 -->
 		<link href="${contextPath}/resources/assets/css/climacons-font.css" rel="stylesheet">
+		<!-- 图表 -->
 		<link href="${contextPath}/resources/assets/plugins/xcharts/css/xcharts.min.css" rel=" stylesheet">		
+		<!-- 日历 -->
 		<link href="${contextPath}/resources/assets/plugins/fullcalendar/css/fullcalendar.css" rel="stylesheet">
+		<!-- 折线图 -->
 		<link href="${contextPath}/resources/assets/plugins/morris/css/morris.css" rel="stylesheet">
+		<!-- jquery ui -->
 		<link href="${contextPath}/resources/assets/plugins/jquery-ui/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+		<!-- 地图 -->
 		<link href="${contextPath}/resources/assets/plugins/jvectormap/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">	    
 	    <link href="${contextPath}/resources/assets/css/style.min.css" rel="stylesheet">
 		<link href="${contextPath}/resources/assets/css/add-ons.min.css" rel="stylesheet">		

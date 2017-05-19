@@ -2,6 +2,7 @@ package com.yangpan.background.web.action;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import com.yangpan.background.query.PageList;
 
 /**
  *	具有公共的CRUD,高级查询分页
@@ -23,15 +24,16 @@ public abstract class CRUDAction<T> extends BaseAction implements ModelDriven<T>
 	 */
 	@Override
 	public String execute() throws Exception {
-		list();
+		//list();
 		return SUCCESS;
 	}
 	
 	/**
 	 * 列表 
 	 * 需要子类覆写的显示列表页面的回调方法
+	 * @return 
 	 */
-	protected abstract void list() throws Exception;
+	protected abstract String list() throws Exception;
 	
 	/**
 	 * 需要CRUD的Action一般都存在回显效果，由父类规定好方法名，子类覆写即可
