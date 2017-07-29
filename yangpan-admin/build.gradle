@@ -1,8 +1,0 @@
-group 'site.yangpan'
-
-apply plugin: 'war'
-
-//依赖
-dependencies {
-    compile project(':yangpan-core')
-}

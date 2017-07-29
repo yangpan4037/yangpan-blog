@@ -1,4 +1,4 @@
-package site.yangpan.admin;
+package site.yangpan.front;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
