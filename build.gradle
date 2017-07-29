@@ -1,0 +1,109 @@
+group 'site.yangpan'
+version '2.0.0'
+
+//apply plugin: 'java'
+//apply plugin: 'idea'
+//
+////JVM 版本号要求
+//sourceCompatibility = 1.8
+//targetCompatibility = 1.8
+//
+////java编译的时候缺省状态下会因为中文字符而失败
+//[compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+//
+//repositories {
+//    mavenLocal()
+//    maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+//    mavenCentral()
+//    jcenter()
+//    maven { url "http://repo.spring.io/snapshot" }
+//    maven { url "http://repo.spring.io/milestone" }
+//    maven { url 'http://maven.springframework.org/release' }
+//    maven { url 'http://maven.springframework.org/milestone' }
+//}
+
+////依赖
+//dependencies {
+//    testCompile group: 'junit', name: 'junit', version: '4.12'
+//}
+
+
+//根项目构建脚本
+buildscript {
+    //构建仓库
+    repositories {
+        mavenLocal()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+        mavenCentral()
+        jcenter()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url 'http://maven.springframework.org/release' }
+        maven { url 'http://maven.springframework.org/milestone' }
+    }
+    //构建依赖
+    dependencies {
+        //Spring Boot Gradlet插件还包括一个bootRun任务，可用于以exploded 形式运行应用程序。 每当导入spring-boot-gradle-plugin时，都会添加bootRun任务：
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+    }
+}
+
+
+
+//所有子项目的通用配置
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'spring-boot'
+
+    version = '2.0.0'
+
+    //JVM 版本号要求
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    //java编译的时候缺省状态下会因为中文字符而失败
+    [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+
+    //项目仓库
+    repositories {
+        mavenLocal()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+        mavenCentral()
+        jcenter()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url 'http://maven.springframework.org/release' }
+        maven { url 'http://maven.springframework.org/milestone' }
+    }
+
+    //项目依赖
+    dependencies {
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+        compile("org.springframework.boot:spring-boot-starter-web")
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+        compile 'javax.servlet:javax.servlet-api'
+        compile 'javax.servlet:jstl'
+        compile 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    }
+
+    //构建脚本
+    buildscript {
+        //构建仓库
+        repositories {
+            mavenLocal()
+            maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+            mavenCentral()
+            jcenter()
+            maven { url "http://repo.spring.io/snapshot" }
+            maven { url "http://repo.spring.io/milestone" }
+            maven { url 'http://maven.springframework.org/release' }
+            maven { url 'http://maven.springframework.org/milestone' }
+        }
+        //构建依赖
+        dependencies {
+            //Spring Boot Gradlet插件还包括一个bootRun任务，可用于以exploded 形式运行应用程序。 每当导入spring-boot-gradle-plugin时，都会添加bootRun任务：
+            classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+        }
+    }
+}

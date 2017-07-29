@@ -1,0 +1,5 @@
+rootProject.name = 'yangpan-blog'
+include 'yangpan-core'
+include 'yangpan-admin'
+include 'yangpan-front'
+
