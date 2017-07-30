@@ -8,11 +8,11 @@ sourceCompatibility = 1.8
 //项目依赖
 dependencies {
     //官方描述：支持全栈式Web开发，包括Tomcat和spring-webmvc等
-    compile("org.springframework.boot:spring-boot-starter-web")
-    //官方描述：支持“Java持久化API”，包括spring-data jpa、spring-orm和Hibernate。
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.5.6.RELEASE'
+    //compile("org.springframework.boot:spring-boot-starter-web")
     //官方描述：支持常见的测试依赖项，包括JUnit、Hamcrest和模型，以及spring测试模块。
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    //官方描述：支持“Java持久化API”，包括spring-data jpa、spring-orm和Hibernate。
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.5.6.RELEASE'
     //mysql
     compile 'mysql:mysql-connector-java:8.0.7-dmr'
     testCompile group: 'junit', name: 'junit', version: '4.12'

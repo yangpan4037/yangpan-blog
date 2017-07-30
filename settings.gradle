@@ -2,4 +2,5 @@ rootProject.name = 'yangpan-blog'
 include 'yangpan-front'
 include 'yangpan-core'
 include 'yangpan-core'
+include 'yangpan-admin'
 
