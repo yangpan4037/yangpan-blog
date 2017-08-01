@@ -10,3 +10,4 @@ springboot.log
 /gradle
 /.idea
 /gradle
+/yangpan-core/lib
