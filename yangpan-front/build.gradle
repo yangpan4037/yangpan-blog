@@ -1,5 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'spring-boot'
+apply plugin: 'idea'
+apply plugin: 'maven'
 
 //java编译的时候缺省状态下会因为中文字符而失败
 [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
@@ -8,7 +10,8 @@ apply plugin: 'spring-boot'
 //项目依赖
 dependencies {
     //依赖核心模块
-    compile project(':yangpan-core')
+    //compile project(':yangpan-core')
+    compile("site.yangpan:yangpan-core:${yangpanVersion}")
     //官方描述：支持全栈式Web开发，包括Tomcat和spring-webmvc等
     compile("org.springframework.boot:spring-boot-starter-web")
     //官方描述：支持常见的测试依赖项，包括JUnit、Hamcrest和模型，以及spring测试模块。

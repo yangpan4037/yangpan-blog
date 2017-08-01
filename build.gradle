@@ -1,10 +1,10 @@
-allprojects{
-    group 'site.yangpan'
-    version '1.0.0'
-}
-
 //全部项目
 allprojects{
+    ext{
+        yangpanVersion = "1.0.0"
+    }
+    group 'site.yangpan'
+    version yangpanVersion
     //所有项目仓库
     repositories {
         mavenLocal()
