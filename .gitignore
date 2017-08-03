@@ -1,13 +1,3 @@
-﻿/.idea
-/build
-/out
 /.gradle
-build
-springboot.log
-/gradlew
-/gradlew.bat
-/yangpan-blog.iml
-/gradle
 /.idea
-/gradle
-/yangpan-core/lib
+/yangpan-blog.iml

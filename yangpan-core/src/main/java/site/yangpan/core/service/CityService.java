@@ -14,31 +14,13 @@
  * limitations under the License.
  */
 
-package site.yangpan.core.dao;
+package site.yangpan.core.service;
 
-import java.io.Serializable;
+import site.yangpan.core.domain.City;
 
-import org.springframework.util.Assert;
+public interface CityService {
 
-public class CitySearchCriteria implements Serializable {
+	City getCity(String name, String country);
 
-	private static final long serialVersionUID = 1L;
 
-	private String name;
-
-	public CitySearchCriteria() {
-	}
-
-	public CitySearchCriteria(String name) {
-		Assert.notNull(name, "Name must not be null");
-		this.name = name;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 }

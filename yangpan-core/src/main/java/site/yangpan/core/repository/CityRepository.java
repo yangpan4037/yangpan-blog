@@ -14,13 +14,22 @@
  * limitations under the License.
  */
 
-package site.yangpan.core.dao;
+package site.yangpan.core.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import site.yangpan.core.domain.City;
 
-public interface CityService {
+@Repository
+public interface CityRepository extends CrudRepository<City, Long> {
 
-	City getCity(String name, String country);
+	Page<City> findAll(Pageable pageable);
 
+	Page<City> findByNameContainingAndCountryContainingAllIgnoringCase(String name,
+                                                                       String country, Pageable pageable);
+
+	City findByNameAndCountryAllIgnoringCase(String name, String country);
 
 }

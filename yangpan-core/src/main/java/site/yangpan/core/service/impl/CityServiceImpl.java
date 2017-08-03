@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-package site.yangpan.core.dao;
+package site.yangpan.core.service.impl;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import site.yangpan.core.domain.City;
+import site.yangpan.core.repository.CityRepository;
+import site.yangpan.core.service.CityService;
 
-@Component("cityService")
+@Service
 @Transactional
 class CityServiceImpl implements CityService {
 
-	private final CityRepository cityRepository;
+    @Autowired
+    private CityRepository cityRepository;
 
-	public CityServiceImpl(CityRepository cityRepository) {
-		this.cityRepository = cityRepository;
-	}
-
-	@Override
-	public City getCity(String name, String country) {
-		Assert.notNull(name, "Name must not be null");
-		Assert.notNull(country, "Country must not be null");
-		return this.cityRepository.findByNameAndCountryAllIgnoringCase(name, country);
-	}
+    @Override
+    public City getCity(String name, String country) {
+        Assert.notNull(name, "Name must not be null");
+        Assert.notNull(country, "Country must not be null");
+        return this.cityRepository.findByNameAndCountryAllIgnoringCase(name, country);
+    }
 }
