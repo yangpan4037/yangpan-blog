@@ -1,3 +1,5 @@
-/.gradle
+﻿/.gradle
 /.idea
 /yangpan-blog.iml
+/yangpan-front/build
+/yangpan-core/build
