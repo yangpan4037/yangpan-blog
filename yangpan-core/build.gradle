@@ -1,6 +1,6 @@
 //构建脚本
 buildscript {
-    //构建仓库
+    //构建仓库 
     repositories {
         mavenLocal()
         maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
