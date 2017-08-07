@@ -1,0 +1,66 @@
+// buildscript 代码块中脚本优先执行
+buildscript {
+
+    // ext 用于定义动态属性
+    ext {
+        springBootVersion = '1.5.3.RELEASE'
+    }
+
+    // 自定义  Thymeleaf 和 Thymeleaf Layout Dialect 的版本
+    ext['thymeleaf.version'] = '3.0.3.RELEASE'
+    ext['thymeleaf-layout-dialect.version'] = '2.2.0'
+    // 自定义 Embedded MongoDB 的 依赖
+    ext['embedded-mongo.version'] = '2.0.0'
+
+    // 使用了 Maven 的中央仓库（你也可以指定其他仓库）
+    repositories {
+        //mavenCentral()
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+    }
+
+    // 依赖关系
+    dependencies {
+        // classpath 声明说明了在执行其余的脚本时，ClassLoader 可以使用这些依赖项
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+//java编译的时候缺省状态下会因为中文字符而失败
+sourceCompatibility = 1.8
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+//项目仓库
+repositories {
+    mavenLocal()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+    mavenCentral()
+    jcenter()
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+    maven { url 'http://maven.springframework.org/release' }
+    maven { url 'http://maven.springframework.org/milestone' }
+}
+
+//项目依赖
+dependencies {
+    // 该依赖对于编译发行是必须的
+    compile('org.springframework.boot:spring-boot-starter-web')
+
+    // 添加 Thymeleaf 的依赖
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+
+    // 添加 Spring Data Mongodb 的依赖
+    compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+    // 添加  Embedded MongoDB 的依赖
+    //compile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
+
+    // 该依赖对于编译测试是必须的，默认包含编译产品依赖和编译时依
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
