@@ -1,11 +1,6 @@
-.header-top{width:100%;height:45px;line-height:45px;background:#f1f1f1;border-bottom:1px solid #ddd;overflow:hidden;}
-.header-top .left{float:left;}
-.header-top .right{float:right;text-align:right;}
-.header-top .left .login{color:orangered;margin:0 15px 0 0;}
-.header-top .left .login:hover{text-decoration:underline;}
-.header-top a:hover{color:orangered;}
-.header-top .right li{float:left;margin:0 0 0 15px;overflow:hidden;}
-
-.header-top .right .search-wrap{position:relative;width:534px;height:35px;margin:5px 0;float:left;}
-.header-top .right .search-text{position:absolute;z-index:1;left:0;width:500px;height:30px;padding:0 15px;border:2px solid orangered;}
-.header-top .right .search-btn{position:absolute;z-index:2;right:0;width:}
+﻿/**
+ * time	2017-05-12
+ * name	杨潘 yangpan
+ * tel	13541292110
+ * mail 916780135@qq.com
+ */
