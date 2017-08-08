@@ -33,7 +33,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body{width:100%;min-height:100%;padding:0 0 50px;position:absolute;}
+body{width:100%;min-height:100%;padding:0 0 100px;position:absolute;}
 .media-auto-width{height:100%;margin:0 auto;}
 .clear-float{clear:both;overflow:hidden;height:100px;background:red;}
 

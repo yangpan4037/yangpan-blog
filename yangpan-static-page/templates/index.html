@@ -7,7 +7,118 @@
 	<link rel="stylesheet" type="text/css" href="../static/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/global.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/index.css">
-	<script type="text/javascript" src="../static/plugs/jquery/dist/"></script>
+	<script type="text/javascript" src="../static/plugs/jquery.1.10.2.js"></script>
+	<script type="text/javascript">
+		$(function(){
+
+			//点击切换动画速度，slow，first 也可以设置毫秒数
+			var animateSpeed = 500;
+			//自动切换的间隔毫秒
+			var intervalTime = 3000;//只能用数字
+
+			//获取最外层容器banner-wrap
+			var bannerWrap = $(".banner-wrap");
+			bannerWrap.each(function(){
+				var banner = $(this).find(".banner");
+				var bannerLen = banner.find("li").length;
+				var bannerWidth = $(this).width();
+				var prevBtn = $(this).find(".prev");
+				var nextBtn = $(this).find(".next");
+				var timer = null;
+				var index = 0;
+
+				//初始化banner的位置
+				banner.css("marginLeft",-bannerWidth+"px");
+
+				//创建小圆点
+				var iconHtml= '<ul class="icon-wrap">';
+				for(var i=0;i<bannerLen;i++){
+					iconHtml+='<li></li>';
+				}
+				iconHtml+='</ul>';
+				$(this).append(iconHtml);
+				var icons = $(this).find(".icon-wrap li");
+				icons.eq(0).addClass("active");
+
+				//获取收尾的li，用于克隆
+				var firstLi = banner.find("li:first").html();
+				var lastLi = banner.find("li:last").html();
+
+				//获取最后一个放到开始位置
+				banner.prepend("<li>"+lastLi+"</li>");
+
+				//获取最第一个放到最后位置
+				banner.append("<li>"+firstLi+"</li>");
+
+				//左边点击切换
+				prevBtn.click(function(){
+					if(parseInt(banner.css("marginLeft"))<=-bannerWidth*bannerLen){
+						banner.css("marginLeft",0);
+						index = -1;
+					}
+					cutAnimate("-",1);			
+				});
+
+				//右边点击切换
+				nextBtn.click(function(){
+					if(parseInt(banner.css("marginLeft"))>=-bannerWidth*1){
+						banner.css("marginLeft",-bannerWidth*(bannerLen+1)+"px");
+						index = bannerLen;
+					}
+					cutAnimate("+",-1);
+				});
+
+				//点击小圆点
+				icons.click(function(){
+					var index = $(this).index()+1;
+					banner.animate({"marginLeft":-bannerWidth*index+"px"},animateSpeed);
+					$(this).addClass("active").siblings("li").removeClass("active");
+
+				});
+
+				//开启定时器
+				startCutAnimate();
+
+				//开关定时器
+				$(this).mouseover(function(){
+					stopCutAnimate();
+				}).mouseout(function(){
+					startCutAnimate();
+				});
+
+				//切换动画
+				function cutAnimate(symbol,num){
+					if(!banner.is(":animated")){
+						banner.animate({
+							"marginLeft":symbol+"="+bannerWidth+"px"
+						},"first");
+						iconChange(num);
+					}
+				}
+
+				//小圆点高亮
+				function iconChange(num){				
+					index = index+num;
+					icons.eq(index).addClass("active").siblings("li").removeClass("active");
+				}
+
+				//开启定时器
+				function startCutAnimate(){
+					//设表先关
+					stopCutAnimate();
+					timer = setInterval(function(){
+						prevBtn.click();
+					},intervalTime);
+				}
+
+				//清除动画
+				function stopCutAnimate(){
+					clearInterval(timer);
+				}
+
+			});
+		});
+	</script>
 </head>
 <body>
 	<!-- header start -->
@@ -18,14 +129,14 @@
 				<a href="#" class="register">现在注册</a>
 			</div>
 			<ul class="right">
-				<li>
+				<!-- <li>
 					<div class="search-wrap">
 						<form action="#">
 							<input class="search-text" type="text" placeholder="请输入搜索内容。">
 							<input class="search-btn iconfont" type="submit" value="&#xe613;" />
 						</form>
 					</div>
-				</li>
+				</li> -->
 				<li>
 					<a href="#">首页</a>
 				</li>
@@ -43,9 +154,41 @@
 	</div>
 	<!-- header end -->
 	
-	<div class="yangpan-ad">
-		<img src="../static/pic/index_ad.jpg" alt="">
+
+	<div style="height:300px;background:;margin:15px 0 0;">
+		<div class="banner-wrap media-auto-width">
+			<ul class="banner">
+				<li>
+					<a href="#">
+						<img src="../static/pic/banner_01.jpg"/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="../static/pic/banner_02.jpg"/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="../static/pic/banner_03.jpg"/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="../static/pic/banner_04.jpg"/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="../static/pic/banner_05.jpg"/>
+					</a>
+				</li>
+			</ul>
+			<a class="arrows prev" href="javascript:void(0);">&lt;</a>
+			<a class="arrows next" href="javascript:void(0);">&gt;</a>
+		</div>
 	</div>
+
 	
 	<!-- yangpan-layout-wrap start -->
 	<div class="yangpan-layout-wrap media-auto-width">
@@ -58,11 +201,25 @@
 					<ul class="module-content">
 						<li class="item">
 							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
+						        <img class="face" src="../static/images/defaut_face_01.jpeg" alt="头像">
 						    </div>
 							<div class="item-right">
 								<div class="item-content">
 									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
+									<p class="item-info">
+										<a class="author" href=""  title="名称">微利图库</a>
+										<span>, 2017-07-08 10:03</span>
+									</p>
+								</div>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+						        <img class="face" src="../static/images/defaut_face_02.jpg" alt="头像">
+						    </div>
+							<div class="item-right">
+								<div class="item-content">
+									<a href="#" class="item-title" title="标题">汇聚灵感的高品质图库——花瓣美素上线了</a>
 									<p class="item-info">
 										<a class="author" href=""  title="名称">华丽逆转</a>
 										<span>, 2017-08-08 10:03</span>
@@ -72,55 +229,41 @@
 						</li>
 						<li class="item">
 							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
+						        <img class="face" src="../static/images/defaut_face_03.jpg" alt="头像">
 						    </div>
 							<div class="item-right">
 								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
+									<a href="#" class="item-title" title="标题">2017ArtCenter&阿森特，创新改变世界| 游戏改变者 精英论坛即将开始！ </a>
 									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
+										<a class="author" href=""  title="名称">游戏改变者</a>
+										<span>, 2017-04-08 10:03</span>
 									</p>
 								</div>
 							</div>
 						</li>
 						<li class="item">
 							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
+						        <img class="face" src="../static/images/defaut_face_04.jpg" alt="头像">
 						    </div>
 							<div class="item-right">
 								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
+									<a href="#" class="item-title" title="标题">Vans艺术家#艺术TEE图案征集活动获奖公示</a>
 									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
+										<a class="author" href=""  title="名称">万众期待</a>
+										<span>, 2017-03-12 10:03</span>
 									</p>
 								</div>
 							</div>
 						</li>
 						<li class="item">
 							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
+						        <img class="face" src="../static/images/defaut_face_05.jpg" alt="头像">
 						    </div>
 							<div class="item-right">
 								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
+									<a href="#" class="item-title" title="标题">“中国鲁迅美术学院与英国曼彻斯特索尔福德大学 合作办学项目签约仪式”隆重举行</a>
 									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class="item">
-							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
-						    </div>
-							<div class="item-right">
-								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
-									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
+										<a class="author" href=""  title="名称">中国鲁迅美术学院</a>
 										<span>, 2017-08-08 10:03</span>
 									</p>
 								</div>
@@ -129,11 +272,53 @@
 					</ul>
 				</div>
 				<div class="module-wrap">
-					<div class="module-title">热门文章</div>
+					<div class="module-title">最新发布</div>
 					<ul class="module-content">
 						<li class="item">
 							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
+						        <img class="face" src="../static/images/defaut_face_06.jpg" alt="头像">
+						    </div>
+							<div class="item-right">
+								<div class="item-content">
+									<a href="#" class="item-title" title="标题">二十四节气标识系统设计征集函</a>
+									<p class="item-info">
+										<a class="author" href=""  title="名称">北京国际设计周组委会</a>
+										<span>, 2016-03-02 10:03</span>
+									</p>
+								</div>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+						        <img class="face" src="../static/images/defaut_face_05.jpg" alt="头像">
+						    </div>
+							<div class="item-right">
+								<div class="item-content">
+									<a href="#" class="item-title" title="标题">创新年轻IP 传播樱花新精神—樱花IP卡通形象征集</a>
+									<p class="item-info">
+										<a class="author" href=""  title="名称">狮出有樱</a>
+										<span>, 2015-07-24 10:03</span>
+									</p>
+								</div>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+						        <img class="face" src="../static/images/defaut_face_07.jpg" alt="头像">
+						    </div>
+							<div class="item-right">
+								<div class="item-content">
+									<a href="#" class="item-title" title="标题">HAZZYS哈吉斯第二届原创插画设计大赛千寻之冠等你而来</a>
+									<p class="item-info">
+										<a class="author" href=""  title="名称">英伦服装品牌</a>
+										<span>, 2012-11-09 15:03</span>
+									</p>
+								</div>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+						        <img class="face" src="../static/images/defaut_face_03.jpg" alt="头像">
 						    </div>
 							<div class="item-right">
 								<div class="item-content">
@@ -147,55 +332,13 @@
 						</li>
 						<li class="item">
 							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
+						        <img class="face" src="../static/images/defaut_face_02.jpg" alt="头像">
 						    </div>
 							<div class="item-right">
 								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
+									<a href="#" class="item-title" title="标题">北京惠民文化消费季吉祥物征集大赛已启动！</a>
 									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class="item">
-							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
-						    </div>
-							<div class="item-right">
-								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
-									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class="item">
-							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
-						    </div>
-							<div class="item-right">
-								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
-									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class="item">
-							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
-						    </div>
-							<div class="item-right">
-								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
-									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
+										<a class="author" href=""  title="名称">参赛链接</a>
 										<span>, 2017-08-08 10:03</span>
 									</p>
 								</div>
@@ -213,7 +356,7 @@
 		        	    <li class="layout-middle-wrap">
 						    <div class="layout-middle-left">
 						        <a href="#" class="cover">
-						        	<img src="../static/pic/article_cover.jpg" alt="">
+						        	<img src="../static/pic/article_cover_01.jpg" alt="">
 						        </a>
 						    </div>
 						    <div class="layout-middle-right">
@@ -240,7 +383,88 @@
 						<li class="layout-middle-wrap">
 						    <div class="layout-middle-left">
 						        <a href="#" class="cover">
-						        	<img src="../static/pic/article_cover.jpg" alt="">
+						        	<img src="../static/pic/article_cover_02.jpg" alt="">
+						        </a>
+						    </div>
+						    <div class="layout-middle-right">
+						        <div class="layout-middle-right-content">
+						            <a class="title" href="#">汇聚灵感的高品质图库——花瓣美素上线了</a>
+						            <p class="info">
+						            	<span class="iconfont">&#xe652;</span> yangpan
+						            	<span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+						            </p>
+						            <p class="summary">关键词 高品质 低价格 微利图库 移动互联网时代的今天，利用移动媒体端作为信息高效传递的载体已经深入人们的日常生活，信息传递地同时良好的视觉体验也愈发重要。广告传媒行业对图片素材有着海量需求，但由于行业操作不尽规范，传统图片平台垄断式渠道，盗版、侵权、高价等充斥着视觉产 … </p>
+						            <div class="bottom">
+						            	<div class="left">
+						            		<span class="category">分类:行业 </span>
+						            	</div>
+						            	<div class="right">
+						            		<span class="iconfont look">&#xe61b; 102</span>
+						            		<span class="iconfont vote">&#xe60c; 102</span>
+						            		<span class="iconfont comment">&#xe692; 102</span>
+						            	</div>
+						            </div>
+						        </div>
+						    </div>
+						</li>
+						<li class="layout-middle-wrap">
+						    <div class="layout-middle-left">
+						        <a href="#" class="cover">
+						        	<img src="../static/pic/article_cover_03.jpg" alt="">
+						        </a>
+						    </div>
+						    <div class="layout-middle-right">
+						        <div class="layout-middle-right-content">
+						            <a class="title" href="#">2017ArtCenter&阿森特，创新改变世界| 游戏改变者 精英论坛即将开始！</a>
+						            <p class="info">
+						            	<span class="iconfont">&#xe652;</span> yangpan
+						            	<span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+						            </p>
+						            <p class="summary">游戏改变者，用创造力影响着企业的生命 2017年7月21至22日，美国艺术中心设计学院和阿森特艺术中心设计学院将在北京举办第二届“创新改变世界”精英论坛，ArtCenter与行业创新领导力再次相约北京。这次，大会主题是“游戏改变者（Game Changer）”，大会将与 … </p>
+						            <div class="bottom">
+						            	<div class="left">
+						            		<span class="category">分类:行业 </span>
+						            	</div>
+						            	<div class="right">
+						            		<span class="iconfont look">&#xe61b; 102</span>
+						            		<span class="iconfont vote">&#xe60c; 102</span>
+						            		<span class="iconfont comment">&#xe692; 102</span>
+						            	</div>
+						            </div>
+						        </div>
+						    </div>
+						</li>
+						<li class="layout-middle-wrap">
+						    <div class="layout-middle-left">
+						        <a href="#" class="cover">
+						        	<img src="../static/pic/article_cover_04.jpg" alt="">
+						        </a>
+						    </div>
+						    <div class="layout-middle-right">
+						        <div class="layout-middle-right-content">
+						            <a class="title" href="#">“中国鲁迅美术学院与英国曼彻斯特索尔福德大学 合作办学项目签约仪式”隆重举行</a>
+						            <p class="info">
+						            	<span class="iconfont">&#xe652;</span> yangpan
+						            	<span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+						            </p>
+						            <p class="summary">2017年6月25日下午3时，“中国鲁迅美术学院与英国曼彻斯特索尔福德大学合作办学项目签约仪式”在北京人民大会堂澳门厅隆重举行。 出席签约仪式的英方嘉宾有：英国曼彻斯特索尔福德大学校长海伦•米歇尔（Helen Marshall）教授，英国曼彻斯特索尔福德大学媒体与艺术学 … </p>
+						            <div class="bottom">
+						            	<div class="left">
+						            		<span class="category">分类:行业 </span>
+						            	</div>
+						            	<div class="right">
+						            		<span class="iconfont look">&#xe61b; 102</span>
+						            		<span class="iconfont vote">&#xe60c; 102</span>
+						            		<span class="iconfont comment">&#xe692; 102</span>
+						            	</div>
+						            </div>
+						        </div>
+						    </div>
+						</li>
+						<li class="layout-middle-wrap">
+						    <div class="layout-middle-left">
+						        <a href="#" class="cover">
+						        	<img src="../static/pic/article_cover_05.jpg" alt="">
 						        </a>
 						    </div>
 						    <div class="layout-middle-right">
@@ -267,7 +491,7 @@
 						<li class="layout-middle-wrap">
 						    <div class="layout-middle-left">
 						        <a href="#" class="cover">
-						        	<img src="../static/pic/article_cover.jpg" alt="">
+						        	<img src="../static/pic/article_cover_06.jpg" alt="">
 						        </a>
 						    </div>
 						    <div class="layout-middle-right">
@@ -294,7 +518,7 @@
 						<li class="layout-middle-wrap">
 						    <div class="layout-middle-left">
 						        <a href="#" class="cover">
-						        	<img src="../static/pic/article_cover.jpg" alt="">
+						        	<img src="../static/pic/article_cover_07.png" alt="">
 						        </a>
 						    </div>
 						    <div class="layout-middle-right">
@@ -321,7 +545,61 @@
 						<li class="layout-middle-wrap">
 						    <div class="layout-middle-left">
 						        <a href="#" class="cover">
-						        	<img src="../static/pic/article_cover.jpg" alt="">
+						        	<img src="../static/pic/article_cover_01.jpg" alt="">
+						        </a>
+						    </div>
+						    <div class="layout-middle-right">
+						        <div class="layout-middle-right-content">
+						            <a class="title" href="#">Vans艺术家#艺术TEE图案征集活动获奖公示</a>
+						            <p class="info">
+						            	<span class="iconfont">&#xe652;</span> yangpan
+						            	<span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+						            </p>
+						            <p class="summary">万众期待，众所瞩目，后台私信到爆的#VANS艺术家#艺术TEE图案征集活动结果 现在来公布啦！   咚咚咚咚咚咚咚 Vans艺术家奖 人选：1名  TA的艺术创作作品将被Vans量产，成为2018年OFF THE WALL艺术TEE！同时，TA将获得价值¥5,000的V … </p>
+						            <div class="bottom">
+						            	<div class="left">
+						            		<span class="category">分类:行业 </span>
+						            	</div>
+						            	<div class="right">
+						            		<span class="iconfont look">&#xe61b; 102</span>
+						            		<span class="iconfont vote">&#xe60c; 102</span>
+						            		<span class="iconfont comment">&#xe692; 102</span>
+						            	</div>
+						            </div>
+						        </div>
+						    </div>
+						</li>
+						<li class="layout-middle-wrap">
+						    <div class="layout-middle-left">
+						        <a href="#" class="cover">
+						        	<img src="../static/pic/article_cover_02.jpg" alt="">
+						        </a>
+						    </div>
+						    <div class="layout-middle-right">
+						        <div class="layout-middle-right-content">
+						            <a class="title" href="#">Vans艺术家#艺术TEE图案征集活动获奖公示</a>
+						            <p class="info">
+						            	<span class="iconfont">&#xe652;</span> yangpan
+						            	<span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+						            </p>
+						            <p class="summary">万众期待，众所瞩目，后台私信到爆的#VANS艺术家#艺术TEE图案征集活动结果 现在来公布啦！   咚咚咚咚咚咚咚 Vans艺术家奖 人选：1名  TA的艺术创作作品将被Vans量产，成为2018年OFF THE WALL艺术TEE！同时，TA将获得价值¥5,000的V … </p>
+						            <div class="bottom">
+						            	<div class="left">
+						            		<span class="category">分类:行业 </span>
+						            	</div>
+						            	<div class="right">
+						            		<span class="iconfont look">&#xe61b; 102</span>
+						            		<span class="iconfont vote">&#xe60c; 102</span>
+						            		<span class="iconfont comment">&#xe692; 102</span>
+						            	</div>
+						            </div>
+						        </div>
+						    </div>
+						</li>
+						<li class="layout-middle-wrap">
+						    <div class="layout-middle-left">
+						        <a href="#" class="cover">
+						        	<img src="../static/pic/article_cover_03.jpg" alt="">
 						        </a>
 						    </div>
 						    <div class="layout-middle-right">
