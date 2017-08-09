@@ -8,135 +8,25 @@
 	<link rel="stylesheet" type="text/css" href="../static/css/global.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/index.css">
 	<script type="text/javascript" src="../static/plugs/jquery.1.10.2.js"></script>
-	<script type="text/javascript">
-		$(function(){
-
-			//点击切换动画速度，slow，first 也可以设置毫秒数
-			var animateSpeed = 500;
-			//自动切换的间隔毫秒
-			var intervalTime = 3000;//只能用数字
-
-			//获取最外层容器banner-wrap
-			var bannerWrap = $(".banner-wrap");
-			bannerWrap.each(function(){
-				var banner = $(this).find(".banner");
-				var bannerLen = banner.find("li").length;
-				var bannerWidth = $(this).width();
-				var prevBtn = $(this).find(".prev");
-				var nextBtn = $(this).find(".next");
-				var timer = null;
-				var index = 0;
-
-				//初始化banner的位置
-				banner.css("marginLeft",-bannerWidth+"px");
-
-				//创建小圆点
-				var iconHtml= '<ul class="icon-wrap">';
-				for(var i=0;i<bannerLen;i++){
-					iconHtml+='<li></li>';
-				}
-				iconHtml+='</ul>';
-				$(this).append(iconHtml);
-				var icons = $(this).find(".icon-wrap li");
-				icons.eq(0).addClass("active");
-
-				//获取收尾的li，用于克隆
-				var firstLi = banner.find("li:first").html();
-				var lastLi = banner.find("li:last").html();
-
-				//获取最后一个放到开始位置
-				banner.prepend("<li>"+lastLi+"</li>");
-
-				//获取最第一个放到最后位置
-				banner.append("<li>"+firstLi+"</li>");
-
-				//左边点击切换
-				prevBtn.click(function(){
-					if(parseInt(banner.css("marginLeft"))<=-bannerWidth*bannerLen){
-						banner.css("marginLeft",0);
-						index = -1;
-					}
-					cutAnimate("-",1);			
-				});
-
-				//右边点击切换
-				nextBtn.click(function(){
-					if(parseInt(banner.css("marginLeft"))>=-bannerWidth*1){
-						banner.css("marginLeft",-bannerWidth*(bannerLen+1)+"px");
-						index = bannerLen;
-					}
-					cutAnimate("+",-1);
-				});
-
-				//点击小圆点
-				icons.click(function(){
-					var index = $(this).index()+1;
-					banner.animate({"marginLeft":-bannerWidth*index+"px"},animateSpeed);
-					$(this).addClass("active").siblings("li").removeClass("active");
-
-				});
-
-				//开启定时器
-				startCutAnimate();
-
-				//开关定时器
-				$(this).mouseover(function(){
-					stopCutAnimate();
-				}).mouseout(function(){
-					startCutAnimate();
-				});
-
-				//切换动画
-				function cutAnimate(symbol,num){
-					if(!banner.is(":animated")){
-						banner.animate({
-							"marginLeft":symbol+"="+bannerWidth+"px"
-						},"first");
-						iconChange(num);
-					}
-				}
-
-				//小圆点高亮
-				function iconChange(num){				
-					index = index+num;
-					icons.eq(index).addClass("active").siblings("li").removeClass("active");
-				}
-
-				//开启定时器
-				function startCutAnimate(){
-					//设表先关
-					stopCutAnimate();
-					timer = setInterval(function(){
-						prevBtn.click();
-					},intervalTime);
-				}
-
-				//清除动画
-				function stopCutAnimate(){
-					clearInterval(timer);
-				}
-
-			});
-		});
-	</script>
+	<script type="text/javascript" src="../static/js/index.js"></script>
 </head>
 <body>
 	<!-- header start -->
 	<div class="header">
 		<div class="media-auto-width">
 			<div class="left">
-				<a href="#" class="login">亲，请登录</a>
-				<a href="#" class="register">现在注册</a>
+				<a href="login/login.html" class="login">亲，请登录</a>
+				<a href="login/register.html" class="register">现在注册</a>
 			</div>
 			<ul class="right">
-				<!-- <li>
+				<li>
 					<div class="search-wrap">
 						<form action="#">
 							<input class="search-text" type="text" placeholder="请输入搜索内容。">
 							<input class="search-btn iconfont" type="submit" value="&#xe613;" />
 						</form>
 					</div>
-				</li> -->
+				</li>
 				<li>
 					<a href="#">首页</a>
 				</li>
@@ -184,8 +74,8 @@
 					</a>
 				</li>
 			</ul>
-			<a class="arrows prev" href="javascript:void(0);">&lt;</a>
-			<a class="arrows next" href="javascript:void(0);">&gt;</a>
+			<a class="iconfont arrows prev" href="javascript:void(0);">&#xe601;</a>
+			<a class="iconfont arrows next" href="javascript:void(0);">&#xe602;</a>
 		</div>
 	</div>
 
@@ -644,155 +534,66 @@
 		    
 		    <!-- yangpan-layout-right start -->
 		    <div class="yangpan-layout-right">
-		        <div class="module-wrap">
-					<div class="module-title">热门文章</div>
-					<ul class="module-content">
-						<li class="item">
-							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
-						    </div>
-							<div class="item-right">
-								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
-									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class="item">
-							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
-						    </div>
-							<div class="item-right">
-								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
-									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class="item">
-							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
-						    </div>
-							<div class="item-right">
-								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
-									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class="item">
-							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
-						    </div>
-							<div class="item-right">
-								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
-									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class="item">
-							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
-						    </div>
-							<div class="item-right">
-								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
-									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
-									</p>
-								</div>
-							</div>
-						</li>
-					</ul>
+		        <div class="module-two-wrap">
+					<div class="module-title">活跃用户</div>
+					<div class="module-two-content">
+						<a class="item">
+							<img class="face" src="../static/images/defaut_face_01.jpeg" alt="头像">
+							<span class="name">华丽逆转</span>
+						</a>
+						<a class="item">
+							<img class="face" src="../static/images/defaut_face_02.jpg" alt="头像">
+							<span class="name">华丽逆转</span>
+						</a>
+						<a class="item">
+							<img class="face" src="../static/images/defaut_face_03.jpg" alt="头像">
+							<span class="name">华丽逆转</span>
+						</a>
+						<a class="item">
+							<img class="face" src="../static/images/defaut_face_04.jpg" alt="头像">
+							<span class="name">华丽逆转</span>
+						</a>
+						<a class="item">
+							<img class="face" src="../static/images/defaut_face_05.jpg" alt="头像">
+							<span class="name">华丽逆转</span>
+						</a>
+						<a class="item">
+							<img class="face" src="../static/images/defaut_face_06.jpg" alt="头像">
+							<span class="name">华丽逆转</span>
+						</a>
+						<a class="item">
+							<img class="face" src="../static/images/defaut_face_07.jpg" alt="头像">
+							<span class="name">华丽逆转</span>
+						</a>
+						<a class="item">
+							<img class="face" src="../static/images/defaut_face_01.jpeg" alt="头像">
+							<span class="name">华丽逆转</span>
+						</a>
+					</div>
 				</div>
-				<div class="module-wrap">
-					<div class="module-title">热门文章</div>
-					<ul class="module-content">
-						<li class="item">
-							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
-						    </div>
-							<div class="item-right">
-								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
-									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class="item">
-							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
-						    </div>
-							<div class="item-right">
-								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
-									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class="item">
-							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
-						    </div>
-							<div class="item-right">
-								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
-									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class="item">
-							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
-						    </div>
-							<div class="item-right">
-								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
-									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class="item">
-							<div class="item-left">
-						        <img class="face" src="../static/images/defaut_face.jpeg" alt="头像">
-						    </div>
-							<div class="item-right">
-								<div class="item-content">
-									<a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
-									<p class="item-info">
-										<a class="author" href=""  title="名称">华丽逆转</a>
-										<span>, 2017-08-08 10:03</span>
-									</p>
-								</div>
-							</div>
-						</li>
-					</ul>
+				<div class="module-three-wrap">
+					<div class="module-title">热门标签</div>
+					<div class="module-three-content" id="hotTags">
+						<a class="item" href="#">摄影</a>
+						<a class="item" href="#">风景</a>
+						<a class="item" href="#">百度</a>
+						<a class="item" href="#">bat</a>
+						<a class="item" href="#">比特币</a>
+						<a class="item" href="#">百度贴吧</a>
+						<a class="item" href="#">百度站长平台</a>
+						<a class="item" href="#">百度seo</a>
+						<a class="item" href="#">百度糯米</a>
+						<a class="item" href="#">暴风科技</a>
+						<a class="item" href="#">b2b</a>
+						<a class="item" href="#">百度竞价</a>
+						<a class="item" href="#">比特币勒索病毒</a>
+						<a class="item" href="#">百度外卖</a>
+						<a class="item" href="#">比特币行情</a>
+						<a class="item" href="#">百度地图</a>
+						<a class="item" href="#">b轮融资</a>
+						<a class="item" href="#">比尔盖茨</a>
+						<a class="item" href="#">暴风影音</a>
+					</div>
 				</div>
 		    </div>
 			<!-- yangpan-layout-right end -->

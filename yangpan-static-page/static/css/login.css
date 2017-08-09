@@ -1,0 +1,45 @@
+﻿/**
+ * time	2017-05-12
+ * name	杨潘 yangpan
+ * tel	13541292110
+ * mail 916780135@qq.com
+ */
+// *{outline:1px solid red;}
+body{
+	background:#2d9b95 !important;
+	background:-moz-radial-gradient(center,ellipse cover,#2d9b95 0%,#0e1329 100%) !important;
+	background:-webkit-gradient(radial,center center,0px,center center,100%,color-stop(0%,#2d9b95),color-stop(100%,#0e1329)) !important;
+	background:-webkit-radial-gradient(center,ellipse cover,#2d9b95 0%,#0e1329 100%) !important;
+	background:-o-radial-gradient(center,ellipse cover,#2d9b95 0%,#0e1329 100%) !important;
+	background:-ms-radial-gradient(center,ellipse cover,#2d9b95 0%,#0e1329 100%) !important;
+	background:radial-gradient(ellipse at center,#2d9b95 0%,#0e1329 100%) !important;
+	filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#2d9b95',endColorstr='#0e1329',GradientType=1 ) !important;
+}
+canvas{position:absolute;width:100%;height:80%;height:calc(100% - 150px);height:-moz-calc(100% - 150px);height:-webkit-calc(100% - 150px);}
+
+.login-wrap{width:392px;position:absolute;left:50%;top:50%;margin:-350px 0 0 -196px;overflow:hidden;}
+.login-header{text-align:center;}
+.login-header .logo-wrap{display:block;width:80px;height:80px;line-height:50px;text-align:center;margin:0 auto;}
+.login-header .logo{display:block;width:100%;height:100%;background:#eee;border-radius:50%;border:2px solid #ddd;}
+.login-header .info{height:50px;line-height:50px;font-size:18px;color:#fff;margin:0 0 20px;}
+
+.login-body .form{width:100%;padding:5px 0 0;}
+.login-body{width:320px;padding:0 35px;margin:0 auto;border-radius:15px;background:#fff;overflow:hidden;}
+.login-body .title{text-align:center;font-size:16px;height:55px;line-height:55px;border-bottom:1px solid #ddd;}
+.login-body .username,.login-body .password,.login-body .form .error{display:block;width:90%;height:35px;line-height:35px;padding:0 5%;margin:15px 0;border:2px solid #ddd;border-radius:5px;background:#eee;}
+.login-body .username:focus,.login-body .password:focus{border:2px solid orangered;}
+.login-body .form .error{display:none;border:2px solid orangered;background:#ffe6e5;}
+.login-body .form .error .iconfont{color:red;margin:0 5px 0 0;}
+.login-body .forget-wrap{height:20px;line-height:20px;text-align:right;margin:0 0 15px;}
+.login-body .forget-wrap .forget{color:orangered;}
+.login-body .forget-wrap .forget:hover{text-decoration:underline;}
+.login-body .submit-btn{width:100%;height:40px;line-height:40px;font-size:16px;text-align:center;border:0 none;border-radius:5px;background:#eee;cursor:pointer;background:orangered;color:#fff;}
+.login-body .submit-btn:hover{background:rgb(238, 85, 0)}
+.login-body .submit-btn:disabled{color:#bbb;background:#eee;}
+.login-body .other{width:100%;height:20px;line-height:20px;font-size:14px;margin:15px 0;}
+.login-body .other .left{float:left;cursor:pointer;}
+.login-body .other .register{float:right;color:orangered;}
+.login-body .other .register:hover{text-decoration:underline;}
+.third .icon-wrap{text-align:center;padding:20px 0;overflow:hidden;}
+.third .icon-wrap .icon{display:inline-block;width:45px;height:45px;line-height:45px;font-size:20px;margin:0 15px;text-align:center;border-radius:50%;background:#ddd;color:#fff;}
+.third .icon-wrap .icon:hover{background:orangered;}
