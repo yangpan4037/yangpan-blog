@@ -6,13 +6,17 @@
  */
 
 $(function() {
-	$("#username,#password").keyup(function() {
+	$("#username,#password,#email,#realname").keyup(function() {
 		var value = $(this).val();
 		if ($.trim($(this).val()) != "") {
 			$(this).css("border", "2px solid green");
+		}else{
+			$(this).css("border", "2px solid orangered");
 		}
-		if ($.trim($("#username").val()) != "" && $.trim($("#password").val()) != "") {
+		if ($.trim($("#username").val()) != "" && $.trim($("#password").val()) != "" && $.trim($("#email").val()) != "" && $.trim($("#realname").val()) != "") {
 			$("#submitBtn").prop("disabled", false);
+		}else{
+			$("#submitBtn").prop("disabled", true);
 		}
 	});
 

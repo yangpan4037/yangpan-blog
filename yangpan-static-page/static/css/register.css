@@ -17,7 +17,7 @@ body{
 }
 canvas{position:absolute;width:100%;height:80%;height:calc(100% - 150px);height:-moz-calc(100% - 150px);height:-webkit-calc(100% - 150px);}
 
-.register-wrap{width:392px;position:absolute;left:50%;top:50%;margin:-350px 0 0 -196px;overflow:hidden;}
+.register-wrap{width:392px;position:absolute;left:50%;top:50%;margin:-390px 0 0 -196px;overflow:hidden;}
 .register-header{text-align:center;}
 .register-header .logo-wrap{display:block;width:80px;height:80px;line-height:50px;text-align:center;margin:0 auto;}
 .register-header .logo{display:block;width:100%;height:100%;background:#eee;border-radius:50%;border:2px solid #ddd;}
@@ -26,9 +26,11 @@ canvas{position:absolute;width:100%;height:80%;height:calc(100% - 150px);height:
 .register-body .form{width:100%;padding:5px 0 0;}
 .register-body{width:320px;padding:0 35px;margin:0 auto;border-radius:15px;background:#fff;overflow:hidden;}
 .register-body .title{text-align:center;font-size:16px;height:55px;line-height:55px;border-bottom:1px solid #ddd;}
-.register-body .username,.register-body .password,.register-body .form .error{display:block;width:90%;height:35px;line-height:35px;padding:0 5%;margin:15px 0;border:2px solid #ddd;border-radius:5px;background:#eee;}
+.register-body .input-wrap{position:relative;margin:15px 0;overflow:hidden;}
+.register-body .username,.register-body .password,.register-body .email,.register-body .realname,.register-body .form .error{display:block;width:258px;height:35px;line-height:35px;padding:0 5% 0 13%;border:2px solid #ddd;border-radius:5px;background:#eee;}
+.register-body .input-wrap .iconfont{position:absolute;top:11px;left:15px;}
 .register-body .username:focus,.register-body .password:focus{border:2px solid orangered;}
-.register-body .form .error{display:none;border:2px solid orangered;background:#ffe6e5;}
+.register-body .form .error{display:none;border:2px solid orangered;background:#ffe6e5;margin:10px 0 0;}
 .register-body .form .error .iconfont{color:red;margin:0 5px 0 0;}
 .register-body .forget-wrap{height:20px;line-height:20px;text-align:right;margin:0 0 15px;}
 .register-body .forget-wrap .forget{color:orangered;}

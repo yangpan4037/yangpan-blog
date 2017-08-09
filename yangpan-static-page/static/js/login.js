@@ -10,9 +10,13 @@ $(function() {
 		var value = $(this).val();
 		if ($.trim($(this).val()) != "") {
 			$(this).css("border", "2px solid green");
+		}else{
+			$(this).css("border", "2px solid orangered");
 		}
 		if ($.trim($("#username").val()) != "" && $.trim($("#password").val()) != "") {
 			$("#submitBtn").prop("disabled", false);
+		}else{
+			$("#submitBtn").prop("disabled", true);
 		}
 	});
 
