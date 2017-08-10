@@ -78,5 +78,5 @@
  		}
  	});
  	var selectDate=$('.birthday input');
-	selectDate.datepicker({changeMonth:true,changeYear:true,yearRange:"1900:2050",dateFormat:'yy-mm-dd',inline:true,monthNamesShort:["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],dayNamesMin:["日","一","二","三","四","五","六"],onSelect:function (dateText,inst){var theDate = new Date(Date.parse($(this).datepicker('getDate')));var dateFormatted = $.datepicker.formatDate('yy-mm-dd',theDate);}});
+	// selectDate.datepicker({changeMonth:true,changeYear:true,yearRange:"1900:2050",dateFormat:'yy-mm-dd',inline:true,monthNamesShort:["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],dayNamesMin:["日","一","二","三","四","五","六"],onSelect:function (dateText,inst){var theDate = new Date(Date.parse($(this).datepicker('getDate')));var dateFormatted = $.datepicker.formatDate('yy-mm-dd',theDate);}});
  });
