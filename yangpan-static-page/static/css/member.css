@@ -1,0 +1,50 @@
+/**
+ * time	2017-08-10
+ * name	杨潘 yangpan
+ * tel	13541292110
+ * mail 916780135@qq.com
+ */
+
+body{background:#eee;}
+.header-nav-wrap{width:100%;height:70px;overflow:hidden;background:#fff;}
+.header-nav-wrap .logo{display:block;width:200px;height:70px;float:left;line-height:70px;text-align:center;}
+.header-nav-wrap .logo img{display:block;max-width:100%;max-height:100%;margin:0 auto;background:#eee;}
+.header-nav-wrap .nav{height:100%;float:left;}
+.header-nav-wrap .nav a{display:inline-block;float:left;line-height:70px;font-size:18px;margin:0 20px;}
+.header-nav-wrap .nav a.active,.header-nav-wrap .nav a:hover{height:68px;color:orangered;border-bottom:2px solid orangered;}
+.header-nav-wrap .right{float:right;height:30px;line-height:30px;margin:20px 0;}
+.header-nav-wrap .right a{color:orangered;margin:0 0 0 15px;}
+.header-nav-wrap .right a:hover span{text-decoration:underline;}
+
+.member-body-wrap{width:100%;padding:25px 0;overflow:hidden;background:#eee;}
+
+.member-body{height:100%;}
+.member-body-right{position:relative;float:right;width:350px;margin-left:-350px;background:#fff;}
+.member-body-left{float:left;width:100%;}
+.member-body-content{margin-right:380px;background:#fff;}
+
+.member-body-right-content{padding:25px 35px;overflow:hidden;}
+.member-body-right-content dt{font-size:18px;height:35px;line-height:35px;padding:10px 0;}
+.member-body-right-content dd{font-size:15px;height:30px;line-height:30px;padding:0 0 0 20px;}
+.member-body-right-content dd i{margin:0 5px 0 0;color:#666;}
+.member-body-right-content dd a{color:#666;}
+.member-body-right-content dd:hover i,.member-body-right-content dd:hover a{color:orangered;}
+
+.member-info{overflow:hidden;padding:25px 0;}
+.member-info .left{width:530px;heihgt:160px;float:left;overflow:hidden;}
+.member-info .left .face-wrap{display:block;width:160px;height:160px;margin:0 25px;float:left;border-radius:50%;border:2px solid #ddd;overflow:hidden;}
+.member-info .left .face-wrap .face-space{display:block;width:154px;height:154px;margin:3px;border-radius:50%;overflow:hidden;}
+.member-info .left .face-wrap .face-space .face{display:block;width:100%;height:100%;}
+.member-info .left .other-info{overflow:hidden;float:left;padding:30px 0;}
+.member-info .left .name{fdisplay:block;font-size:24px;color:#333;line-height:40px;line-height:40px;}
+.member-info .left .say-hi{display:block;font-size:14px;height:30px;line-height:30px;}
+.member-info .left .amend{display:block;color:orangered;font-size:14px;height:30px;line-height:30px;}
+.member-info .right{float:left;margin:20px 0;}
+.member-info .right .info{display:block;height:30px;line-height:30px;font-size:15px;font-weight:400;}
+.member-info .right .info .title{display:block;float:left;}
+.member-info .right .info .value{display:block;float:left;width:120px;color:#666;margin:0 0 0 15px;}
+.member-info .right .info .color{color:orangered;}
+.member-info .right .info a{margin:0 5px;}
+.member-info .right .info a:hover{text-decoration:underline;}
+
+
