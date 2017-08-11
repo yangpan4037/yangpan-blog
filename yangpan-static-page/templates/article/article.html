@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文章管理</title>
+	<link rel="stylesheet" type="text/css" href="../../static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/global.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/article.css">
+	<script type="text/javascript" src="../../static/plugs/jquery.1.10.2.js"></script>
+	<script type="text/javascript" src="../../static/js/global.js"></script>
+	<script type="text/javascript" src="../../static/js/article.js"></script>
+</head>
+<body>
+
+	<!-- header start -->
+	<div class="header">
+		<div class="media-auto-width">
+			<div class="left">
+				<a href="../login/login.html" class="login">亲，请登录</a>
+				<a href="../login/register.html" class="register">现在注册</a>
+			</div>
+			<ul class="right">
+				<li>
+					<div class="search-wrap">
+						<form action="#">
+							<input class="search-text" type="text" placeholder="请输入搜索内容。">
+							<input class="search-btn iconfont" type="submit" value="&#xe613;" />
+						</form>
+					</div>
+				</li>
+				<li>
+					<a href="">首页</a>
+				</li>
+				<li>
+					<a href="">最新</a>
+				</li>
+				<li>
+					<a href="">最热</a>
+				</li>
+				<li>
+					<a href="">写文章</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- header end -->
+
+	<!-- header-nav-wrap start -->
+	<div class="header-nav-wrap">
+		<div class="media-auto-width">
+			<a class="logo" href="../index.html">
+				<img src="" alt="logo">
+			</a>
+			<div class="nav">
+				<a href="../member/member.html">个人中心</a>
+				<a class="active" href="#">文章中心</a>
+				<a href="#">消息中心</a>
+			</div>
+			<div class="right">
+				<a href="#">
+					<i class="iconfont">&#xe641;</i>
+					<span>帮助</span>
+				</a>
+				<a href="#">
+					<i class="iconfont">&#xe608;</i>
+					<span>设置</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- header-nav-wrap end -->
+
+	<!-- article-body-wrap start -->
+	<div class="article-body-wrap">
+		<div class="media-auto-width article-body">
+			<div class="article-body-left">
+				<div class="article-body-content">
+					<div class="article-manage main">
+						<div class="page-nav">
+							<div class="left">文章管理</div>
+							<div class="right">
+								<div class="content">
+									<span>我的资源：</span>
+									<a class="active" href="javascript:void(0);">所有文章</a>
+									<a href="javascript:void(0);">审核通过0篇</a>
+									<a href="javascript:void(0);">未审核10篇</a>
+									<a href="javascript:void(0);">未通过审核0篇</a>
+								</div>
+							</div>
+						</div>
+						<ul class="article-list">
+							<li class="null-list" style="display: none;">没有相关记录！</li>
+							<li class="pass have">
+								<div class="left">
+									<div class="content">
+										<p class="time">10天前</p>
+										<h3 class="title">
+											<a href="#######">我读书的这半年：心态的变化,我读书的这半年：心态的变化我读书的这半年：心态的变化我读书的这半年：心态的变化我读书的这半年：心态的变化我读书的这半年：心态的变化我读书的这半年：心态的变化</a>
+										</h3>
+										<p class="bottom">
+											<span class="read-num">阅读 2958</span>
+											<span class="read-num">评论 100</span>
+										</p>
+										<p class="state-bar">
+											<span class="state">审核通过</span>
+										</p>
+									</div>
+								</div>
+								<div class="right">
+									<a class="pic" href="#######">
+										<img src="../../static/pic/article_cover_01.jpg">
+									</a>
+								</div>
+							</li>
+							<li class="not-pass have">
+								<div class="left">
+									<div class="content">
+										<p class="time">10天前</p>
+										<h3 class="title">
+											<a href="#######">你刚好丑成我喜欢的样子,你刚好丑成我喜欢的样子你刚好丑成我喜欢的样子你刚好丑成我喜欢的样子你刚好丑成我喜欢的样子你刚好丑成我喜欢的样子</a>
+										</h3>
+										<p class="state-bar">
+											<span class="state">未通过审核</span>
+											<a class="edit" href="contribute.html">编辑</a>
+										</p>
+									</div>
+								</div>
+								<div class="right">
+									<a class="pic" href="#######">
+										<img src="../../static/pic/article_cover_02.jpg">
+									</a>
+								</div>
+							</li>
+							<li class="not-check have">
+								<div class="left">
+									<div class="content">
+										<p class="time">10天前</p>
+										<h3 class="title">
+											<a href="#######">穷养得后遗症这么大，可我“表哥”是真穷穷养得后遗症这么大，可我“表哥”是真穷穷养得后遗症这么大，可我“表哥”是真穷穷养得后遗症这么大，可我“表哥”是真穷</a>
+										</h3>
+										<p class="state-bar">
+											<span class="state">未审核</span>
+										</p>
+									</div>
+								</div>
+								<div class="right">
+									<a class="pic" href="#######">
+										<img src="../../static/pic/article_cover_03.jpg">
+									</a>
+								</div>
+							</li>
+						</ul>
+						<div class="yangpan-pagination">
+			        		<a href="#">上一页</a>
+			        		<a href="#">1</a>
+			        		<a href="#">2</a>
+			        		<a href="#">3</a>
+			        		<a href="#">4</a>
+			        		<a href="#">5</a>
+			        		<a href="#">...</a>
+			        		<a href="#">65</a>
+			        		<a href="#">下一页</a>
+			        		到 <input type="text"> 页
+			        		每页 <input type="text"> 条
+			        		共3699条数据
+			        	</div>
+					</div>
+				</div>
+			</div>
+			<div class="article-body-right">
+				<dl class="article-body-right-content">
+					<dt>文章中心</dt>
+					<dd class="active">
+						<i class="iconfont">&#xe647;</i>
+						<a href="article.html">文章管理</a>
+					</dd>
+					<dd>
+						<i class="iconfont">&#xe624;</i>
+						<a href="category.html">分类管理</a>
+					</dd>
+					<dd>
+						<i class="iconfont">&#xe624;</i>
+						<a href="contribute.html">发表文章</a>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		
+	</div>
+	<!-- article-body-wrap end -->
+
+	<!-- footer start -->
+	<div class="footer" id="footer">
+		<div class="media-auto-width">
+			<div class="foot-tag">
+				<a href="#">联系斯特</a>
+				<a href="#">用户反馈</a>
+				<a href="#">关于斯特</a>
+				<a href="#">新浪微博</a>
+				<a href="#">帮助中心</a>
+			</div>
+			<div class="copyright">
+				<span>© yangan 春花秋实</span>
+				<a href="#">蜀ICP备12345678号</a>
+				<span>Copyright  20017-2017  All  Rights  Reserver</span>
+			</div>
+		</div>
+	</div>
+	<!-- footer end -->
+</body>
+</html>

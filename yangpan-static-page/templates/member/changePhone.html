@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>基本信息</title>
+	<title>修改电话号码</title>
 	<link rel="stylesheet" type="text/css" href="../../static/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="../../static/css/global.css">
 	<link rel="stylesheet" type="text/css" href="../../static/css/member.css">
 	<script type="text/javascript" src="../../static/plugs/jquery.1.10.2.js"></script>
 	<script type="text/javascript" src="../../static/js/global.js"></script>
-	<script type="text/javascript" src="../../static/js/aboutMe.js"></script>
+	<script type="text/javascript" src="../../static/js/changePhone.js"></script>
 </head>
 <body>
 
@@ -75,10 +75,10 @@
 		<div class="media-auto-width member-body">
 			<div class="member-body-left">
 				<div class="member-body-content">
-					<div class="about-me main">
+					<div class="change-phone main">
 						<h3 class="page-title">个人资料</h3>
 						<ul class="tab-head">
-							<li class="active">
+							<li>
 								<a href="aboutMe.html">基本信息</a>
 							</li>
 							<li>
@@ -96,84 +96,29 @@
 							<li>
 								<a href="retrievalPayPsw.html">找回支付密码</a>
 							</li>
-							<li>
+							<li class="active">
 								<a href="changePhone.html">修改电话号码</a>
 							 </li>
 						</ul>
 						<div class="tab-body">
-							<div class="user-name similar">
-								<div class="title">用户昵称：</div>
-								<input id="userName" type="text" value="逝。可而止”" placeholder="请填写昵称">
+							<div class="similar">
+								<div class="title">新手机号：</div>
+								<input id="phone" placeholder="输入新手机号绑定" type="text">
+								<p class="hint">请输入手机号码</p>
+							</div>
+							<div class="similar">
+								<div class="title">验 证 码 ：</div>
+								<input id="safetyCode" class="short" placeholder="输入验证码" type="text">
+								<input id="sendCode" class="short-btn" value="发送短信" type="button">
 								<p class="hint"></p>
 							</div>
-							<div class="real-name similar">
-								<div class="title">真实姓名：</div>
-								<input id="realName" type="text" value="杨潘" placeholder="请填写真实姓名">
-								<p class="hint">请输入真实姓名，20个英文或10个汉字</p>
-							</div>
-							<div class="sex-wrap similar">
-								<div class="title">性　　别：</div>
-								<div class="sex">
-									<a href="javascript:void(0);">男</a>
-									<a href="javascript:void(0);">女</a>
-									<a class="active" href="javascript:void(0);">保密</a>
-								</div>
-							</div>
-							<div class="birthday similar">
-								<div class="title">生　　日：</div>
-								<input id="birthday" type="text" placeholder="请选择生日">
-								<p class="hint">填生日有惊喜哦~</p>
-							</div>
-							<div class="area similar">
-								<div class="title">所在地区：</div>
-								<div class="select-style">
-									<select>
-										<option value="0">四川省</option>
-										<option value="1">云南省</option>
-										<option value="2">贵州省</option>
-										<option value="3">江西省</option>
-									</select>
-								</div>
-								<div class="select-style">
-									<select>
-										<option value="00">成都市</option>
-										<option value="11">南充市</option>
-										<option value="22">绵阳市</option>
-										<option value="33">自贡市</option>
-									</select>
-								</div>
-								<div class="select-style">
-									<select>
-										<option value="00">成都市</option>
-										<option value="11">南充市</option>
-										<option value="22">绵阳市</option>
-										<option value="33">自贡市</option>
-									</select>
-								</div>
-							</div>
-							<div class="qq similar">
-								<div class="title">QQ号码：</div>
-								<input id="QQ" type="text" placeholder="请填写QQ号码~">
-								<p class="hint">QQ号码是您与卖家沟通最重要的工具之一，请务必填写</p>
-							</div>
-							<div class="tel similar">
-								<div class="title">电话号码：</div>
-								<input type="text" value="135****2110" disabled="disable"/>
-								<a class="alter" href="changePhone.html">修改</a>
-							</div>
-							<div class="idcard similar">
-								<div class="title">身份证号：</div>
-								<input id="idCard" type="text" placeholder="请输入身份证号" />
-								<p class="hint">身份证号码是您在平台交易和使用的基本凭证，填写后将不可更改</p>
-							</div>
-							<div class="email similar">
-								<div class="title">电子邮箱：</div>
-								<input type="text" value="9167****135@qq.com" disabled="disabled">
-								<a class="alter" href="changeEmail.html">修改</a>
-							</div>
 							<div class="submit-wrap">
-								<a class="submit-btn" href="javascript:void(0);">提交修改</a>
+								<a class="submit-btn" href="javascript:void(0);">确认修改</a>
 							</div>
+						</div>
+						<div class="change-success">
+							<h3 class="title">修改成功，请牢记新的手机号码</h3>
+							<a class="url" href="aboutMe.html">返回个人中心</a>
 						</div>
 					</div>
 				</div>
@@ -187,7 +132,7 @@
 					</dd>
 					<dd>
 						<i class="iconfont">&#xe624;</i>
-						<a href="otherAccount.html">第三方绑定</a>
+						<a href="#">第三方绑定</a>
 					</dd>
 					<dt>个人中心</dt>
 					<dd>

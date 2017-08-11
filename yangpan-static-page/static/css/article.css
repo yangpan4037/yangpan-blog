@@ -1,0 +1,126 @@
+﻿/**
+ * time	2017-08-10
+ * name	杨潘 yangpan
+ * tel	13541292110
+ * mail 916780135@qq.com
+ */
+
+body{background:#eee;}
+.header-nav-wrap{width:100%;height:70px;overflow:hidden;background:#fff;}
+.header-nav-wrap .logo{display:block;width:200px;height:70px;float:left;line-height:70px;text-align:center;}
+.header-nav-wrap .logo img{display:block;max-width:100%;max-height:100%;margin:0 auto;background:#eee;}
+.header-nav-wrap .nav{height:100%;float:left;}
+.header-nav-wrap .nav a{display:inline-block;float:left;line-height:70px;font-size:18px;margin:0 20px;}
+.header-nav-wrap .nav a.active,.header-nav-wrap .nav a:hover{height:68px;color:orangered;border-bottom:2px solid orangered;}
+.header-nav-wrap .right{float:right;height:30px;line-height:30px;margin:20px 0;}
+.header-nav-wrap .right a{color:orangered;margin:0 0 0 15px;}
+.header-nav-wrap .right a:hover span{text-decoration:underline;}
+
+.article-body-wrap{width:100%;padding:25px 0;overflow:hidden;background:#eee;}
+.article-body{height:100%;}
+.article-body-right{position:relative;float:right;width:350px;margin-left:-350px;background:#fff;}
+.article-body-left{float:left;width:100%;}
+.article-body-content{margin-right:375px;}
+
+.article-body-right-content{padding:25px 35px;overflow:hidden;}
+.article-body-right-content dt{font-size:18px;height:35px;line-height:35px;padding:10px 0;}
+.article-body-right-content dd{font-size:15px;height:30px;line-height:30px;padding:0 0 10px 20px;}
+.article-body-right-content dd i{margin:0 5px 0 0;color:#666;}
+.article-body-right-content dd a{color:#666;}
+.article-body-right-content .active i,.article-body-right-content .active a,.article-body-right-content dd:hover i,.article-body-right-content dd:hover a{color:orangered;}
+
+
+.article-info{overflow:hidden;padding:35px;background:#fff;}
+.article-info .left{width:530px;heihgt:160px;float:left;overflow:hidden;}
+.article-info .left .face-wrap{display:block;width:160px;height:160px;margin:0 25px;float:left;border-radius:50%;border:2px solid #ddd;overflow:hidden;}
+.article-info .left .face-wrap .face-space{display:block;width:154px;height:154px;margin:3px;border-radius:50%;overflow:hidden;}
+.article-info .left .face-wrap .face-space .face{display:block;width:100%;height:100%;}
+.article-info .left .other-info{overflow:hidden;float:left;padding:30px 0;}
+.article-info .left .name{fdisplay:block;font-size:24px;color:#333;line-height:40px;line-height:40px;}
+.article-info .left .say-hi{display:block;font-size:14px;height:30px;line-height:30px;}
+.article-info .left .amend{display:block;color:orangered;font-size:14px;height:30px;line-height:30px;}
+.article-info .right{float:left;margin:20px 0;}
+.article-info .right .info{display:block;height:30px;line-height:30px;font-size:15px;font-weight:400;}
+.article-info .right .info .title{display:block;float:left;}
+.article-info .right .info .value{display:block;float:left;width:120px;color:#666;margin:0 0 0 15px;}
+.article-info .right .info .color{color:orangered;}
+.article-info .right .info a{margin:0 5px;}
+.article-info .right .info a:hover{text-decoration:underline;}
+
+
+.article-body-content .main{padding:30px;background:#fff;}
+
+/**分页*/
+.yangpan-pagination{padding:15px 0;overflow:hidden;width:100%;text-align:center;font-size:14px;}
+.yangpan-pagination a{display:inline-block;height:30px;line-height:30px;margin:0 2px;padding:0 15px;border-radius:5px;border:1px solid #ddd;background:#f5f5f5;}
+.yangpan-pagination a:hover{background:orangered;border:1px solid orangered;color:#fff;}
+.yangpan-pagination input{border:1px solid #ddd;padding:0 12px;width:20px;height:28px;border-radius:5px;}
+
+
+/**	article css go */
+.article-manage .page-nav{padding:25px 0;overflow:hidden;}
+.article-manage .page-nav .left{position:relative;width:130px;margin:0 -130px 0 0;float:left;color:#333;font-size:18px;font-weight:400;}
+.article-manage .page-nav .right{float:right;width:100%;}
+.article-manage .page-nav .right .content{margin:0 0 0 130px;text-align:right;}
+.article-manage .page-nav .right .content a{display:inline-block;height:15px;padding:0 10px;border-right:1px solid #ddd;}
+.article-manage .page-nav .right .content a:last-child{border:0 none;}
+.article-manage .page-nav .right .content .active{color:orangered;}
+.article-manage .article-list .have{padding:15px 0;border-bottom:1px dashed #ddd;overflow:hidden;}
+.article-manage .article-list .have:last-child{border:0 none;}
+.article-manage .article-list .have .right{position:relative;float:right;width:160px;height:100%;margin:0 0 0 -160px;}
+.article-manage .article-list .have .left{width:100%;height:100%;float:left;}
+.article-manage .article-list .have .left .content{margin:0 160px 0 20px;height:100%;overflow:hidden;}
+.article-manage .article-list .have .right .pic{display:block;width:145px;height:105px;margin:15px auto;overflow:hidden;border-radius:5px;}
+.article-manage .article-list .have .right .pic img{display:block;width:100%;height:100%;}
+.article-manage .article-list .have .bottom,.article-list .have .state-bar{color:#777;height:25px;line-height:25px;}
+.article-manage .article-list .have .bottom span{margin:0 15px 0 0;}
+.article-manage .article-list .time{font-size:12px;color:#777;margin:28px 0 0;}
+.article-manage .article-list .title{margin:10px 0 10px;}
+.article-manage .article-list .title a{display:block;width:95%;color:#333;font-size:18px;font-weight:500;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
+.article-manage .article-list .title a:hover{color:orangered;}
+.article-manage .article-list .pass .state{color:orangered;}
+.article-manage .article-list .edit{color:orangered;margin:0 0 0 15px;} 
+.article-manage .article-list .edit:hover{text-decoration:underline;}
+.article-manage .article-list .not-pass .state{color:#999;}
+.article-manage .article-list .not-check .state{color:purple;}
+.article-manage .article-list .null-list{display:none;color:#666;border:0 none;font-size:18px;line-height:135px;text-align:center;}
+/**	article css end */
+
+
+/*contribute css go*/
+.contribute .page-title{color:#333;font-size:18px;font-weight:400;height:25px;overflow:hidden;padding:10px 0 25px;width:100%;}
+.contribute .messages-wrap{min-height:900px;margin:25px 0 0;padding:40px 20px 20px 50px;border:1px solid #ddd;border-radius:5px;background:#fbfbfb;overflow:hidden;}
+.contribute .messages-wrap .part{zoom:1;overflow:hidden;}
+.contribute .messages-wrap .part .left{position:relative;float:left;width:115px;margin:0 -115px 0 0;}
+.contribute .messages-wrap .part .right{width:100%;float:right;overflow:hidden;}
+.contribute .messages-wrap .part .right .content{margin:0 0 0 115px;padding:0 0 25px 40px;border-left:1px dashed #ddd;overflow:hidden;}
+.contribute .messages-wrap .part .left span{position:relative;display:block;width:80px;height:40px;padding:0 0 0 45px;font-size:16px;line-height:40px;text-align:left;color:#737373;}
+.contribute .messages-wrap .part .left span:after{position:absolute;top:0;left:0;display:block;width:45px;height:40px;line-height:40px;text-align:center;font-family:"iconfont" !important;font-size:18px;font-style:normal;-webkit-font-smoothing: antialiased;-webkit-text-stroke-width: 0.2px;-moz-osx-font-smoothing: grayscale;content:'';}
+.contribute .messages-wrap .part .left .person-icon:after{content:'\e624';}
+.contribute .messages-wrap .part .left .title-icon:after{content:'\e609';}
+.contribute .messages-wrap .part .left .digest-icon:after{content:'\e606';}
+.contribute .messages-wrap .part .left .category-icon:after{content:'\e61a';}
+.contribute .messages-wrap .part .left .content-icon:after{content:'\e686';}
+.contribute .messages-wrap .part .left .pic-icon:after{content:'\e636';}
+.contribute .messages-wrap .part .left .keyword-icon:after{content:'\e633';}
+.contribute .messages-wrap .part .hint{float:left;color:orangered;font-size:12px;line-height:40px;padding:0 20px;}
+.contribute .messages-wrap .part .left:after{position:absolute;right:-10px;top:10px;display:block;width:20px;height:20px;font-size:20px;color:#bbb;content:'\e603';font-family:"iconfont" !important;font-size:18px;font-style:normal;-webkit-font-smoothing: antialiased;-webkit-text-stroke-width: 0.2px;-moz-osx-font-smoothing: grayscale;}
+.contribute .messages-wrap .part input.write{width:500px;height:40px;float:left;padding:0 20px;border:1px solid #ddd;border-radius:5px;color:#666;}
+.contribute .messages-wrap .part textarea.textarea,.messages-wrap .part .textarea{width:500px;height:270px;float:left;padding:10px 20px;border:1px solid #ddd;border-radius:5px;line-height:25px;color:#666;background:#fff;}
+.contribute .messages-wrap .part textarea.digest{width:500px;height:70px;float:left;padding:10px 20px;border:1px solid #ddd;border-radius:5px;line-height:25px;color:#666;background:#fff;}
+.contribute .messages-wrap .part .btn{display:block;width:160px;height:40px;line-height:40px;text-align:center;background:orangered;color:#fff;font-size:16px;}
+.contribute .messages-wrap .part .btn:hover{background:#db3e3e;}
+
+
+.contribute .messages-wrap{margin-top:0;}
+.contribute .container{padding:0 20px 0 0;}
+.contribute .file-wrap{position:relative;float:left;line-height:40px;color:orangered;overflow:hidden;}
+.contribute .file-wrap:hover{text-decoration:underline;}
+.contribute .file-wrap .file-btn{cursor:pointer;position:absolute;width:100px;height:35px;z-index:2;opacity:0;}
+.contribute .pic .hint{float:left;}
+.contribute .file-wrap .file{position:absolute;width:100px;height:35px;}
+.select-style{position:relative;display:block;width:150px;height:40px;overflow:hidden;border:1px solid #ddd;border-radius:5px;float:left;margin:0 10px 0 0;}
+.select-style select{width:100%;text-indent:5px;height:100%;color:#777;border:0 none;border-radius:5px;background:transparent;background:none;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;-o-appearance:none;appearance:none;background:#fff;}
+.select-style select option{padding:0 10px;}
+.select-style:after{border-bottom:1px solid #ddd;border-left:1px solid #ddd;content:"";display:inline-block;width:8px;height:8px;position:absolute;top:13px;right:10px;transform:translateY(-70%) rotateZ(-45deg);transform:rotate(-45deg);-ms-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-o-transform:rotate(-45deg);}
+/*contribute css end*/

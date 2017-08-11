@@ -19,7 +19,7 @@
  		obj.parent().removeClass('error').addClass('right');
  	}
  	function hintErrorInfo(obj,text){
- 		obj.siblings('.hint').css('color','#ff7200').text(text);
+ 		obj.siblings('.hint').css('color','orangered').text(text);
  		obj.parent().addClass('error');
  	}
  	function hintDefaultInfo(obj,text){

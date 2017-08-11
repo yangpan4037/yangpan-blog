@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>基本信息</title>
+	<title>更改头像</title>
 	<link rel="stylesheet" type="text/css" href="../../static/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="../../static/css/global.css">
 	<link rel="stylesheet" type="text/css" href="../../static/css/member.css">
 	<script type="text/javascript" src="../../static/plugs/jquery.1.10.2.js"></script>
 	<script type="text/javascript" src="../../static/js/global.js"></script>
-	<script type="text/javascript" src="../../static/js/aboutMe.js"></script>
+	<script type="text/javascript" src="../../static/js/changeFace.js"></script>
 </head>
 <body>
 
@@ -75,19 +75,19 @@
 		<div class="media-auto-width member-body">
 			<div class="member-body-left">
 				<div class="member-body-content">
-					<div class="about-me main">
+					<div class="change-face main">
 						<h3 class="page-title">个人资料</h3>
 						<ul class="tab-head">
-							<li class="active">
+							<li>
 								<a href="aboutMe.html">基本信息</a>
 							</li>
 							<li>
-								<a href="changePwd.html">修改密码</a>
+								<a href="changePsw.html">修改密码</a>
 							</li>
 							<li>
 								<a href="changeEmail.html">修改电子邮件</a>
 							</li>
-							<li>
+							<li class="active">
 								<a href="changeFace.html">更换头像</a>
 							</li>
 							<li>
@@ -101,78 +101,39 @@
 							 </li>
 						</ul>
 						<div class="tab-body">
-							<div class="user-name similar">
-								<div class="title">用户昵称：</div>
-								<input id="userName" type="text" value="逝。可而止”" placeholder="请填写昵称">
-								<p class="hint"></p>
-							</div>
-							<div class="real-name similar">
-								<div class="title">真实姓名：</div>
-								<input id="realName" type="text" value="杨潘" placeholder="请填写真实姓名">
-								<p class="hint">请输入真实姓名，20个英文或10个汉字</p>
-							</div>
-							<div class="sex-wrap similar">
-								<div class="title">性　　别：</div>
-								<div class="sex">
-									<a href="javascript:void(0);">男</a>
-									<a href="javascript:void(0);">女</a>
-									<a class="active" href="javascript:void(0);">保密</a>
+							<div class="left">
+								<div class="original-wrap">
+									<p class="default-info">选择一张本地图片编辑后上传为图像</p>
+									<div class="pic">
+										<img id="originalPic">
+									</div>
 								</div>
-							</div>
-							<div class="birthday similar">
-								<div class="title">生　　日：</div>
-								<input id="birthday" type="text" placeholder="请选择生日">
-								<p class="hint">填生日有惊喜哦~</p>
-							</div>
-							<div class="area similar">
-								<div class="title">所在地区：</div>
-								<div class="select-style">
-									<select>
-										<option value="0">四川省</option>
-										<option value="1">云南省</option>
-										<option value="2">贵州省</option>
-										<option value="3">江西省</option>
-									</select>
+								<div class="btn-wrap">
+									<a class="file-btn" href="javascript:void(0);">
+										<span>图片上传</span>
+										<input id="fileBtn" class="file-btn" type="file">
+									</a>
+									<a class="save-btn" href="javascript:void(0);">保存头像</a>
 								</div>
-								<div class="select-style">
-									<select>
-										<option value="00">成都市</option>
-										<option value="11">南充市</option>
-										<option value="22">绵阳市</option>
-										<option value="33">自贡市</option>
-									</select>
+								<p class="hint-type">仅支持gif，jpeg，jpg，bmp，png图片格式，且上传文件小于4M</p>
+								<p class="hint-size">头像默认尺寸为120x120像素，请根据系统操作提示进行裁剪并生效。</p>
+							</div>
+							<div class="preview">
+								<p class="hint-clarity">您的头像会被系统自动等比缩放为相应的尺寸请注意各尺寸头像是否清晰</p>
+								<div class="pic-list">
+									<div class="big">
+										<img id="bigPic">
+										<span>120*120</span>
+									</div>
+									<div class="middle">
+										<img id="middlePic">
+										<span>60*60</span>
+									</div>
+									<div class="small">
+										<img id="smallPic">
+										<span>30*30</span>
+									</div>
 								</div>
-								<div class="select-style">
-									<select>
-										<option value="00">成都市</option>
-										<option value="11">南充市</option>
-										<option value="22">绵阳市</option>
-										<option value="33">自贡市</option>
-									</select>
-								</div>
-							</div>
-							<div class="qq similar">
-								<div class="title">QQ号码：</div>
-								<input id="QQ" type="text" placeholder="请填写QQ号码~">
-								<p class="hint">QQ号码是您与卖家沟通最重要的工具之一，请务必填写</p>
-							</div>
-							<div class="tel similar">
-								<div class="title">电话号码：</div>
-								<input type="text" value="135****2110" disabled="disable"/>
-								<a class="alter" href="changePhone.html">修改</a>
-							</div>
-							<div class="idcard similar">
-								<div class="title">身份证号：</div>
-								<input id="idCard" type="text" placeholder="请输入身份证号" />
-								<p class="hint">身份证号码是您在平台交易和使用的基本凭证，填写后将不可更改</p>
-							</div>
-							<div class="email similar">
-								<div class="title">电子邮箱：</div>
-								<input type="text" value="9167****135@qq.com" disabled="disabled">
-								<a class="alter" href="changeEmail.html">修改</a>
-							</div>
-							<div class="submit-wrap">
-								<a class="submit-btn" href="javascript:void(0);">提交修改</a>
 							</div>
 						</div>
 					</div>
@@ -183,14 +144,14 @@
 					<dt>个人中心</dt>
 					<dd>
 						<i class="iconfont">&#xe647;</i>
-						<a href="#">个人资料</a>
+						<a href="aboutMe.html">个人资料</a>
 					</dd>
 					<dd>
 						<i class="iconfont">&#xe624;</i>
-						<a href="otherAccount.html">第三方绑定</a>
+						<a href="#">第三方绑定</a>
 					</dd>
 					<dt>个人中心</dt>
-					<dd>
+					<dd class="active">
 						<i class="iconfont">&#xe647;</i>
 						<a href="#">个人资料</a>
 					</dd>
