@@ -23,10 +23,10 @@ body{background:#eee;}
 .article-body-content{margin-right:375px;}
 
 .article-body-right-content{padding:25px 35px;overflow:hidden;}
-.article-body-right-content dt{font-size:18px;height:35px;line-height:35px;padding:10px 0;}
-.article-body-right-content dd{font-size:15px;height:30px;line-height:30px;padding:0 0 10px 20px;}
-.article-body-right-content dd i{margin:0 5px 0 0;color:#666;}
-.article-body-right-content dd a{color:#666;}
+.article-body-right-content .stair{font-size:18px;height:35px;line-height:35px;padding:10px 0;}
+.article-body-right-content .second{font-size:15px;height:30px;line-height:30px;padding:0 0 10px 20px;}
+.article-body-right-content .second i{margin:0 5px 0 0;color:#666;}
+.article-body-right-content .second a{color:#666;}
 .article-body-right-content .active i,.article-body-right-content .active a,.article-body-right-content dd:hover i,.article-body-right-content dd:hover a{color:orangered;}
 
 
@@ -46,9 +46,12 @@ body{background:#eee;}
 .article-info .right .info .color{color:orangered;}
 .article-info .right .info a{margin:0 5px;}
 .article-info .right .info a:hover{text-decoration:underline;}
-
-
 .article-body-content .main{padding:30px;background:#fff;}
+
+.article-body-content .null-nothing-wrap{padding:30px 50px;border:1px solid #ffd4c4;background:#fff8f5;overflow:hidden;}
+.article-body-content .null-nothing-wrap .iconfont{display:inline-block;width:70px;height:70px;margin:0 25px 0 0;text-align:center;line-height:70px;font-size:35px;color:orangered;vertical-align:-10px;}
+.article-body-content .null-nothing-wrap a{color:orangered;}
+.article-body-content .null-nothing-wrap a:hover{text-decoration:underline;}
 
 /**分页*/
 .yangpan-pagination{padding:15px 0;overflow:hidden;width:100%;text-align:center;font-size:14px;}
@@ -57,7 +60,7 @@ body{background:#eee;}
 .yangpan-pagination input{border:1px solid #ddd;padding:0 12px;width:20px;height:28px;border-radius:5px;}
 
 
-/**	article css go */
+/**	articleManager css go */
 .article-manage .page-nav{padding:25px 0;overflow:hidden;}
 .article-manage .page-nav .left{position:relative;width:130px;margin:0 -130px 0 0;float:left;color:#333;font-size:18px;font-weight:400;}
 .article-manage .page-nav .right{float:right;width:100%;}
@@ -84,7 +87,7 @@ body{background:#eee;}
 .article-manage .article-list .not-pass .state{color:#999;}
 .article-manage .article-list .not-check .state{color:purple;}
 .article-manage .article-list .null-list{display:none;color:#666;border:0 none;font-size:18px;line-height:135px;text-align:center;}
-/**	article css end */
+/**	articleManager css end */
 
 
 /*contribute css go*/
@@ -110,8 +113,6 @@ body{background:#eee;}
 .contribute .messages-wrap .part textarea.digest{width:500px;height:70px;float:left;padding:10px 20px;border:1px solid #ddd;border-radius:5px;line-height:25px;color:#666;background:#fff;}
 .contribute .messages-wrap .part .btn{display:block;width:160px;height:40px;line-height:40px;text-align:center;background:orangered;color:#fff;font-size:16px;}
 .contribute .messages-wrap .part .btn:hover{background:#db3e3e;}
-
-
 .contribute .messages-wrap{margin-top:0;}
 .contribute .container{padding:0 20px 0 0;}
 .contribute .file-wrap{position:relative;float:left;line-height:40px;color:orangered;overflow:hidden;}
@@ -124,3 +125,35 @@ body{background:#eee;}
 .select-style select option{padding:0 10px;}
 .select-style:after{border-bottom:1px solid #ddd;border-left:1px solid #ddd;content:"";display:inline-block;width:8px;height:8px;position:absolute;top:13px;right:10px;transform:translateY(-70%) rotateZ(-45deg);transform:rotate(-45deg);-ms-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-o-transform:rotate(-45deg);}
 /*contribute css end*/
+
+
+/** category css go */
+.category .null-nothing-wrap{padding:30px 50px;border:1px solid #ffd4c4;background:#fff8f5;overflow:hidden;}
+.category .null-nothing-wrap .iconfont{display:inline-block;width:70px;height:70px;margin:0 25px 0 0;text-align:center;line-height:70px;font-size:35px;color:orangered;vertical-align:-10px;}
+.category .null-nothing-wrap a{color:orangered;}
+.category .null-nothing-wrap a:hover{text-decoration:underline;}
+.category .category-tag-wrap{margin:25px 0 0;overflow:hidden;border:1px solid #ddd;position:relative;}
+.category .category-tag-left{position:absolute;float:left;width:190px;margin-right:-190px;height:100%;background:#f9f9f9;overflow:hidden;}
+.category .category-tag-right{float:right;width:100%;height:100%;}
+.category .category-tag-content{hegiht:100%;margin-left:200px;padding:15px 0;overflow:hidden;}
+.category .category-tag-content .item{display:block;float:left;padding:0 15px;margin:5px;height:35px;line-height:35px;border-radius:5px;border:2px solid orangered;}
+.category .category-tag-content .item:hover{color:#fff;background:orangered;}
+.category .category-tag-left .title{padding:20px}
+.category .form{display:block;width:100%;height:100%;}
+.category .add-category-wrap{margin:20px 0 10px;height:40px;line-height:40px;border-radius:5px;border:1px solid #ddd;}
+.category .add-category-left,.add-category-right{position:relative;float:left;width:190px;margin:0 -190px 0 0;background:#eee;}
+.category .add-category-right{float:right;width:190px;margin:0 0 0 -190px;height:100%;position:relative;}
+.category .add-category-middle{float:left;width:100%;height:100%;}
+.category .add-category-content{margin:0 190px 0 190px;height:100%;position:relative;}
+.category .add-category-content .name{width:100%;height:100%;display:block;position:absolute;top:-1px;left:-2px;border:1px solid #ddd;}
+.category .add-category-left .title{padding:0 20px;}
+.category .submit-btn{display:block;position:absolute;top:-1px;left:-1px;width:192px;height:42px;border:1px solid orangered;border-radius:0 5px 5px 0;cursor:pointer;background:orangered;color:#fff;}
+.category .submit-btn:hover{background:orangered;border:1px solid orangered;color:#fff;}
+/** category css end */
+
+
+/** article css go */
+.article-page .article-structure-title{font-size:20px;height:45px;line-height:45px;padding:0 0 10px;}
+.article-page .article-structure-list dt{height:30px;line-height:30px;font-size:16px;text-indent:15px;}
+.article-page .article-structure-list dd{height:30px;line-height:30px;font-size:14px;text-indent:30px;}
+/** article css end */
