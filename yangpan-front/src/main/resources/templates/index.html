@@ -1,121 +1,627 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="~{fragments/header :: header}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="../../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+    <link rel="stylesheet" type="text/css" href="../../css/index.css">
+    <script type="text/javascript" src="../../plugs/jquery.1.10.2.js"></script>
+    <script type="text/javascript" src="../../js/global.js"></script>
+    <script type="text/javascript" src="../../js/index.js"></script>
 </head>
 <body>
-<!-- Page Content -->
-<div class="container blog-content-container">
-
-    <div class="row">
-
-        <!-- Blog Entries Column -->
-        <div class="col-md-8">
-
-            <!-- Blog Post -->
-            <div id="mainContainer">
-                <div id="mainContainerRepleace">
-		            <div class="card mb-4" th:each="blog : ${blogList}">
-		                <div class="card-block">
-		                 	<h2 class="card-title">
-		                 		<span>
-				                  <a href="/u/waylau" title="waylau" th:href="'/u/' + ${blog.username}"  th:title="${blog.username}">
-				                    <img src="/images/avatar-defualt.jpg" th:src="${blog.avatar} == null ? '/images/avatar-defualt.jpg' : ${blog.avatar}"  class="blog-avatar-50">
-				                  </a>
-						        </span>
-		                        <a href="/u/waylau/blogs/1" class="card-link" title="waylau" 
-		                        	th:href="'/u/' + ${blog.username} + '/blogs/'+ ${blog.blogId}"  th:title="${blog.title}" th:text="${blog.title}">
-		                            OAuth 2.0 认证的原理与实践
-		                        </a>
-		                    </h2>
-		                    <p class="card-text" th:text="${blog.summary}">使用 OAuth 2.0 认证的的好处是显然易见的。你只需要用同一个账号密码，就能在各个网站进行访问，而免去了在每个网站都进行注册的繁琐过程。 本文将介绍
-		                        OAuth 2.0 的原理，并基于 Spring Security 和 GitHub 账号，来演示 OAuth 2.0 的认证的过程。</p>
-		                    <div class="card-text">
-		                        <a href="/u/waylau" th:href="'/u/' + ${blog.username}" class="card-link" th:text=${blog.username}>waylau</a> 发表于 [[${#dates.format(blog.createTime, 'yyyy-MM-dd HH:mm')}]] <i class="fa fa-eye" aria-hidden="true">[[${blog.readSize}]]</i>
-		                        <i class="fa fa-heart-o" aria-hidden="true">[[${blog.voteSize}]]</i> <i class="fa fa-comment-o"
-		                                                                              aria-hidden="true">[[${blog.commentSize}]]</i>
-		                    </div>
-		                </div>
-		            </div>
-	 
-		            <div th:replace="~{fragments/page :: page}">...</div>
-	            </div>
-            </div>
- 
+<!-- header start -->
+<div class="header">
+    <div class="media-auto-width">
+        <div class="left">
+            <a href="login/login.html" class="login">亲，请登录</a>
+            <a href="login/register.html" class="register">现在注册</a>
         </div>
+        <ul class="right">
+            <li>
+                <div class="search-wrap">
+                    <form action="#">
+                        <input class="search-text" type="text" placeholder="请输入搜索内容。">
+                        <input class="search-btn iconfont" type="submit" value="&#xe613;" />
+                    </form>
+                </div>
+            </li>
+            <li>
+                <a href="#">首页</a>
+            </li>
+            <li>
+                <a href="#">最新</a>
+            </li>
+            <li>
+                <a href="#">最热</a>
+            </li>
+            <li>
+                <a href="#">写文章</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- header end -->
 
-        <!-- 右侧栏目 -->
-        <div class="col-md-4">
-            <div>
-                <!-- 热门标签 -->
-                <div class="card ">
-                    <h5 class="card-header"><i class="fa fa-tags" aria-hidden="true"></i> 热门标签</h5>
-                    <div class="card-block">
-                        <div class="row">
-                            <div class="col-lg-12" >
-                                <a th:each="tag, tagStat : ${tags}" th:object="${tag}" href="/blogs?keyword=1" th:href="'/blogs?keyword=' +  *{name}"> <span class="badge" 
-                                th:classappend="${tagStat.index} eq 0 ? 'badge-danger': (${tagStat.index} eq 1 ? 'badge-warning':(${tagStat.index} eq 2 ? 'badge-info':'badge-default'))"th:text="*{name}">Web Design</span></a>
+<!-- banner-outer-wrap start -->
+<div class="banner-outer-wrap">
+    <div class="banner-wrap media-auto-width">
+        <ul class="banner">
+            <li>
+                <a href="#">
+                    <img src="../static/pic/banner_01.jpg"/>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../static/pic/banner_02.jpg"/>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../static/pic/banner_03.jpg"/>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../static/pic/banner_04.jpg"/>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../static/pic/banner_05.jpg"/>
+                </a>
+            </li>
+        </ul>
+        <a class="iconfont arrows prev" href="javascript:void(0);">&#xe601;</a>
+        <a class="iconfont arrows next" href="javascript:void(0);">&#xe602;</a>
+    </div>
+</div>
+<!-- banner-outer-wrap end -->
+
+<!-- yangpan-layout-wrap start -->
+<div class="yangpan-layout-wrap media-auto-width">
+    <div class="yangpan-layout">
+
+        <!-- yangpan-layout-left start -->
+        <div class="yangpan-layout-left">
+            <div class="module-wrap">
+                <div class="module-title">热门文章</div>
+                <ul class="module-content">
+                    <li class="item">
+                        <div class="item-left">
+                            <img class="face" src="../static/images/defaut_face_01.jpeg" alt="头像">
+                        </div>
+                        <div class="item-right">
+                            <div class="item-content">
+                                <a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
+                                <p class="item-info">
+                                    <a class="author" href=""  title="名称">微利图库</a>
+                                    <span>, 2017-07-08 10:03</span>
+                                </p>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- 热门用户 -->
-                <div class="card my-4">
-                    <h5 class="card-header"><i class="fa fa-users" aria-hidden="true"></i> 热门用户</h5>
-                    <div class="card-block">
-                        <div class="row">
-                            <div class="col-lg-12">
-								<span th:each="user: ${users}" th:object="${user}">
-				                  <a href="/u/waylau" th:href="'/u/' + *{username}" title="waylau" th:title="*{username}">
-				                    <img src="/images/avatar-defualt.jpg" th:src="*{avatar} == null ? '/images/avatar-defualt.jpg' : *{avatar}" class="blog-avatar-50">
-				                  </a>
-				                </span>
+                    </li>
+                    <li class="item">
+                        <div class="item-left">
+                            <img class="face" src="../static/images/defaut_face_02.jpg" alt="头像">
+                        </div>
+                        <div class="item-right">
+                            <div class="item-content">
+                                <a href="#" class="item-title" title="标题">汇聚灵感的高品质图库——花瓣美素上线了</a>
+                                <p class="item-info">
+                                    <a class="author" href=""  title="名称">华丽逆转</a>
+                                    <span>, 2017-08-08 10:03</span>
+                                </p>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </li>
+                    <li class="item">
+                        <div class="item-left">
+                            <img class="face" src="../static/images/defaut_face_03.jpg" alt="头像">
+                        </div>
+                        <div class="item-right">
+                            <div class="item-content">
+                                <a href="#" class="item-title" title="标题">2017ArtCenter&阿森特，创新改变世界| 游戏改变者 精英论坛即将开始！ </a>
+                                <p class="item-info">
+                                    <a class="author" href=""  title="名称">游戏改变者</a>
+                                    <span>, 2017-04-08 10:03</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="item-left">
+                            <img class="face" src="../static/images/defaut_face_04.jpg" alt="头像">
+                        </div>
+                        <div class="item-right">
+                            <div class="item-content">
+                                <a href="#" class="item-title" title="标题">Vans艺术家#艺术TEE图案征集活动获奖公示</a>
+                                <p class="item-info">
+                                    <a class="author" href=""  title="名称">万众期待</a>
+                                    <span>, 2017-03-12 10:03</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="item-left">
+                            <img class="face" src="../static/images/defaut_face_05.jpg" alt="头像">
+                        </div>
+                        <div class="item-right">
+                            <div class="item-content">
+                                <a href="#" class="item-title" title="标题">“中国鲁迅美术学院与英国曼彻斯特索尔福德大学 合作办学项目签约仪式”隆重举行</a>
+                                <p class="item-info">
+                                    <a class="author" href=""  title="名称">中国鲁迅美术学院</a>
+                                    <span>, 2017-08-08 10:03</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="module-wrap">
+                <div class="module-title">最新发布</div>
+                <ul class="module-content">
+                    <li class="item">
+                        <div class="item-left">
+                            <img class="face" src="../static/images/defaut_face_06.jpg" alt="头像">
+                        </div>
+                        <div class="item-right">
+                            <div class="item-content">
+                                <a href="#" class="item-title" title="标题">二十四节气标识系统设计征集函</a>
+                                <p class="item-info">
+                                    <a class="author" href=""  title="名称">北京国际设计周组委会</a>
+                                    <span>, 2016-03-02 10:03</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="item-left">
+                            <img class="face" src="../static/images/defaut_face_05.jpg" alt="头像">
+                        </div>
+                        <div class="item-right">
+                            <div class="item-content">
+                                <a href="#" class="item-title" title="标题">创新年轻IP 传播樱花新精神—樱花IP卡通形象征集</a>
+                                <p class="item-info">
+                                    <a class="author" href=""  title="名称">狮出有樱</a>
+                                    <span>, 2015-07-24 10:03</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="item-left">
+                            <img class="face" src="../static/images/defaut_face_07.jpg" alt="头像">
+                        </div>
+                        <div class="item-right">
+                            <div class="item-content">
+                                <a href="#" class="item-title" title="标题">HAZZYS哈吉斯第二届原创插画设计大赛千寻之冠等你而来</a>
+                                <p class="item-info">
+                                    <a class="author" href=""  title="名称">英伦服装品牌</a>
+                                    <span>, 2012-11-09 15:03</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="item-left">
+                            <img class="face" src="../static/images/defaut_face_03.jpg" alt="头像">
+                        </div>
+                        <div class="item-right">
+                            <div class="item-content">
+                                <a href="#" class="item-title" title="标题">为平静而设计|专访“中国好设计”金奖设计师高凤麟</a>
+                                <p class="item-info">
+                                    <a class="author" href=""  title="名称">华丽逆转</a>
+                                    <span>, 2017-08-08 10:03</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="item-left">
+                            <img class="face" src="../static/images/defaut_face_02.jpg" alt="头像">
+                        </div>
+                        <div class="item-right">
+                            <div class="item-content">
+                                <a href="#" class="item-title" title="标题">北京惠民文化消费季吉祥物征集大赛已启动！</a>
+                                <p class="item-info">
+                                    <a class="author" href=""  title="名称">参赛链接</a>
+                                    <span>, 2017-08-08 10:03</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- yangpan-layout-left end -->
 
-                <!-- 热门文章 -->
-                <div class="card my-4">
-                    <h5 class="card-header"><i class="fa fa-fire" aria-hidden="true"></i> 热门文章</h5>
-
-                    <ul class="list-group" th:each="hotblog , hotblogStat : ${hotest}" th:object="${hotblog}">
-                        <a  th:href="'/u/'+*{username} +'/blogs/'+ *{blogId}" class="list-group-item">
-                            [[*{title}]]<span class="badge badge-pill" th:classappend="${hotblogStat.index} eq 0 ? 'badge-danger': (${hotblogStat.index} eq 1 ? 'badge-warning':(${hotblogStat.index} eq 2 ? 'badge-info':'badge-default'))">[[*{readSize}]]</span>
-                        </a>
-                    </ul>
-
-                </div>
-
-                <!-- 最新发布 -->
-                <div class="card my-4">
-                    <h5 class="card-header"><i class="fa fa-line-chart" aria-hidden="true"></i> 最新发布</h5>
-                    <div class="list-group">
-                        <ul class="list-group" th:each="newblog : ${newest}" th:object="${newblog}">
-                        <a  th:href="'/u/'+*{username} +'/blogs/'+ *{blogId}" class="list-group-item" th:text="*{title}">
-                        </a>
- 
-                        </ul>
-                    </div>
-
+        <!-- yangpan-layout-middle start -->
+        <div class="yangpan-layout-middle">
+            <div class="yangpan-layout-content">
+                <ul>
+                    <li class="layout-middle-wrap">
+                        <div class="layout-middle-left">
+                            <a href="#" class="cover">
+                                <img src="../static/pic/article_cover_01.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="layout-middle-right">
+                            <div class="layout-middle-right-content">
+                                <a class="title" href="#">Vans艺术家#艺术TEE图案征集活动获奖公示</a>
+                                <p class="info">
+                                    <span class="iconfont">&#xe652;</span> yangpan
+                                    <span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+                                </p>
+                                <p class="summary">万众期待，众所瞩目，后台私信到爆的#VANS艺术家#艺术TEE图案征集活动结果 现在来公布啦！   咚咚咚咚咚咚咚 Vans艺术家奖 人选：1名  TA的艺术创作作品将被Vans量产，成为2018年OFF THE WALL艺术TEE！同时，TA将获得价值¥5,000的V … </p>
+                                <div class="bottom">
+                                    <div class="left">
+                                        <span class="category">分类:行业 </span>
+                                    </div>
+                                    <div class="right">
+                                        <span class="iconfont look">&#xe61b; 102</span>
+                                        <span class="iconfont vote">&#xe60c; 102</span>
+                                        <span class="iconfont comment">&#xe692; 102</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="layout-middle-wrap">
+                        <div class="layout-middle-left">
+                            <a href="#" class="cover">
+                                <img src="../static/pic/article_cover_02.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="layout-middle-right">
+                            <div class="layout-middle-right-content">
+                                <a class="title" href="#">汇聚灵感的高品质图库——花瓣美素上线了</a>
+                                <p class="info">
+                                    <span class="iconfont">&#xe652;</span> yangpan
+                                    <span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+                                </p>
+                                <p class="summary">关键词 高品质 低价格 微利图库 移动互联网时代的今天，利用移动媒体端作为信息高效传递的载体已经深入人们的日常生活，信息传递地同时良好的视觉体验也愈发重要。广告传媒行业对图片素材有着海量需求，但由于行业操作不尽规范，传统图片平台垄断式渠道，盗版、侵权、高价等充斥着视觉产 … </p>
+                                <div class="bottom">
+                                    <div class="left">
+                                        <span class="category">分类:行业 </span>
+                                    </div>
+                                    <div class="right">
+                                        <span class="iconfont look">&#xe61b; 102</span>
+                                        <span class="iconfont vote">&#xe60c; 102</span>
+                                        <span class="iconfont comment">&#xe692; 102</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="layout-middle-wrap">
+                        <div class="layout-middle-left">
+                            <a href="#" class="cover">
+                                <img src="../static/pic/article_cover_03.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="layout-middle-right">
+                            <div class="layout-middle-right-content">
+                                <a class="title" href="#">2017ArtCenter&阿森特，创新改变世界| 游戏改变者 精英论坛即将开始！</a>
+                                <p class="info">
+                                    <span class="iconfont">&#xe652;</span> yangpan
+                                    <span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+                                </p>
+                                <p class="summary">游戏改变者，用创造力影响着企业的生命 2017年7月21至22日，美国艺术中心设计学院和阿森特艺术中心设计学院将在北京举办第二届“创新改变世界”精英论坛，ArtCenter与行业创新领导力再次相约北京。这次，大会主题是“游戏改变者（Game Changer）”，大会将与 … </p>
+                                <div class="bottom">
+                                    <div class="left">
+                                        <span class="category">分类:行业 </span>
+                                    </div>
+                                    <div class="right">
+                                        <span class="iconfont look">&#xe61b; 102</span>
+                                        <span class="iconfont vote">&#xe60c; 102</span>
+                                        <span class="iconfont comment">&#xe692; 102</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="layout-middle-wrap">
+                        <div class="layout-middle-left">
+                            <a href="#" class="cover">
+                                <img src="../static/pic/article_cover_04.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="layout-middle-right">
+                            <div class="layout-middle-right-content">
+                                <a class="title" href="#">“中国鲁迅美术学院与英国曼彻斯特索尔福德大学 合作办学项目签约仪式”隆重举行</a>
+                                <p class="info">
+                                    <span class="iconfont">&#xe652;</span> yangpan
+                                    <span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+                                </p>
+                                <p class="summary">2017年6月25日下午3时，“中国鲁迅美术学院与英国曼彻斯特索尔福德大学合作办学项目签约仪式”在北京人民大会堂澳门厅隆重举行。 出席签约仪式的英方嘉宾有：英国曼彻斯特索尔福德大学校长海伦•米歇尔（Helen Marshall）教授，英国曼彻斯特索尔福德大学媒体与艺术学 … </p>
+                                <div class="bottom">
+                                    <div class="left">
+                                        <span class="category">分类:行业 </span>
+                                    </div>
+                                    <div class="right">
+                                        <span class="iconfont look">&#xe61b; 102</span>
+                                        <span class="iconfont vote">&#xe60c; 102</span>
+                                        <span class="iconfont comment">&#xe692; 102</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="layout-middle-wrap">
+                        <div class="layout-middle-left">
+                            <a href="#" class="cover">
+                                <img src="../static/pic/article_cover_05.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="layout-middle-right">
+                            <div class="layout-middle-right-content">
+                                <a class="title" href="#">Vans艺术家#艺术TEE图案征集活动获奖公示</a>
+                                <p class="info">
+                                    <span class="iconfont">&#xe652;</span> yangpan
+                                    <span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+                                </p>
+                                <p class="summary">万众期待，众所瞩目，后台私信到爆的#VANS艺术家#艺术TEE图案征集活动结果 现在来公布啦！   咚咚咚咚咚咚咚 Vans艺术家奖 人选：1名  TA的艺术创作作品将被Vans量产，成为2018年OFF THE WALL艺术TEE！同时，TA将获得价值¥5,000的V … </p>
+                                <div class="bottom">
+                                    <div class="left">
+                                        <span class="category">分类:行业 </span>
+                                    </div>
+                                    <div class="right">
+                                        <span class="iconfont look">&#xe61b; 102</span>
+                                        <span class="iconfont vote">&#xe60c; 102</span>
+                                        <span class="iconfont comment">&#xe692; 102</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="layout-middle-wrap">
+                        <div class="layout-middle-left">
+                            <a href="#" class="cover">
+                                <img src="../static/pic/article_cover_06.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="layout-middle-right">
+                            <div class="layout-middle-right-content">
+                                <a class="title" href="#">Vans艺术家#艺术TEE图案征集活动获奖公示</a>
+                                <p class="info">
+                                    <span class="iconfont">&#xe652;</span> yangpan
+                                    <span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+                                </p>
+                                <p class="summary">万众期待，众所瞩目，后台私信到爆的#VANS艺术家#艺术TEE图案征集活动结果 现在来公布啦！   咚咚咚咚咚咚咚 Vans艺术家奖 人选：1名  TA的艺术创作作品将被Vans量产，成为2018年OFF THE WALL艺术TEE！同时，TA将获得价值¥5,000的V … </p>
+                                <div class="bottom">
+                                    <div class="left">
+                                        <span class="category">分类:行业 </span>
+                                    </div>
+                                    <div class="right">
+                                        <span class="iconfont look">&#xe61b; 102</span>
+                                        <span class="iconfont vote">&#xe60c; 102</span>
+                                        <span class="iconfont comment">&#xe692; 102</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="layout-middle-wrap">
+                        <div class="layout-middle-left">
+                            <a href="#" class="cover">
+                                <img src="../static/pic/article_cover_07.png" alt="">
+                            </a>
+                        </div>
+                        <div class="layout-middle-right">
+                            <div class="layout-middle-right-content">
+                                <a class="title" href="#">Vans艺术家#艺术TEE图案征集活动获奖公示</a>
+                                <p class="info">
+                                    <span class="iconfont">&#xe652;</span> yangpan
+                                    <span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+                                </p>
+                                <p class="summary">万众期待，众所瞩目，后台私信到爆的#VANS艺术家#艺术TEE图案征集活动结果 现在来公布啦！   咚咚咚咚咚咚咚 Vans艺术家奖 人选：1名  TA的艺术创作作品将被Vans量产，成为2018年OFF THE WALL艺术TEE！同时，TA将获得价值¥5,000的V … </p>
+                                <div class="bottom">
+                                    <div class="left">
+                                        <span class="category">分类:行业 </span>
+                                    </div>
+                                    <div class="right">
+                                        <span class="iconfont look">&#xe61b; 102</span>
+                                        <span class="iconfont vote">&#xe60c; 102</span>
+                                        <span class="iconfont comment">&#xe692; 102</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="layout-middle-wrap">
+                        <div class="layout-middle-left">
+                            <a href="#" class="cover">
+                                <img src="../static/pic/article_cover_01.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="layout-middle-right">
+                            <div class="layout-middle-right-content">
+                                <a class="title" href="#">Vans艺术家#艺术TEE图案征集活动获奖公示</a>
+                                <p class="info">
+                                    <span class="iconfont">&#xe652;</span> yangpan
+                                    <span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+                                </p>
+                                <p class="summary">万众期待，众所瞩目，后台私信到爆的#VANS艺术家#艺术TEE图案征集活动结果 现在来公布啦！   咚咚咚咚咚咚咚 Vans艺术家奖 人选：1名  TA的艺术创作作品将被Vans量产，成为2018年OFF THE WALL艺术TEE！同时，TA将获得价值¥5,000的V … </p>
+                                <div class="bottom">
+                                    <div class="left">
+                                        <span class="category">分类:行业 </span>
+                                    </div>
+                                    <div class="right">
+                                        <span class="iconfont look">&#xe61b; 102</span>
+                                        <span class="iconfont vote">&#xe60c; 102</span>
+                                        <span class="iconfont comment">&#xe692; 102</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="layout-middle-wrap">
+                        <div class="layout-middle-left">
+                            <a href="#" class="cover">
+                                <img src="../static/pic/article_cover_02.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="layout-middle-right">
+                            <div class="layout-middle-right-content">
+                                <a class="title" href="#">Vans艺术家#艺术TEE图案征集活动获奖公示</a>
+                                <p class="info">
+                                    <span class="iconfont">&#xe652;</span> yangpan
+                                    <span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+                                </p>
+                                <p class="summary">万众期待，众所瞩目，后台私信到爆的#VANS艺术家#艺术TEE图案征集活动结果 现在来公布啦！   咚咚咚咚咚咚咚 Vans艺术家奖 人选：1名  TA的艺术创作作品将被Vans量产，成为2018年OFF THE WALL艺术TEE！同时，TA将获得价值¥5,000的V … </p>
+                                <div class="bottom">
+                                    <div class="left">
+                                        <span class="category">分类:行业 </span>
+                                    </div>
+                                    <div class="right">
+                                        <span class="iconfont look">&#xe61b; 102</span>
+                                        <span class="iconfont vote">&#xe60c; 102</span>
+                                        <span class="iconfont comment">&#xe692; 102</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="layout-middle-wrap">
+                        <div class="layout-middle-left">
+                            <a href="#" class="cover">
+                                <img src="../static/pic/article_cover_03.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="layout-middle-right">
+                            <div class="layout-middle-right-content">
+                                <a class="title" href="#">Vans艺术家#艺术TEE图案征集活动获奖公示</a>
+                                <p class="info">
+                                    <span class="iconfont">&#xe652;</span> yangpan
+                                    <span class="iconfont">&#xe600;</span> 2017-08-08 16:10
+                                </p>
+                                <p class="summary">万众期待，众所瞩目，后台私信到爆的#VANS艺术家#艺术TEE图案征集活动结果 现在来公布啦！   咚咚咚咚咚咚咚 Vans艺术家奖 人选：1名  TA的艺术创作作品将被Vans量产，成为2018年OFF THE WALL艺术TEE！同时，TA将获得价值¥5,000的V … </p>
+                                <div class="bottom">
+                                    <div class="left">
+                                        <span class="category">分类:行业 </span>
+                                    </div>
+                                    <div class="right">
+                                        <span class="iconfont look">&#xe61b; 102</span>
+                                        <span class="iconfont vote">&#xe60c; 102</span>
+                                        <span class="iconfont comment">&#xe692; 102</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="yangpan-pagination">
+                    <a href="#">上一页</a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">...</a>
+                    <a href="#">65</a>
+                    <a href="#">下一页</a>
+                    到 <input type="text"> 页
+                    每页 <input type="text"> 条
+                    共3699条数据
                 </div>
             </div>
         </div>
+        <!-- yangpan-layout-middle end -->
+
+        <!-- yangpan-layout-right start -->
+        <div class="yangpan-layout-right">
+            <div class="module-two-wrap">
+                <div class="module-title">活跃用户</div>
+                <div class="module-two-content">
+                    <a class="item">
+                        <img class="face" src="../static/images/defaut_face_01.jpeg" alt="头像">
+                        <span class="name">华丽逆转</span>
+                    </a>
+                    <a class="item">
+                        <img class="face" src="../static/images/defaut_face_02.jpg" alt="头像">
+                        <span class="name">华丽逆转</span>
+                    </a>
+                    <a class="item">
+                        <img class="face" src="../static/images/defaut_face_03.jpg" alt="头像">
+                        <span class="name">华丽逆转</span>
+                    </a>
+                    <a class="item">
+                        <img class="face" src="../static/images/defaut_face_04.jpg" alt="头像">
+                        <span class="name">华丽逆转</span>
+                    </a>
+                    <a class="item">
+                        <img class="face" src="../static/images/defaut_face_05.jpg" alt="头像">
+                        <span class="name">华丽逆转</span>
+                    </a>
+                    <a class="item">
+                        <img class="face" src="../static/images/defaut_face_06.jpg" alt="头像">
+                        <span class="name">华丽逆转</span>
+                    </a>
+                    <a class="item">
+                        <img class="face" src="../static/images/defaut_face_07.jpg" alt="头像">
+                        <span class="name">华丽逆转</span>
+                    </a>
+                    <a class="item">
+                        <img class="face" src="../static/images/defaut_face_01.jpeg" alt="头像">
+                        <span class="name">华丽逆转</span>
+                    </a>
+                </div>
+            </div>
+            <div class="module-three-wrap">
+                <div class="module-title">热门标签</div>
+                <div class="module-three-content" id="hotTags">
+                    <a class="item" href="#">摄影</a>
+                    <a class="item" href="#">风景</a>
+                    <a class="item" href="#">百度</a>
+                    <a class="item" href="#">bat</a>
+                    <a class="item" href="#">比特币</a>
+                    <a class="item" href="#">百度贴吧</a>
+                    <a class="item" href="#">百度站长平台</a>
+                    <a class="item" href="#">百度seo</a>
+                    <a class="item" href="#">百度糯米</a>
+                    <a class="item" href="#">暴风科技</a>
+                    <a class="item" href="#">b2b</a>
+                    <a class="item" href="#">百度竞价</a>
+                    <a class="item" href="#">比特币勒索病毒</a>
+                    <a class="item" href="#">百度外卖</a>
+                    <a class="item" href="#">比特币行情</a>
+                    <a class="item" href="#">百度地图</a>
+                    <a class="item" href="#">b轮融资</a>
+                    <a class="item" href="#">比尔盖茨</a>
+                    <a class="item" href="#">暴风影音</a>
+                </div>
+            </div>
+        </div>
+        <!-- yangpan-layout-right end -->
 
     </div>
-    <!-- /.row -->
-
 </div>
-<!-- /.container -->
+<!-- yangpan-layout-wrap end -->
 
+<!-- <div style="height:100px;background:red;">zcxzcxzczx</div> -->
 
-<div th:replace="~{fragments/footer :: footer}">...</div>
-
-<!-- JavaScript -->
-<script src="../../js/index.js" th:src="@{/js/index.js}"></script>
-
-
+<!-- footer start -->
+<div class="footer" id="footer">
+    <div class="media-auto-width">
+        <div class="foot-tag">
+            <a href="#">联系斯特</a>
+            <a href="#">用户反馈</a>
+            <a href="#">关于斯特</a>
+            <a href="#">新浪微博</a>
+            <a href="#">帮助中心</a>
+        </div>
+        <div class="copyright">
+            <span>© yangan 春花秋实</span>
+            <a href="#">蜀ICP备12345678号</a>
+            <span>Copyright  20017-2017  All  Rights  Reserver</span>
+        </div>
+    </div>
+</div>
+<!-- footer end -->
 </body>
 </html>
