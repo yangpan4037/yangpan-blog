@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>注册</title>
+	<link rel="stylesheet" type="text/css" href="../../static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/global.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/register.css">
+	<script type="text/javascript" src="../../static/plugs/jquery.1.10.2.js"></script>
+	<script type="text/javascript" src="../../static/js/global.js"></script>
+	<script type="text/javascript" src="../../static/js/register.js"></script>
+</head>
+<body>
+
+<!-- header start -->
+	<div class="header">
+		<div class="media-auto-width">
+			<div class="left">
+				<a href="login.html" class="login">亲，请登录</a>
+				<a href="register.html" class="register">现在注册</a>
+			</div>
+			<ul class="right">
+				<li>
+					<div class="search-wrap">
+						<form action="#">
+							<input class="search-text" type="text" placeholder="请输入搜索内容。">
+							<input class="search-btn iconfont" type="submit" value="&#xe613;" />
+						</form>
+					</div>
+				</li>
+				<li>
+					<a href="">首页</a>
+				</li>
+				<li>
+					<a href="">最新</a>
+				</li>
+				<li>
+					<a href="">最热</a>
+				</li>
+				<li>
+					<a href="">写文章</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- header end -->
+
+
+	<canvas></canvas>
+
+	<div class="register-wrap">
+		<div class="register-header">
+			<a class="logo-wrap" href="../index.html">
+				<img class="logo" src="../../static/images/defaut_face_02.jpg" alt="logo"></a>
+			<p class="info">注册，与众多技术人员一起交流、分享快乐。</p>
+		</div>
+		<div class="register-body">
+			<div class="title">注册</div>
+			<form id="dataForm" class="form" action="#">
+				<p class="error"> <i class="iconfont">&#xe622;</i>
+					账号未注册,请注册
+				</p>
+				<div class="input-wrap">
+					<input id="username" class="username" type="text" placeholder="请输入用户名，用于登录" />
+					<i class="iconfont">&#xe652;</i>
+				</div>
+				<div class="input-wrap">
+					<input id="password" class="password" type="password" placeholder="请输入密码" />
+					<i class="iconfont">&#xe61b;</i>
+				</div>
+				<div class="input-wrap">
+					<input id="email" class="email" type="text" placeholder="请输入邮箱，方便联系" />
+					<i class="iconfont">&#xe605;</i>
+				</div>
+				<div class="input-wrap">
+					<input id="realname" class="realname" type="text" placeholder="请输入真实姓名，方便称呼" />
+					<i class="iconfont">&#xe623;</i>
+				</div>
+				<div class="other">
+					<label class="left">
+						<input name="remember" type="checkbox"/>
+						我看过并接受<a href="">《用户协议》</a>
+					</label>
+					<a class="register" href="login.html">已有帐号，直接登录</a>
+				</div>
+				<input id="submitBtn" class="submit-btn" type="submit" value="注册" disabled/>
+			</form>
+			<div class="third">
+				<p class="title">第三方帐号登录</p>
+				<div class="icon-wrap">
+					<a class="icon iconfont" href="#">&#xe673;</a>
+					<a class="icon iconfont" href="#">&#xe604;</a>
+					<a class="icon iconfont" href="#">&#xe63a;</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- footer start -->
+	<div class="footer" id="footer">
+		<div class="media-auto-width">
+			<div class="foot-tag">
+				<a href="#">联系斯特</a>
+				<a href="#">用户反馈</a>
+				<a href="#">关于斯特</a>
+				<a href="#">新浪微博</a>
+				<a href="#">帮助中心</a>
+			</div>
+			<div class="copyright">
+				<span>© yangan 春花秋实</span>
+				<a href="#">蜀ICP备12345678号</a>
+				<span>Copyright  20017-2017  All  Rights  Reserver</span>
+			</div>
+		</div>
+	</div>
+	<!-- footer end -->
+</body>
+</html>

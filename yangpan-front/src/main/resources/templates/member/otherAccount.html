@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>第三方帐号绑定</title>
+	<link rel="stylesheet" type="text/css" href="../../static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/global.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/member.css">
+	<script type="text/javascript" src="../../static/plugs/jquery.1.10.2.js"></script>
+	<script type="text/javascript" src="../../static/js/global.js"></script>
+	<script type="text/javascript" src="../../static/js/otherAccount.js"></script>
+</head>
+<body>
+
+	<!-- header start -->
+	<div class="header">
+		<div class="media-auto-width">
+			<div class="left">
+				<a href="../login/login.html" class="login">亲，请登录</a>
+				<a href="../login/register.html" class="register">现在注册</a>
+			</div>
+			<ul class="right">
+				<li>
+					<div class="search-wrap">
+						<form action="#">
+							<input class="search-text" type="text" placeholder="请输入搜索内容。">
+							<input class="search-btn iconfont" type="submit" value="&#xe613;" />
+						</form>
+					</div>
+				</li>
+				<li>
+					<a href="">首页</a>
+				</li>
+				<li>
+					<a href="">最新</a>
+				</li>
+				<li>
+					<a href="">最热</a>
+				</li>
+				<li>
+					<a href="">写文章</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- header end -->
+
+	<!-- header-nav-wrap start -->
+	<div class="header-nav-wrap">
+		<div class="media-auto-width">
+			<a class="logo" href="../index.html">
+				<img src="" alt="logo">
+			</a>
+			<div class="nav">
+				<a class="active" href="member.html">个人中心</a>
+				<a href="#">文章中心</a>
+				<a href="#">消息中心</a>
+			</div>
+			<div class="right">
+				<a href="#">
+					<i class="iconfont">&#xe641;</i>
+					<span>帮助</span>
+				</a>
+				<a href="#">
+					<i class="iconfont">&#xe608;</i>
+					<span>设置</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- header-nav-wrap end -->
+
+	<!-- member-body-wrap start -->
+	<div class="member-body-wrap">
+		<div class="media-auto-width member-body">
+			<div class="member-body-left">
+				<div class="member-body-content">
+					<div class="other-account main">
+						<h3 class="page-title">绑定三方账号</h3>
+						<!-- 未绑定时候显示效果 -->
+						<ul class="three-account">
+							<li>
+								<div class="left">
+									<i class="icon-off iconfont">&#xe63a;</i>
+									<p>你还未绑定QQ</p>
+									<a href="#">绑定QQ账号</a>
+								</div>
+								<div class="right">
+									<p class="content">绑定微博帐号，可以方便地将您在斯特中看到的内容分享给微博上的朋友们。绑定成功，您还可以在微博上发现更多文章！</p>
+								</div>
+							</li>
+							<li>
+								<div class="left">
+									<i class="icon-off iconfont">&#xe604;</i>
+									<p>您还未绑定新浪微博</p>
+									<a href="#">绑定新浪微博账号</a>
+								</div>
+								<div class="right">
+									<p class="content">绑定微信帐号，可以方便地将您在斯特中看到的内容分享给微信朋友圈里的朋友们。绑定成功，您还可以在微信朋友圈上发现更多文章！</p>
+								</div>
+							</li>
+							<li>
+								<div class="left">
+									<i class="icon-off iconfont">&#xe673;</i>
+									<p>您还未绑定微信</p>
+									<a href="#">绑定微信账号</a>
+								</div>
+								<div class="right">
+									<p class="content">绑定QQ帐号，可以方便地将您在斯特中看到的内容分享给QQ空间里的朋友们。绑定成功，您还可以在QQ空间上发现更多文章！</p>
+								</div>
+							</li>
+						</ul>
+						<!-- 未绑定时候显示效果 -->
+
+
+						<!-- 绑定后显示效果 -->
+						<ul class="three-account">
+							<li>
+								<div class="left">
+									<i class="icon-on iconfont">&#xe63a;</i>
+									<p>QQ（您绑定的账号为：916780135）</p>
+									<span>已绑定</span>
+									<a href="#">解除绑定</a>
+								</div>
+								<div class="right">
+									<p class="content">绑定微博帐号，可以方便地将您在斯特中看到的内容分享给微博上的朋友们。绑定成功，您还可以在微博上发现更多文章！</p>
+								</div>
+							</li>
+							<li>
+								<div class="left">
+									<i class="icon-on iconfont">&#xe604;</i>
+									<p>微博（您绑定的账号为：yangpan。）</p>
+									<span>已绑定</span>
+									<a href="#">解除绑定</a>
+								</div>
+								<div class="right">
+									<p class="content">绑定微信帐号，可以方便地将您在斯特中看到的内容分享给微信朋友圈里的朋友们。绑定成功，您还可以在微信朋友圈上发现更多文章！</p>
+								</div>
+							</li>
+							<li>
+								<div class="left">
+									<i class="icon-on iconfont">&#xe673;</i>
+									<p>您还未绑定微信</p>
+									<span>已绑定</span>
+									<a href="#">解除绑定</a>
+								</div>
+								<div class="right">
+									<p class="content">绑定QQ帐号，可以方便地将您在斯特中看到的内容分享给QQ空间里的朋友们。绑定成功，您还可以在QQ空间上发现更多文章！</p>
+								</div>
+							</li>
+						</ul>
+						<!-- 绑定后显示效果 -->
+					</div>
+				</div>
+			</div>
+			<div class="member-body-right">
+				<dl class="member-body-right-content">
+					<dt>个人中心</dt>
+					<dd>
+						<i class="iconfont">&#xe647;</i>
+						<a href="aboutMe.html">个人资料</a>
+					</dd>
+					<dd>
+						<i class="iconfont">&#xe624;</i>
+						<a href="#">第三方绑定</a>
+					</dd>
+					<dt>个人中心</dt>
+					<dd class="active">
+						<i class="iconfont">&#xe647;</i>
+						<a href="#">个人资料</a>
+					</dd>
+					<dd>
+						<i class="iconfont">&#xe624;</i>
+						<a href="#">第三方绑定</a>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		
+	</div>
+	<!-- member-body-wrap end -->
+
+	<!-- footer start -->
+	<div class="footer" id="footer">
+		<div class="media-auto-width">
+			<div class="foot-tag">
+				<a href="#">联系斯特</a>
+				<a href="#">用户反馈</a>
+				<a href="#">关于斯特</a>
+				<a href="#">新浪微博</a>
+				<a href="#">帮助中心</a>
+			</div>
+			<div class="copyright">
+				<span>© yangan 春花秋实</span>
+				<a href="#">蜀ICP备12345678号</a>
+				<span>Copyright  20017-2017  All  Rights  Reserver</span>
+			</div>
+		</div>
+	</div>
+	<!-- footer end -->
+</body>
+</html>
