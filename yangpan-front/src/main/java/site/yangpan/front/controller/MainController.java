@@ -44,19 +44,19 @@ public class MainController {
      */
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "/login/login";
     }
 
     @GetMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
         model.addAttribute("errorMsg", "登陆失败，账号或者密码错误！");
-        return "login";
+        return "/login/login";
     }
 
     @GetMapping("/register")
     public String register() {
-        return "register";
+        return "/login/register";
     }
 
     /**
