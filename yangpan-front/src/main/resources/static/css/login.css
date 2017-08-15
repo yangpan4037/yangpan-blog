@@ -17,7 +17,7 @@ body{
 }
 canvas{position:absolute;width:100%;height:80%;height:calc(100% - 150px);height:-moz-calc(100% - 150px);height:-webkit-calc(100% - 150px);}
 
-.login-wrap{width:392px;position:absolute;left:50%;top:50%;margin:-350px 0 0 -196px;overflow:hidden;}
+.login-wrap{width:392px;position:absolute;left:50%;top:50%;margin:-400px 0 0 -196px;overflow:hidden;}
 .login-header{text-align:center;}
 .login-header .logo-wrap{display:block;width:80px;height:80px;line-height:50px;text-align:center;margin:0 auto;}
 .login-header .logo{display:block;width:100%;height:100%;background:#eee;border-radius:50%;border:2px solid #ddd;}
@@ -27,11 +27,13 @@ canvas{position:absolute;width:100%;height:80%;height:calc(100% - 150px);height:
 .login-body{width:320px;padding:0 35px;margin:0 auto;border-radius:15px;background:#fff;overflow:hidden;}
 .login-body .title{text-align:center;font-size:16px;height:55px;line-height:55px;border-bottom:1px solid #ddd;}
 .login-body .input-wrap{position:relative;margin:15px 0;overflow:hidden;}
-.login-body .username,.login-body .password,.login-body .form .error{display:block;width:258px;height:35px;line-height:35px;padding:0 5% 0 13%;border:2px solid #ddd;border-radius:5px;background:#eee;}
+.login-body .username,.login-body .password,.login-body .error{display:block;width:260px;height:35px;line-height:35px;padding:0 15px 0 40px;border:2px solid #ddd;border-radius:5px;background:#eee;}
 .login-body .input-wrap .iconfont{position:absolute;top:11px;left:15px;}
-.login-body .username:focus,.login-body .password:focus{border:2px solid orangered;}
-.login-body .form .error{display:none;border:2px solid orangered;background:#ffe6e5;margin:15px 0;}
-.login-body .form .error .iconfont{color:red;margin:0 5px 0 0;}
+.login-body .input-wrap .captcha{display:block;width:142px;height:35px;float:left;line-height:35px;padding:0 15px 0 40px;border:2px solid #ddd;border-radius:5px;background:#eee;}
+.login-body .input-wrap .captcha-img{display:block;float:right;width:100px;height:35px;border:2px solid #ddd;border-radius:5px;cursor:pointer;}
+.login-body .username:focus,.login-body .password:focus,.login-body .captcha:focus{border:2px solid orangered;}
+.login-body .error{display:none;border:2px solid orangered;background:#ffe6e5;margin:15px 0;position:relative;}
+.login-body .error .iconfont{position:absolute;left:15px;color:red;margin:0 5px 0 0;}
 .login-body .forget-wrap{height:20px;line-height:20px;text-align:right;margin:0 0 15px;}
 .login-body .forget-wrap .forget{color:orangered;}
 .login-body .forget-wrap .forget:hover{text-decoration:underline;}

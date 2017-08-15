@@ -6,18 +6,65 @@
  */
 
 $(function() {
-	$("#username,#password").keyup(function() {
-		var value = $(this).val();
+
+    //切换验证码图片
+	(function(){
+        var oldSrc = $("#captchaImage").attr("src");
+        $("#captchaImage").click(function(){
+            var refreshSrc = oldSrc + "?r=" + Math.random();
+            $(this).attr("src",refreshSrc);
+        });
+	})();
+
+	//输入时验证
+	$("#username,#password,#captcha").keyup(function() {
 		if ($.trim($(this).val()) != "") {
-			$(this).css("border", "2px solid green");
+			$(this).css("border", "2px solid #2d9b95");
 		}else{
 			$(this).css("border", "2px solid orangered");
 		}
-		if ($.trim($("#username").val()) != "" && $.trim($("#password").val()) != "") {
+		if ($.trim($("#username").val()) != "" && $.trim($("#password").val()) != "" && $.trim($("#captcha").val()) != "") {
 			$("#submitBtn").prop("disabled", false);
 		}else{
 			$("#submitBtn").prop("disabled", true);
 		}
+	});
+
+	//提交登录
+	$("#submitBtn").click(function(){
+        var dialogLayer = layer.msg('加载中',{
+            icon: 16,
+            shade: 0.01
+        });
+		// 获取 CSRF Token
+        var csrfToken = $("meta[name='_csrf']").attr("content");
+        var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+        $.ajax({
+            url: "/login",
+            data:{
+            	"username":$.trim($("#username").val()),
+            	"password":$.trim($("#password").val()),
+            	"validateCode":$.trim($("#captcha").val())
+            },
+            dataType:"json",
+            type: 'POST',
+            beforeSend: function(request) {
+                request.setRequestHeader(csrfHeader, csrfToken); //添加CSRF Token
+            },
+            success: function(result){
+                layer.close(dialogLayer);
+                if(!result.success){
+					$("#errorInfo").text(result.message).parent().show();
+					$("#captchaImage").click();
+                }else{
+                	location.href = result.redirectUrl;
+				}
+            },
+            error : function() {
+                layer.close(dialogLayer);
+                $("#errorInfo").text("请求失败！请刷新重试~").parent().show();
+            }
+        });
 	});
 
 

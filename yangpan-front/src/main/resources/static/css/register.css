@@ -27,11 +27,13 @@ canvas{position:absolute;width:100%;height:80%;height:calc(100% - 150px);height:
 .register-body{width:320px;padding:0 35px;margin:0 auto;border-radius:15px;background:#fff;overflow:hidden;}
 .register-body .title{text-align:center;font-size:16px;height:55px;line-height:55px;border-bottom:1px solid #ddd;}
 .register-body .input-wrap{position:relative;margin:15px 0;overflow:hidden;}
-.register-body .username,.register-body .password,.register-body .email,.register-body .realname,.register-body .form .error{display:block;width:258px;height:35px;line-height:35px;padding:0 5% 0 13%;border:2px solid #ddd;border-radius:5px;background:#eee;}
+.register-body .username,.register-body .password,.register-body .email,.register-body .realname,.register-body .error{display:block;width:258px;height:35px;line-height:35px;padding:0 5% 0 13%;border:2px solid #ddd;border-radius:5px;background:#eee;}
 .register-body .input-wrap .iconfont{position:absolute;top:11px;left:15px;}
-.register-body .username:focus,.register-body .password:focus{border:2px solid orangered;}
-.register-body .form .error{display:none;border:2px solid orangered;background:#ffe6e5;margin:10px 0 0;}
-.register-body .form .error .iconfont{color:red;margin:0 5px 0 0;}
+.register-body .input-wrap .captcha{display:block;width:142px;height:35px;float:left;line-height:35px;padding:0 15px 0 40px;border:2px solid #ddd;border-radius:5px;background:#eee;}
+.register-body .input-wrap .captcha-img{display:block;float:right;width:100px;height:35px;border:2px solid #ddd;border-radius:5px;cursor:pointer;}
+.register-body .username:focus,.register-body .password:focus,.login-body .captcha:focus{border:2px solid orangered;}
+.register-body .error{display:none;border:2px solid orangered;background:#ffe6e5;margin:15px 0;position:relative;}
+.register-body .error .iconfont{position:absolute;left:15px;color:red;margin:0 5px 0 0;}
 .register-body .forget-wrap{height:20px;line-height:20px;text-align:right;margin:0 0 15px;}
 .register-body .forget-wrap .forget{color:orangered;}
 .register-body .forget-wrap .forget:hover{text-decoration:underline;}

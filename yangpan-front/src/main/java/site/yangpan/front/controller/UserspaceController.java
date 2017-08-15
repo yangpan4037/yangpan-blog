@@ -82,7 +82,7 @@ public class UserspaceController {
     public String saveProfile(@PathVariable("username") String username,User user) {
         User originalUser = userService.getUserById(user.getId());
         originalUser.setEmail(user.getEmail());
-        originalUser.setName(user.getName());
+        originalUser.setRealname(user.getRealname());
 
         // 判断密码是否做了变更
         String rawPassword = originalUser.getPassword();

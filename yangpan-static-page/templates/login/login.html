@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="../../static/css/global.css">
 	<link rel="stylesheet" type="text/css" href="../../static/css/login.css">
 	<script type="text/javascript" src="../../static/plugs/jquery.1.10.2.js"></script>
+	<script type="text/javascript" src="../../static/plugs/layer/build/layer.js"></script>
 	<script type="text/javascript" src="../../static/js/global.js"></script>
 	<script type="text/javascript" src="../../static/js/login.js"></script>
 </head>
@@ -112,3 +113,9 @@
 	<!-- footer end -->
 </body>
 </html>
+<script type="text/javascript">
+	//页面一打开就执行弹层
+layer.ready(function(){
+  layer.load(2);
+});  
+</script>

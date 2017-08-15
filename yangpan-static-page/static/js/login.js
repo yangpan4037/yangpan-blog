@@ -6,6 +6,8 @@
  */
 
 $(function() {
+
+	
 	$("#username,#password").keyup(function() {
 		var value = $(this).val();
 		if ($.trim($(this).val()) != "") {

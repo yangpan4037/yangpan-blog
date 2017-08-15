@@ -75,4 +75,19 @@ public interface UserService {
      * @return
      */
     List<User> listUsersByUsernames(Collection<String> usernames);
+
+    /**
+     * 根据名称查询
+     *
+     * @param username
+     * @return
+     */
+    User findByUsername(String username);
+
+    /**
+     * 根据邮箱查询
+     * @param email
+     * @return
+     */
+    User findByEmail(String email);
 }

@@ -3,6 +3,7 @@ package site.yangpan.core.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -63,18 +64,33 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public Page<User> listUsersByNameLike(String name, Pageable pageable) {
         // 模糊查询
         name = "%" + name + "%";
-        Page<User> users = userRepository.findByNameLike(name, pageable);
+        Page<User> users = userRepository.findByRealnameLike(name, pageable);
         return users;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
+        if(user == null){
+            throw new AuthenticationServiceException("找不到该用户");
+        }
+        return user;
     }
 
     @Override
     public List<User> listUsersByUsernames(Collection<String> usernames) {
         return userRepository.findByUsernameIn(usernames);
     }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
 
 }

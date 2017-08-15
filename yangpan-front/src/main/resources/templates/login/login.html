@@ -1,12 +1,17 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
+	<!-- CSRF -->
+	<meta name="_csrf" th:content="${_csrf.token}"/>
+	<!-- default header name is X-CSRF-TOKEN -->
+	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 	<title>登录</title>
 	<link rel="stylesheet" type="text/css" href="../../../css/reset.css">
 	<link rel="stylesheet" type="text/css" href="../../../css/global.css">
 	<link rel="stylesheet" type="text/css" href="../../../css/login.css">
 	<script type="text/javascript" src="../../../plugs/jquery.1.10.2.js"></script>
+	<script type="text/javascript" src="../../../plugs/layer/build/layer.js"></script>
 	<script type="text/javascript" src="../../../js/global.js"></script>
 	<script type="text/javascript" src="../../../js/login.js"></script>
 </head>
@@ -56,9 +61,9 @@
 		</div>
 		<div class="login-body">
 			<div class="title">登录</div>
-			<form id="dataForm" class="form" action="/login" method="post">
-				<p class="error"> <i class="iconfont">&#xe622;</i>
-					账号未注册,请注册
+				<p class="error error-wrap">
+					<i class="iconfont">&#xe622;</i>
+					<span id="errorInfo"></span>
 				</p>
 				<div class="input-wrap">
 					<input id="username" class="username" type="text" placeholder="请输入用户名" />
@@ -67,6 +72,11 @@
 				<div class="input-wrap">
 					<input id="password" class="password" type="password" placeholder="请输入密码" />
 					<i class="iconfont">&#xe61b;</i>
+				</div>
+				<div class="input-wrap">
+					<input id="captcha" class="captcha" type="text" placeholder="请输入验证码" />
+					<img id="captchaImage" class="captcha-img" src="/imageCaptcha" alt="验证码" />
+					<i class="iconfont">&#xe634;</i>
 				</div>
 				<div class="forget-wrap">
 					<a class="forget" href="#">忘记密码</a>
@@ -77,9 +87,9 @@
 						<input name="remember" type="checkbox"/>
 						记住密码
 					</label>
-					<a class="register" href="register.html">新用户注册</a>
+					<a class="register" href="/register/page">新用户注册</a>
 				</div>
-			</form>
+
 			<div class="third">
 				<p class="title">第三方帐号登录</p>
 				<div class="icon-wrap">
@@ -96,7 +106,7 @@
 	<div class="footer" id="footer">
 		<div class="media-auto-width">
 			<div class="foot-tag">
-				<a href="#">联系斯特</a>
+				<a id="xxx" href="#">联系斯特</a>
 				<a href="#">用户反馈</a>
 				<a href="#">关于斯特</a>
 				<a href="#">新浪微博</a>
@@ -112,3 +122,36 @@
 	<!-- footer end -->
 </body>
 </html>
+
+<script type="text/javascript">
+
+$("#xxx").click(function(){
+
+		// 获取 CSRF Token 
+		var csrfToken = $("meta[name='_csrf']").attr("content");
+		var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+
+		$.ajax({
+		    url: '/u/xx/blogs/edit',
+		    type: 'POST',
+			contentType: "application/json; charset=utf-8",
+		    data:JSON.stringify({"id":$('#blogId').val(), 
+		    	"title":'czxcz', 
+		    	"summary": 'czxczx' , 
+		    	"content": 'cxzczx', 
+		    	"catalog":{"id":1},
+		    	"tags":'czxczx'
+		    	}),
+			beforeSend: function(request) {
+			    request.setRequestHeader(csrfHeader, csrfToken); // 添加  CSRF Token 
+			},
+			 success: function(data){
+				 console.log(data)
+				 alert(data.message)
+		     },
+		     error : function() {
+		    	 toastr.error("error!");
+		     }
+		})
+})
+</script>

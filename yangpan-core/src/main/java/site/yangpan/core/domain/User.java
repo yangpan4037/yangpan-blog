@@ -41,7 +41,7 @@ public class User implements UserDetails, Serializable {
     @NotEmpty(message = "姓名不能为空")
     @Size(min=2, max=20)
     @Column(nullable = false, length = 20) // 映射为字段，值不能为空
-    private String name;
+    private String realname;
 
     @NotEmpty(message = "邮箱不能为空")
     @Size(max=50)
@@ -71,7 +71,7 @@ public class User implements UserDetails, Serializable {
     }
 
     public User(String name, String email,String username,String password) {
-        this.name = name;
+        this.realname = name;
         this.email = email;
         this.username = username;
         this.password = password;
@@ -85,12 +85,12 @@ public class User implements UserDetails, Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getRealname() {
+        return realname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRealname(String realname) {
+        this.realname = realname;
     }
 
     public String getEmail() {
@@ -168,7 +168,7 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public String toString() {
-        return String.format("User[id=%d, username='%s', name='%s', email='%s', password='%s']", id, username, name, email,
+        return String.format("User[id=%d, username='%s', name='%s', email='%s', password='%s']", id, username, realname, email,
                 password);
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.*;
 
 /**
  * Created by yangpn on 2017-08-06 23:33
@@ -49,14 +50,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/css/**", "/js/**", "/fonts/**", "/index").permitAll() // 都可以访问
+        http.authorizeRequests()
+                .antMatchers("/css/**", "/js/**", "/fonts/**", "/index").permitAll() //不拦截，允许全部角色访问
                 .antMatchers("/h2-console/**").permitAll() // 都可以访问
-                .antMatchers("/admins/**").hasRole("ADMIN") // 需要相应的角色才能访问
+                .antMatchers("/admins/**").hasRole("ADMIN") // 需要ADMIN的角色才能访问
                 .and()
-                .formLogin()   //基于 Form 表单登录验证
-                .loginPage("/login").failureUrl("/login-error") // 自定义登录界面
-                .and().rememberMe().key(KEY) // 启用 remember me
-                .and().exceptionHandling().accessDeniedPage("/403");  // 处理异常，拒绝访问就重定向到 403 页面
+                // 添加验证码验证
+                .addFilterAt(myUsernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class).exceptionHandling()
+                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login/page")).and()
+                // 指定登录页面的请求路径
+                .formLogin().loginPage("/login/page")
+                // 登陆处理路径
+                .loginProcessingUrl("/login").permitAll().and()
+
+//            .formLogin()   //基于 Form 表单登录验证
+//                .loginPage("/login")//拦截到未授权的请求后会跳转的这个请求
+//                .failureUrl("/loginError") //自定义登录界面
+//                .and()
+            .rememberMe()
+                .key(KEY) // 启用 remember me
+                .and()
+            .exceptionHandling()
+                .accessDeniedPage("/403");  // 处理异常，拒绝访问就重定向到 403 页面
         http.csrf().ignoringAntMatchers("/h2-console/**"); // 禁用 H2 控制台的 CSRF 防护
         http.headers().frameOptions().sameOrigin(); // 允许来自同一来源的H2 控制台的请求
     }
@@ -71,5 +86,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
         auth.authenticationProvider(authenticationProvider());
+    }
+
+
+
+
+
+
+
+
+
+
+    @Bean
+    public MyUsernamePasswordAuthenticationFilter myUsernamePasswordAuthenticationFilter() throws Exception {
+        MyUsernamePasswordAuthenticationFilter myFilter = new MyUsernamePasswordAuthenticationFilter();
+        myFilter.setAuthenticationManager(authenticationManagerBean());
+        myFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler());
+        myFilter.setAuthenticationFailureHandler(authenticationFailureHandler());
+//        myFilter.setRememberMeServices(tokenBasedRememberMeServices());
+        return myFilter;
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new SimpleUrlAuthenticationSuccessHandler("/login/success");
+    }
+
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        return new SimpleUrlAuthenticationFailureHandler("/login/failure");
     }
 }
