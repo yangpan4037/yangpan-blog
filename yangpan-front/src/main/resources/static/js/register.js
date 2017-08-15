@@ -8,23 +8,18 @@
 $(function() {
 
 	//切换验证码图片
-	(function(){
-        var oldSrc = $("#captchaImage").attr("src");
-        $("#captchaImage").click(function(){
-            var refreshSrc = oldSrc + "?r=" + Math.random();
-            $(this).attr("src",refreshSrc);
-        });
+	(function() {
+		var oldSrc = $("#captchaImage").attr("src");
+		$("#captchaImage").click(function() {
+			var refreshSrc = oldSrc + "?r=" + Math.random();
+			$(this).attr("src", refreshSrc);
+		});
 	})();
 
 	//输入验证
 	$("#username,#password,#email,#realname,#captcha").keyup(function() {
-		var value = $(this).val();
-		if ($.trim($(this).val()) != "") {
-			$(this).css("border", "2px solid green");
-		}else{
-			$(this).css("border", "2px solid orangered");
-		}
-		if ($.trim($("#username").val()) != "" && $.trim($("#password").val()) != "" && $.trim($("#email").val()) != "" && $.trim($("#realname").val()) != "" && $.trim($("#captcha").val()) != "") {
+		checkFiled();
+		if(checkFiled()){
 			$("#submitBtn").prop("disabled", false);
 		}else{
 			$("#submitBtn").prop("disabled", true);
@@ -32,48 +27,95 @@ $(function() {
 	});
 
 	//验证
-	function checkFiled(){
-		
+	function checkFiled() {
+		if(!/[a-zA-Z0-9_]{6,20}/.test($.trim($("#username").val()))){
+			$("#errorInfo").text("用户名须字母数字下划线6-20位！").parent().show();
+			$("#username").css("border", "2px solid orangered");
+			return false;
+		}else{
+			$("#errorInfo").parent().hide();
+			$("#username").css("border", "2px solid #2d9b95");
+		}
+		if(!/^[A-Za-z0-9]{6,20}$/.test($.trim($("#password").val()))){
+			$("#errorInfo").text("密码长度6-20!").parent().show();
+			$("#password").css("border", "2px solid orangered");
+			return false;
+		}else{
+			$("#errorInfo").parent().hide();
+			$("#password").css("border", "2px solid #2d9b95");
+		}
+		if(!/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/.test($.trim($("#email").val()))){
+			$("#errorInfo").text("邮箱格式不正确！").parent().show();
+			$("#email").css("border", "2px solid orangered");
+			return false;
+		}else{
+			$("#errorInfo").parent().hide();
+			$("#email").css("border", "2px solid #2d9b95");
+		}
+		if(!/^[\u4e00-\u9fa5]{2,4}$/.test($.trim($("#realname").val()))){
+			$("#errorInfo").text("请输入真实姓名，汉字2-4位！").parent().show();
+			$("#realname").css("border", "2px solid orangered");
+			return false;
+		}else{
+			$("#errorInfo").parent().hide();
+			$("#realname").css("border", "2px solid #2d9b95");
+		}
+		if(!/[a-zA-Z0-9_]{5}/.test($.trim($("#captcha").val()))){
+			$("#errorInfo").text("请输入正确验证码！").parent().show();
+			$("#captcha").css("border", "2px solid orangered");
+			return false;
+		}else{
+			$("#errorInfo").parent().hide();
+			$("#captcha").css("border", "2px solid #2d9b95");
+		}
+		return true;
 	}
 
+
+
 	//提交注册
-	$("#submitBtn").click(function(){
-		var dialogLayer = layer.msg('加载中',{
-            icon: 16,
-            shade: 0.01
-        });
-        // 获取 CSRF Token
-        var csrfToken = $("meta[name='_csrf']").attr("content");
-        var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-        $.ajax({
-            url: "/register",
-            data:{
-            	"username":$.trim($("#username").val()),
-            	"password":$.trim($("#password").val()),
-            	"email":$.trim($("#email").val()),
-            	"realname":$.trim($("#realname").val()),
-            	"captcha":$.trim($("#captcha").val())
-            },
-            dataType:"json",
-            type: 'POST',
-            beforeSend: function(request) {
-                request.setRequestHeader(csrfHeader, csrfToken); //添加CSRF Token
-            },
-            success: function(result){
-                layer.close(dialogLayer);
-                if(!result.success){
+	$("#submitBtn").click(function() {
+		var dialogLayer = layer.msg('加载中', {
+			icon: 16,
+			shade: 0.01
+		});
+		// 获取 CSRF Token
+		var csrfToken = $("meta[name='_csrf']").attr("content");
+		var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+		$.ajax({
+			url: "/register",
+			data: {
+				"username": $.trim($("#username").val()),
+				"password": $.trim($("#password").val()),
+				"email": $.trim($("#email").val()),
+				"realname": $.trim($("#realname").val()),
+				"captcha": $.trim($("#captcha").val())
+			},
+			dataType: "json",
+			type: 'POST',
+			beforeSend: function(request) {
+				request.setRequestHeader(csrfHeader, csrfToken); //添加CSRF Token
+			},
+			success: function(result) {
+				layer.close(dialogLayer);
+				if (!result.success) {
 					$("#errorInfo").text(result.message).parent().show();
 					$("#captchaImage").click();
-					$("#"+result.errorField).css("border", "2px solid orangered").focus();
-                }else{
-                	location.href = result.redirectUrl;
+					$("#" + result.errorField).css("border", "2px solid orangered").val("").focus();
+				} else {
+					layer.alert(result.message, {
+					  closeBtn: 0
+					  ,anim: 4
+					}, function(){
+						location.href = result.redirectUrl;
+					});
 				}
-            },
-            error : function() {
-                layer.close(dialogLayer);
-                $("#errorInfo").text("请求失败！请刷新重试~").parent().show();
-            }
-        });
+			},
+			error: function() {
+				layer.close(dialogLayer);
+				$("#errorInfo").text("请求失败！请刷新重试~").parent().show();
+			}
+		});
 	});
 
 	window.requestAnimFrame = (function() {

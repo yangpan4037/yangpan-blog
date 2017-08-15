@@ -7,7 +7,6 @@
 $(function(){
 	
 	//底部位置
-	
 	var bodyHeight = $("body").height();
 	function footBarSite(){
 		console.log("window:"+ $(window).height())
@@ -33,5 +32,22 @@ $(function(){
 	footBarSite();
 	$(window).resize(function(){
 		footBarSite();
+	});
+
+
+	//checkbox
+	var checkBox=$("input[type='checkbox']");
+	function checkCheckbox(obj){
+		if(obj.prop('checked')){
+			obj.parent().addClass('yangpan-checkbox-on-style');
+		}else{
+			obj.parent().removeClass('yangpan-checkbox-on-style');
+		}
+	}
+	checkBox.each(function() {
+		checkCheckbox($(this));
+	});
+	checkBox.click(function(){
+		checkCheckbox($(this));
 	});
 });

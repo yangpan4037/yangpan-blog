@@ -50,7 +50,7 @@ public class User implements UserDetails, Serializable {
     private String email;
 
     @NotEmpty(message = "账号不能为空")
-    @Size(min=3, max=20)
+    @Size(min=5, max=20)
     @Column(nullable = false, length = 20, unique = true)
     private String username; // 用户账号，用户登录时的唯一标识
 

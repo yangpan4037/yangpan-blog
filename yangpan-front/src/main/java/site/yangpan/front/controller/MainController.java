@@ -139,16 +139,13 @@ public class MainController {
         }
 
         //判断用户名和邮箱是否被注册
-
         User user1 = userService.findByUsername(user.getUsername());
-
         if(null != user1){
             result.put("success", false);
             result.put("errorField","username");
             result.put("message", "用户名已被注册！");
             return result;
         }
-
         User user2 = userService.findByEmail(user.getEmail());
         if(null != user2){
             result.put("success", false);
@@ -166,6 +163,7 @@ public class MainController {
 
 
         result.put("success", true);
+        result.put("message", "恭喜您，注册成功！");
         result.put("redirectUrl", "/login/page");
         return result;
     }
