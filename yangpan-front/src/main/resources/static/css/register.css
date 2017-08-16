@@ -42,7 +42,7 @@ canvas{position:absolute;width:100%;height:80%;height:calc(100% - 150px);height:
 .register-body .submit-btn:disabled{color:#bbb;background:#eee;}
 .register-body .other{width:100%;height:20px;line-height:20px;font-size:14px;margin:15px 0;}
 .register-body .other .left{float:left;cursor:pointer;}
-
+.yangpan-checkbox-off-style{border-radius:5px;}
 .register-body .other .register{float:right;color:orangered;}
 .register-body .other .register:hover{text-decoration:underline;}
 .third .icon-wrap{text-align:center;padding:20px 0;overflow:hidden;}

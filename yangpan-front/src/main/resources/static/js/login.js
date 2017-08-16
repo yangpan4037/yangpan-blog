@@ -18,17 +18,41 @@ $(function() {
 
 	//输入时验证
 	$("#username,#password,#captcha").keyup(function() {
-		if ($.trim($(this).val()) != "") {
-			$(this).css("border", "2px solid #2d9b95");
-		}else{
-			$(this).css("border", "2px solid orangered");
-		}
-		if ($.trim($("#username").val()) != "" && $.trim($("#password").val()) != "" && $.trim($("#captcha").val()) != "") {
+		if(checkFiled()){
 			$("#submitBtn").prop("disabled", false);
 		}else{
 			$("#submitBtn").prop("disabled", true);
 		}
 	});
+
+	//验证
+	function checkFiled() {
+		if(!/[a-zA-Z0-9_]{5,20}/.test($.trim($("#username").val()))){
+			$("#errorInfo").text("用户名须字母数字下划线5-20位！").parent().show();
+			$("#username").css("border", "2px solid orangered");
+			return false;
+		}else{
+			$("#errorInfo").parent().hide();
+			$("#username").css("border", "2px solid #2d9b95");
+		}
+		if(!/^[A-Za-z0-9]{5,20}$/.test($.trim($("#password").val()))){
+			$("#errorInfo").text("密码长度5-20!").parent().show();
+			$("#password").css("border", "2px solid orangered");
+			return false;
+		}else{
+			$("#errorInfo").parent().hide();
+			$("#password").css("border", "2px solid #2d9b95");
+		}
+		if(!/[a-zA-Z0-9_]{5}/.test($.trim($("#captcha").val()))){
+			$("#errorInfo").text("请输入正确验证码！").parent().show();
+			$("#captcha").css("border", "2px solid orangered");
+			return false;
+		}else{
+			$("#errorInfo").parent().hide();
+			$("#captcha").css("border", "2px solid #2d9b95");
+		}
+		return true;
+	}
 
 	//提交登录
 	$("#submitBtn").click(function(){

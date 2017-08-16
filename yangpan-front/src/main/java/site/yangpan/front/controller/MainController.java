@@ -216,6 +216,8 @@ public class MainController {
         String redirectUrl = null;
         if (savedRequest != null) {
             redirectUrl = savedRequest.getRedirectUrl();
+        }else{
+            redirectUrl = "/index";
         }
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
@@ -234,9 +236,11 @@ public class MainController {
     @ResponseBody
     public Map<String, Object> loginFailure(HttpServletRequest request, HttpServletResponse response) {
         AuthenticationException ae = (AuthenticationException) request.getSession().getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+        String message = ae.getMessage();
+        message = "Bad credentials".equals(message) ? "密码错误！" : message;
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", false);
-        result.put("message", ae.getMessage());
+        result.put("message", message);
         return result;
     }
 

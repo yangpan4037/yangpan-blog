@@ -18,7 +18,13 @@ $(function() {
 
 	//输入验证
 	$("#username,#password,#email,#realname,#captcha").keyup(function() {
-		checkFiled();
+		if(checkFiled()){
+			$("#submitBtn").prop("disabled", false);
+		}else{
+			$("#submitBtn").prop("disabled", true);
+		}
+	});
+	$("#userAgreement").click(function(){
 		if(checkFiled()){
 			$("#submitBtn").prop("disabled", false);
 		}else{
@@ -28,16 +34,16 @@ $(function() {
 
 	//验证
 	function checkFiled() {
-		if(!/[a-zA-Z0-9_]{6,20}/.test($.trim($("#username").val()))){
-			$("#errorInfo").text("用户名须字母数字下划线6-20位！").parent().show();
+		if(!/[a-zA-Z0-9_]{5,20}/.test($.trim($("#username").val()))){
+			$("#errorInfo").text("用户名须字母数字下划线5-20位！").parent().show();
 			$("#username").css("border", "2px solid orangered");
 			return false;
 		}else{
 			$("#errorInfo").parent().hide();
 			$("#username").css("border", "2px solid #2d9b95");
 		}
-		if(!/^[A-Za-z0-9]{6,20}$/.test($.trim($("#password").val()))){
-			$("#errorInfo").text("密码长度6-20!").parent().show();
+		if(!/^[A-Za-z0-9]{5,20}$/.test($.trim($("#password").val()))){
+			$("#errorInfo").text("密码长度5-20!").parent().show();
 			$("#password").css("border", "2px solid orangered");
 			return false;
 		}else{
@@ -67,6 +73,14 @@ $(function() {
 		}else{
 			$("#errorInfo").parent().hide();
 			$("#captcha").css("border", "2px solid #2d9b95");
+		}
+		if(!$("#userAgreement").prop("checked")){
+			$("#errorInfo").text("请阅读并同意协议！").parent().show();
+			$(".yangpan-checkbox-off-style").css("border", "2px solid orangered");
+			return false;
+		}else{
+			$("#errorInfo").parent().hide();
+			$(".yangpan-checkbox-off-style").css("border", "2px solid #2d9b95");
 		}
 		return true;
 	}
@@ -102,6 +116,7 @@ $(function() {
 					$("#errorInfo").text(result.message).parent().show();
 					$("#captchaImage").click();
 					$("#" + result.errorField).css("border", "2px solid orangered").val("").focus();
+					$("#captcha").css("border", "2px solid orangered").val("");
 				} else {
 					layer.alert(result.message, {
 					  closeBtn: 0
