@@ -1,5 +1,7 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 	<meta charset="UTF-8">
 	<title>注册</title>
@@ -7,48 +9,18 @@
 	<meta name="_csrf" th:content="${_csrf.token}"/>
 	<!-- default header name is X-CSRF-TOKEN -->
 	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-	<link rel="stylesheet" type="text/css" href="../../../css/reset.css">
-	<link rel="stylesheet" type="text/css" href="../../../css/global.css">
+	<!--/* 公共css */-->
+	<link th:replace="fragments/link"/>
+	<!--/* 公共js */-->
+	<script th:replace="fragments/script"/>
 	<link rel="stylesheet" type="text/css" href="../../../css/register.css">
-	<script type="text/javascript" src="../../../plugs/jquery.1.10.2.js"></script>
-	<script type="text/javascript" src="../../../plugs/layer/build/layer.js"></script>
-	<script type="text/javascript" src="../../../js/global.js"></script>
 	<script type="text/javascript" src="../../../js/register.js"></script>
 </head>
 <body>
 
-<!-- header start -->
-	<div class="header">
-		<div class="media-auto-width">
-			<div class="left">
-				<a href="login.html" class="login">亲，请登录</a>
-				<a href="register.html" class="register">现在注册</a>
-			</div>
-			<ul class="right">
-				<li>
-					<div class="search-wrap">
-						<form action="#">
-							<input class="search-text" type="text" placeholder="请输入搜索内容。">
-							<input class="search-btn iconfont" type="submit" value="&#xe613;" />
-						</form>
-					</div>
-				</li>
-				<li>
-					<a href="">首页</a>
-				</li>
-				<li>
-					<a href="">最新</a>
-				</li>
-				<li>
-					<a href="">最热</a>
-				</li>
-				<li>
-					<a href="">写文章</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<!-- header end -->
+	<!--/* header start */-->
+	<div th:replace="~{fragments/header :: header}"></div>
+	<!--/* header end */-->
 
 
 	<canvas></canvas>
@@ -108,23 +80,8 @@
 	</div>
 
 
-	<!-- footer start -->
-	<div class="footer" id="footer">
-		<div class="media-auto-width">
-			<div class="foot-tag">
-				<a href="#">联系斯特</a>
-				<a href="#">用户反馈</a>
-				<a href="#">关于斯特</a>
-				<a href="#">新浪微博</a>
-				<a href="#">帮助中心</a>
-			</div>
-			<div class="copyright">
-				<span>© yangan 春花秋实</span>
-				<a href="#">蜀ICP备12345678号</a>
-				<span>Copyright  20017-2017  All  Rights  Reserver</span>
-			</div>
-		</div>
-	</div>
-	<!-- footer end -->
+	<!--/* footer start */-->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+	<!--/* header end */-->
 </body>
 </html>

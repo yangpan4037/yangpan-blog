@@ -10,10 +10,14 @@
     <!-- header start -->
     <div data-th-fragment="header" class="header">
         <div class="media-auto-width">
-            <div class="left">
-                <a href="login/login.html" class="login">亲，请登录</a>
-                <a href="login/register.html" class="register">现在注册</a>
+            <div class="left" sec:authorize="isAuthenticated()">
+                欢迎您！<a class="username" th:href="@{'/u/' + ${#authentication.name}}" sec:authentication="name"></a>。
             </div>
+            <div class="left" sec:authorize="isAnonymous()">
+                <a href="/login/page" class="login">亲，请登录</a>
+                <a href="/register/page" class="register">现在注册</a>
+            </div>
+
             <ul class="right">
                 <li>
                     <div class="search-wrap">

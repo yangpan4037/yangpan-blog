@@ -39,16 +39,16 @@ public class MainController {
 
     @Autowired
     private AuthorityService authorityService;
-//
-//    @GetMapping("/")
-//    public String root() {
-//        return "redirect:/index";
-//    }
-//
-//    @GetMapping("/index")
-//    public String index() {
-//        return "redirect:/blogs";
-//    }
+
+    /**
+     * 跳转首页
+     * @return
+     */
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/index";
+    }
+
 //
 //    /**
 //     * 获取登录界面

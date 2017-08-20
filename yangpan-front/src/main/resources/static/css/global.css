@@ -49,6 +49,8 @@ body{width:100%;
 /**	header css go */
 .header{width:100%;height:45px;line-height:45px;background:#f1f1f1;border-bottom:1px solid #ddd;overflow:hidden;}
 .header .left{float:left;}
+.header .left .username{color:orangered;margin:0 0 0 10px;}
+.header .left .username:hover{text-decoration:underline;}
 .header .right{float:right;text-align:right;}
 .header .left .login{color:orangered;margin:0 15px 0 0;}
 .header .left .login:hover{text-decoration:underline;}

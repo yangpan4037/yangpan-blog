@@ -19,15 +19,29 @@ import site.yangpan.core.service.EsBlogService;
 import site.yangpan.core.vo.TagVO;
 
 /**
+ * 首页控制器
  * Created by yangpn on 2017-08-06 23:29
  */
 @Controller
-@RequestMapping("/blogs")
-public class BlogController {
+@RequestMapping("/index")
+public class IndexController {
 
+    /**
+     * 注入文章全文检索service
+     */
     @Autowired
     private EsBlogService esBlogService;
 
+    /**
+     * 默认首页
+     * @param order     排序方式默认new
+     * @param keyword   关键词
+     * @param async     异步默认false
+     * @param pageIndex 当前页码
+     * @param pageSize  每页条数
+     * @param model     模型
+     * @return
+     */
     @GetMapping
     public String listEsBlogs(
             @RequestParam(value = "order", required = false, defaultValue = "new") String order,
@@ -63,18 +77,18 @@ public class BlogController {
         model.addAttribute("order", order);
         model.addAttribute("keyword", keyword);
         model.addAttribute("page", page);
-        model.addAttribute("blogList", list);
+        model.addAttribute("articleList", list);
 
         // 首次访问页面才加载
         if (!async && !isEmpty) {
-            List<EsBlog> newest = esBlogService.listTop5NewestEsBlogs();
-            model.addAttribute("newest", newest);
-            List<EsBlog> hotest = esBlogService.listTop5HotestEsBlogs();
-            model.addAttribute("hotest", hotest);
-            List<TagVO> tags = esBlogService.listTop30Tags();
-            model.addAttribute("tags", tags);
-            List<User> users = esBlogService.listTop12Users();
-            model.addAttribute("users", users);
+            List<EsBlog> newArticleList = esBlogService.listTop5NewestEsBlogs();
+            model.addAttribute("newArticleList", newArticleList);
+            List<EsBlog> hotArticleList = esBlogService.listTop5HotestEsBlogs();
+            model.addAttribute("hotArticleList", hotArticleList);
+            List<TagVO> hotTagList = esBlogService.listTop30Tags();
+            model.addAttribute("hotTagList", hotTagList);
+            List<User> activeUserList = esBlogService.listTop12Users();
+            model.addAttribute("activeUserList", activeUserList);
         }
 
         return (async == true ? "/index :: #mainContainerRepleace" : "/index");
