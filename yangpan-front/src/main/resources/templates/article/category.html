@@ -14,7 +14,7 @@
 	<!--/* 公共js */-->
 	<script th:replace="fragments/script"/>
 	<link rel="stylesheet" type="text/css" href="/css/article.css">
-	<script type="text/javascript" src="/js/category.js"></script>
+	<script type="text/javascript" src="/js/article/category.js"></script>
 </head>
 <body>
 
@@ -47,40 +47,41 @@
 	</div>
 	<!-- header-nav-wrap end -->
 
+
 	<!-- article-body-wrap start -->
 	<div class="article-body-wrap">
 		<div class="media-auto-width article-body">
 			<div class="article-body-left">
 				<div class="article-body-content">
 					<div class="category main">
-						<div class="null-nothing-wrap" data-th-if="${#lists.isEmpty(categoryList)}">
+						<div class="null-nothing-wrap" th:style="'display:' + @{(${categoryList eq null or categoryList.size() le 0} ? 'block' : 'none')} + ''">
 							<i class="iconfont">&#xe607;</i>
 							您还没有文章分类哟，现在<a href="#">添加</a>分类吗？(>^ω^<)
 						</div>
-						<div class="category-tag-wrap" data-th-if="${not #lists.isEmpty(categoryList)}">
-						    <div class="category-tag-left">
-						        <p class="title">全部分类</p>
-						    </div>
-						    <div class="category-tag-right">
-						        <div class="category-tag-content">
-						            <a class="item" href="#" data-th-each="data : ${categoryList}">[[${data.name}]]</a>
-						        </div>
-						    </div>
+						<div class="category-tag-wrap" th:style="'display:' + @{(${categoryList eq null or categoryList.size() le 0} ? 'none' : 'block')} + ''">
+							<div class="category-tag-left">
+								<p class="title">全部分类</p>
+							</div>
+							<div class="category-tag-right">
+								<div class="category-tag-content">
+									<a class="item" href="#" th:each="data : ${categoryList}">[[${data.name}]]</a>
+								</div>
+							</div>
 						</div>
 						<div class="add-category-wrap">
-						    <form action="#" class="form">
+						    <div class="form">
 						    	<div class="add-category-left">
 						    	    <p class="title">分类名称</p>
 						    	</div>
 						    	<div class="add-category-middle">
 						    	    <div class="add-category-content">
-						    	        <input class="name" type="text" placeholder="请输入分类名称~">
+						    	        <input id="categoryName" class="name" type="text" placeholder="请输入分类名称~">
 						    	    </div>
 						    	</div>
 						    	<div class="add-category-right">
-						    	    <input class="submit-btn" type="submit" value="添加">
+						    	    <input id="addCategoryBtn" class="submit-btn" type="button" value="添加">
 						    	</div>
-						    </form>
+						    </div>
 						</div>
 					</div>
 				</div>
@@ -110,5 +111,9 @@
 	<!--/* footer start */-->
 	<div th:replace="~{fragments/footer :: footer}"></div>
 	<!--/* header end */-->
+
+	<script th:inline="javascript">
+        var username = [[${user.username}]];
+	</script>
 </body>
 </html>

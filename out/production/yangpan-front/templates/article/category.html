@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<meta charset="UTF-8">
+	<title>分类管理</title>
+	<!-- CSRF -->
+	<meta name="_csrf" th:content="${_csrf.token}"/>
+	<!-- default header name is X-CSRF-TOKEN -->
+	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+	<!--/* 公共css */-->
+	<link th:replace="fragments/link"/>
+	<!--/* 公共js */-->
+	<script th:replace="fragments/script"/>
+	<link rel="stylesheet" type="text/css" href="/css/article.css">
+	<script type="text/javascript" src="/js/article/category.js"></script>
+</head>
+<body>
+
+	<!--/* header start */-->
+	<div th:replace="~{fragments/header :: header}"></div>
+	<!--/* header end */-->
+
+	<!-- header-nav-wrap start -->
+	<div class="header-nav-wrap">
+		<div class="media-auto-width">
+			<a class="logo" href="../index.html">
+				<img src="" alt="logo">
+			</a>
+			<div class="nav">
+				<a href="../member/member.html">个人中心</a>
+				<a class="active" href="#">文章中心</a>
+				<a href="#">消息中心</a>
+			</div>
+			<div class="right">
+				<a href="#">
+					<i class="iconfont">&#xe641;</i>
+					<span>帮助</span>
+				</a>
+				<a href="#">
+					<i class="iconfont">&#xe608;</i>
+					<span>设置</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- header-nav-wrap end -->
+
+
+
+	<!-- article-body-wrap start -->
+	<div class="article-body-wrap">
+		<div class="media-auto-width article-body">
+			<div class="article-body-left">
+				<div class="article-body-content">
+					<div class="category main">
+						<div th:switch="${categoryList eq null or categoryList.size() le 0}">
+							<div class="null-nothing-wrap" th:case="true">
+								<i class="iconfont">&#xe607;</i>
+								您还没有文章分类哟，现在<a href="#">添加</a>分类吗？(>^ω^<)
+							</div>
+							<div class="category-tag-wrap" th:case="false">
+								<div class="category-tag-left">
+									<p class="title">全部分类</p>
+								</div>
+								<div class="category-tag-right">
+									<div class="category-tag-content">
+										<a class="item" href="#" th:each="data : ${categoryList}">[[${data.name}]]</a>
+									</div>
+								</div>
+							</div>
+							<p th:case="*">
+
+							</p>
+						</div>
+						<div class="add-category-wrap">
+						    <div class="form">
+						    	<div class="add-category-left">
+						    	    <p class="title">分类名称</p>
+						    	</div>
+						    	<div class="add-category-middle">
+						    	    <div class="add-category-content">
+						    	        <input id="categoryName" class="name" type="text" placeholder="请输入分类名称~">
+						    	    </div>
+						    	</div>
+						    	<div class="add-category-right">
+						    	    <input id="addCategoryBtn" class="submit-btn" type="button" value="添加">
+						    	</div>
+						    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="article-body-right">
+				<dl class="article-body-right-content">
+					<dt class="stair">文章中心</dt>
+					<dd class="second">
+						<i class="iconfont">&#xe647;</i>
+						<a href="article.html">文章管理</a>
+					</dd>
+					<dd class="second active">
+						<i class="iconfont">&#xe624;</i>
+						<a href="category.html">分类管理</a>
+					</dd>
+					<dd class="second">
+						<i class="iconfont">&#xe624;</i>
+						<a href="contribute.html">发表文章</a>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		
+	</div>
+	<!-- article-body-wrap end -->
+
+	<!--/* footer start */-->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+	<!--/* header end */-->
+
+	<script th:inline="javascript">
+        var username = [[${user.username}]];
+	</script>
+</body>
+</html>
