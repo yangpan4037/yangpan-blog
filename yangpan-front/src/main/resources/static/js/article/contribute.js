@@ -5,8 +5,7 @@
  * mail 916780135@qq.com
  */
 $(function () {
-    //提交分类
-    $("#addCategoryBtn").click(function () {
+    $("#enterContributeBtn").click(function () {
         var dialogLayer = layer.msg('保存中。。。', {
             icon: 16
             , shade: 0.01
@@ -15,13 +14,17 @@ $(function () {
         var csrfToken = $("meta[name='_csrf']").attr("content");
         var csrfHeader = $("meta[name='_csrf_header']").attr("content");
         $.ajax({
-            url: '/article/' + username + '/addCategory',
+            url: '/article/' + username + '/saveArticle',
             type: 'POST',
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
-                "username": username,
-                "catalog": {"id": "", "name": $.trim($('#categoryName').val())}
+                "id": $('#blogId').val(),
+                "title": $.trim($('#title').val()),
+                "summary": $.trim($('#summary').val()),
+                "content": $.trim($('#content').val()),
+                "catalog": {"id": $.trim($('#category').val())},
+                "tags": $.trim($('#tags').val())
             }),
             beforeSend: function (request) {
                 request.setRequestHeader(csrfHeader, csrfToken); // 添加  CSRF Token
@@ -30,12 +33,13 @@ $(function () {
                 layer.close(dialogLayer);
                 if (data.success) {
                     layer.msg(data.message, {icon: 6}, function () {
-                        location.reload();
+                        window.location = data.body;
                     });
                 } else {
                     layer.msg(data.message, function () {
                     });
                 }
+
             },
             error: function () {
                 layer.close(dialogLayer);
