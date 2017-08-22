@@ -1,6 +1,9 @@
 package site.yangpan.front.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -63,12 +66,9 @@ public class ArticleCenterController {
                 isOwner = true;
             }
         }
-
         model.addAttribute("isCatalogsOwner", isOwner);
         model.addAttribute("user", user);
         model.addAttribute("categoryList", categoryList);
-
-
         return "article/category";
     }
 
@@ -81,12 +81,9 @@ public class ArticleCenterController {
     @PostMapping("/addCategory")
     @PreAuthorize("authentication.name.equals(#catalogVO.username)")// 指定用户才能操作方法
     public ResponseEntity<Response> create(@RequestBody CatalogVO catalogVO) {
-
         String username = catalogVO.getUsername();
         Catalog catalog = catalogVO.getCatalog();
-
         User user = (User) userDetailsService.loadUserByUsername(username);
-
         try {
             catalog.setUser(user);
             catalogService.saveCatalog(catalog);
@@ -95,7 +92,6 @@ public class ArticleCenterController {
         } catch (Exception e) {
             return ResponseEntity.ok().body(new Response(false, e.getMessage()));
         }
-
         return ResponseEntity.ok().body(new Response(true, "处理成功", null));
     }
 
@@ -151,9 +147,7 @@ public class ArticleCenterController {
             return ResponseEntity.ok().body(new Response(false, "未选择分类"));
         }
         try {
-
             // 判断是修改还是新增
-
             if (blog.getId() != null) {
                 Blog orignalBlog = blogService.getBlogById(blog.getId());
                 orignalBlog.setTitle(blog.getTitle());
@@ -186,9 +180,13 @@ public class ArticleCenterController {
      * @return
      */
     @GetMapping("/articleManager")
-    public String articleManager(@PathVariable("username") String username) {
-
-        return "article/articleManager";
+    public ModelAndView articleManager(@PathVariable("username") String username,Model model) {
+        User  user = (User)userDetailsService.loadUserByUsername(username);
+        String keyword = null;
+        Pageable pageable = new PageRequest(1, 5);//默认加载5条
+        Page<Blog> page = blogService.listBlogsByTitleVoteAndSort(user, keyword, pageable);
+        model.addAttribute("defaultArticleList",page.getContent());
+        return new ModelAndView("article/articleManager", "model", model);
     }
 
 
