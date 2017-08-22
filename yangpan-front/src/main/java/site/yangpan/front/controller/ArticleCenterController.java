@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import site.yangpan.core.domain.Blog;
 import site.yangpan.core.domain.Catalog;
 import site.yangpan.core.domain.User;
+import site.yangpan.core.domain.Vote;
 import site.yangpan.core.service.BlogService;
 import site.yangpan.core.service.CatalogService;
 import site.yangpan.core.util.ConstraintViolationExceptionHandler;
@@ -168,7 +169,7 @@ public class ArticleCenterController {
             return ResponseEntity.ok().body(new Response(false, e.getMessage()));
         }
 
-        String redirectUrl = "/u/" + username + "/blogs/" + blog.getId();
+        String redirectUrl = "/article/" + username + "/editArticle/" + blog.getId();
         return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
     }
 
@@ -182,11 +183,55 @@ public class ArticleCenterController {
     @GetMapping("/articleManager")
     public ModelAndView articleManager(@PathVariable("username") String username,Model model) {
         User  user = (User)userDetailsService.loadUserByUsername(username);
-        String keyword = null;
-        Pageable pageable = new PageRequest(1, 5);//默认加载5条
+        String keyword = "";
+        Pageable pageable = new PageRequest(0, 5);//默认加载5条
         Page<Blog> page = blogService.listBlogsByTitleVoteAndSort(user, keyword, pageable);
+        model.addAttribute("page",page);
         model.addAttribute("defaultArticleList",page.getContent());
         return new ModelAndView("article/articleManager", "model", model);
+    }
+
+    /**
+     * 文章
+     * @param username
+     * @param model
+     * @return
+     */
+    @GetMapping("/article/{id}")
+    public ModelAndView getBlogById(@PathVariable("username") String username,@PathVariable("id") Long id, Model model) {
+        User principal = null;
+        Blog article = blogService.getBlogById(id);
+
+        // 每次读取，简单的可以认为阅读量增加1次
+        blogService.readingIncrease(id);
+
+        // 判断操作用户是否是博客的所有者
+        boolean isBlogOwner = false;
+        if (SecurityContextHolder.getContext().getAuthentication() !=null && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
+                &&  !SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser")) {
+            principal = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (principal !=null && username.equals(principal.getUsername())) {
+                isBlogOwner = true;
+            }
+        }
+
+        // 判断操作用户的点赞情况
+        List<Vote> votes = article.getVotes();
+        Vote currentVote = null; // 当前用户的点赞情况
+
+        if (principal !=null) {
+            for (Vote vote : votes) {
+                vote.getUser().getUsername().equals(principal.getUsername());
+                currentVote = vote;
+                break;
+            }
+        }
+
+        model.addAttribute("isBlogOwner", isBlogOwner);
+        model.addAttribute("article",article);
+        model.addAttribute("currentVote",currentVote);
+
+        return new ModelAndView("/article/article","model",model);
     }
 
 
