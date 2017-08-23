@@ -52,7 +52,7 @@ public class IndexController {
             Model model) {
 
         Page<EsBlog> page = null;
-        List<EsBlog> list = null;
+        List<EsBlog> articleList = null;
         boolean isEmpty = true; // 系统初始化时，没有博客数据
         try {
             if (order.equals("hot")) { // 最热查询
@@ -71,13 +71,13 @@ public class IndexController {
             page = esBlogService.listEsBlogs(pageable);
         }
 
-        list = page.getContent();    // 当前所在页面数据列表
+        articleList = page.getContent();    // 当前所在页面数据列表
 
 
         model.addAttribute("order", order);
         model.addAttribute("keyword", keyword);
         model.addAttribute("page", page);
-        model.addAttribute("articleList", list);
+        model.addAttribute("articleList", articleList);
 
         // 首次访问页面才加载
         if (!async && !isEmpty) {
