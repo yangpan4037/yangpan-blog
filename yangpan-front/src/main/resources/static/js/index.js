@@ -6,6 +6,70 @@
  */
 
 $(function() {
+
+	//关键词搜索
+	$("#headerSearchKeywordBtn").click(function(){
+        getArticlesBykeyword(0,1);
+	});
+
+    //最新、最热切换
+    $(".header-article-state-btn").click(function(){
+        var dialogLayer = layer.msg('加载中，请稍后。。',{
+            icon: 16,
+            shade: 0.01
+        });
+        var that= $(this);
+        $.ajax({
+            url: "/index",
+            type: 'GET',
+            data:{
+                "order":$(this).attr("order"),
+                "async":true
+            },
+            success: function(result){
+                layer.close(dialogLayer);
+                $("#articleCallbackWrap").html(result);
+                $(".header-article-state-btn").removeClass("active");
+                that.addClass("active");
+                $("#headerSearchKeyword").val('');
+            },
+            error : function() {
+                layer.close(dialogLayer);
+                layer.msg('请求失败！请刷新重试~');
+            }
+        });
+    });
+
+    function getArticlesBykeyword(pageIndex, pageSize) {
+        var dialogLayer = layer.msg('加载中，请稍后。。',{
+            icon: 16,
+            shade: 0.01
+        });
+        $.ajax({
+            url: "/index",
+            contentType : 'application/json',
+            data:{
+                "async":true,
+                "pageIndex":pageIndex,
+                "pageSize":pageSize,
+                "keyword":$("#headerSearchKeyword").val()
+            },
+            success: function(result){
+                layer.close(dialogLayer);
+                $("#articleCallbackWrap").html(result);
+                var keyword = $("#headerSearchKeyword").val();
+                //如果是分类查询，则取消最新、最热选中样式
+                if (keyword.length > 0) {
+                    $(".header-article-state-btn").removeClass("active");
+                }
+            },
+            error : function() {
+                layer.close(dialogLayer);
+                layer.msg('请求失败！请刷新重试~');
+            }
+        });
+    }
+
 	//点击切换动画速度，slow，first 也可以设置毫秒数
 	var animateSpeed = 500;
 	//自动切换的间隔毫秒

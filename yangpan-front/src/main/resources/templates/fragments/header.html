@@ -11,38 +11,8 @@
     <div data-th-fragment="header" class="header">
         <div class="media-auto-width">
             <div class="left" sec:authorize="isAuthenticated()">
-                欢迎您！<a class="username" th:href="@{'/u/' + ${#authentication.name}}" sec:authentication="name"></a>。
+                欢迎您！<a class="username" th:href="@{'/member/' + ${#authentication.name}}" sec:authentication="name"></a>。
                 <a id="headerLogoutBtn" href="javascript:void(0);">退出</a>
-                <script>
-                    $("#headerLogoutBtn").click(function(){
-                        var dialogLayer = layer.msg('请稍后。。',{
-                            icon: 16,
-                            shade: 0.01
-                        });
-                        $.ajax({
-                            url: "/logout",
-                            dataType:"json",
-                            type: 'POST',
-                            data:{
-                                "_csrf":"[[${_csrf.token}]]"
-                            },
-                            beforeSend: function(request) {
-                                request.setRequestHeader('[[${_csrf.token}]]', '[[${_csrf.headerName}]]'); //添加CSRF Token
-                            },
-                            success: function(result){
-                                layer.close(dialogLayer);
-                                layer.msg('成功退出！');
-                                setTimeout(function(){
-                                    location.href="/index";
-                                },1000);
-                            },
-                            error : function() {
-                                layer.close(dialogLayer);
-                                $("#errorInfo").text("请求失败！请刷新重试~").parent().show();
-                            }
-                        });
-                    });
-                </script>
             </div>
             <div class="left" sec:authorize="isAnonymous()">
                 <a href="/login/page" class="login">亲，请登录</a>
@@ -52,20 +22,18 @@
             <ul class="right">
                 <li>
                     <div class="search-wrap">
-                        <form action="#">
-                            <input class="search-text" type="text" placeholder="请输入搜索内容。">
-                            <input class="search-btn iconfont" type="submit" value="&#xe613;" />
-                        </form>
+                        <input id="headerSearchKeyword" class="search-text" type="text" placeholder="请输入搜索内容。">
+                        <input id="headerSearchKeywordBtn" class="search-btn iconfont" type="button" value="&#xe613;" />
                     </div>
                 </li>
                 <li>
                     <a href="/index">首页</a>
                 </li>
                 <li>
-                    <a href="#">最新</a>
+                    <a class="header-article-state-btn" href="javascript:void(0);" order="new">最新</a>
                 </li>
                 <li>
-                    <a href="#">最热</a>
+                    <a class="header-article-state-btn" href="javascript:void(0);" order="hot">最热</a>
                 </li>
                 <li>
                     <a sec:authorize="isAuthenticated()" th:href="@{'/article/' + ${#authentication.name} + '/addArticle'}">写文章</a>

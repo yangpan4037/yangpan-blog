@@ -15,6 +15,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
     /**
      * 根据用户名分页查询用户列表（最新）
      * 由 findByUserAndTitleLikeOrTagsLikeOrderByCreateTimeDesc 代替，可以根据标签进行查询
+     *
      * @param user
      * @param title
      * @param pageable
@@ -26,6 +27,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
 
     /**
      * 根据用户名分页查询用户列表
+     *
      * @param user
      * @param title
      * @param sort
@@ -36,6 +38,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
 
     /**
      * 根据用户名分页查询用户列表
+     *
      * @param user
      * @param title
      * @param sort
@@ -43,8 +46,10 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
      * @return
      */
     Page<Blog> findByTitleLikeAndUserOrTagsLikeAndUserOrderByCreateTimeDesc(String title, User user, String tags, User user2, Pageable pageable);
+
     /**
      * 根据用户名分页查询用户列表
+     *
      * @param user
      * @param title
      * @param sort

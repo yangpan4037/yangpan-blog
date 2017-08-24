@@ -22,29 +22,9 @@
 <div class="banner-outer-wrap">
     <div class="banner-wrap media-auto-width">
         <ul class="banner">
-            <li>
-                <a href="#">
-                    <img src="../static/pic/banner_01.jpg"/>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="../static/pic/banner_02.jpg"/>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="../static/pic/banner_03.jpg"/>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="../static/pic/banner_04.jpg"/>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="../static/pic/banner_05.jpg"/>
+            <li th:each="banner : ${bannerList}">
+                <a th:href="${banner.url}">
+                    <img th:src="${banner.pic}"/>
                 </a>
             </li>
         </ul>
@@ -105,8 +85,8 @@
         <!-- yangpan-layout-left end -->
 
         <!-- yangpan-layout-middle start -->
-        <div class="yangpan-layout-middle">
-            <div class="yangpan-layout-content">
+        <div class="yangpan-layout-middle" id="articleCallbackWrap">
+            <div class="yangpan-layout-content" id="articleListWrap">
                 <ul>
                     <li class="layout-middle-wrap" th:each="dataList : ${articleList}">
                         <div class="layout-middle-left">

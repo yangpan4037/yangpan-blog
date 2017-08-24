@@ -50,4 +50,35 @@ $(function(){
 	checkBox.click(function(){
 		checkCheckbox($(this));
 	});
+
+
+	//退出
+    $("#headerLogoutBtn").click(function(){
+        var dialogLayer = layer.msg('请稍后。。',{
+            icon: 16,
+            shade: 0.01
+        });
+        $.ajax({
+            url: "/logout",
+            dataType:"json",
+            type: 'POST',
+            data:{
+                "_csrf":"[[${_csrf.token}]]"
+            },
+            beforeSend: function(request) {
+                request.setRequestHeader('[[${_csrf.token}]]', '[[${_csrf.headerName}]]'); //添加CSRF Token
+            },
+            success: function(result){
+                layer.close(dialogLayer);
+                layer.msg('成功退出！');
+                setTimeout(function(){
+                    location.href="/index";
+                },1000);
+            },
+            error : function() {
+                layer.close(dialogLayer);
+                layer.msg('请求失败！请刷新重试~');
+            }
+        });
+    });
 });

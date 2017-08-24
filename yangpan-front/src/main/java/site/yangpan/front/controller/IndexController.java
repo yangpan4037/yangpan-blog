@@ -13,8 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import site.yangpan.core.domain.Banner;
 import site.yangpan.core.domain.User;
+import site.yangpan.core.domain.enums.BannerTypeEnum;
 import site.yangpan.core.domain.es.EsBlog;
+import site.yangpan.core.service.BannerService;
 import site.yangpan.core.service.EsBlogService;
 import site.yangpan.core.vo.TagVO;
 
@@ -33,7 +36,14 @@ public class IndexController {
     private EsBlogService esBlogService;
 
     /**
+     * 注入banner service
+     */
+    @Autowired
+    private BannerService bannerService;
+
+    /**
      * 默认首页
+     *
      * @param order     排序方式默认new
      * @param keyword   关键词
      * @param async     异步默认false
@@ -43,41 +53,42 @@ public class IndexController {
      * @return
      */
     @GetMapping
-    public String listEsBlogs(
+    public String execute(
             @RequestParam(value = "order", required = false, defaultValue = "new") String order,
             @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
             @RequestParam(value = "async", required = false) boolean async,
             @RequestParam(value = "pageIndex", required = false, defaultValue = "0") int pageIndex,
             @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
             Model model) {
-
         Page<EsBlog> page = null;
         List<EsBlog> articleList = null;
-        boolean isEmpty = true; // 系统初始化时，没有博客数据
+        boolean isEmpty = true;//系统初始化时，没有博客数据
         try {
-            if (order.equals("hot")) { // 最热查询
+            if (order.equals("hot")) {//最热查询
                 Sort sort = new Sort(Direction.DESC, "readSize", "commentSize", "voteSize", "createTime");
                 Pageable pageable = new PageRequest(pageIndex, pageSize, sort);
                 page = esBlogService.listHotestEsBlogs(keyword, pageable);
-            } else if (order.equals("new")) { // 最新查询
+            } else if (order.equals("new")) {//最新查询
                 Sort sort = new Sort(Direction.DESC, "createTime");
                 Pageable pageable = new PageRequest(pageIndex, pageSize, sort);
                 page = esBlogService.listNewestEsBlogs(keyword, pageable);
             }
-
             isEmpty = false;
         } catch (Exception e) {
             Pageable pageable = new PageRequest(pageIndex, pageSize);
             page = esBlogService.listEsBlogs(pageable);
         }
+        //当前所在页面数据列表
+        articleList = page.getContent();
 
-        articleList = page.getContent();    // 当前所在页面数据列表
-
+        //查询首页banner
+        List<Banner> bannerList = bannerService.findBannerByTypeAndDisplay(BannerTypeEnum.INDEX, true);
 
         model.addAttribute("order", order);
         model.addAttribute("keyword", keyword);
         model.addAttribute("page", page);
         model.addAttribute("articleList", articleList);
+        model.addAttribute("bannerList", bannerList);
 
         // 首次访问页面才加载
         if (!async && !isEmpty) {
@@ -90,8 +101,7 @@ public class IndexController {
             List<User> activeUserList = esBlogService.listTop12Users();
             model.addAttribute("activeUserList", activeUserList);
         }
-
-        return (async == true ? "/index :: #mainContainerRepleace" : "/index");
+        return (async == true ? "/index :: #articleListWrap" : "/index");
     }
 
     @GetMapping("/newest")
