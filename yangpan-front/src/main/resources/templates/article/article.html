@@ -5,12 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <title>文章</title>
+    <!-- CSRF -->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <!--/* 公共css */-->
     <link th:replace="fragments/link"/>
     <!--/* 公共js */-->
     <script th:replace="fragments/script"/>
     <link rel="stylesheet" type="text/css" href="/css/article.css">
-    <script type="text/javascript" src="/js/category.js"></script>
+    <script type="text/javascript" src="/js/article/article.js"></script>
 </head>
 <body>
 
@@ -75,38 +79,29 @@
                             <a href="#"></a>
                         </div>
                     </div>
-                    <div class="author-describe">
-                        <div class="left">
-                            <img src="../../static/images/defaut_face_01.jpeg" alt="">
-                        </div>
-                        <div class="right">
-                            <div class="content">
-                                <p class="author">作者： [[${article.user.username}]] </p>
-                                <p class="describe">那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。我们就在骑楼下躲雨，看绿色的邮筒孤独地站在街的对面。 </p>
-                            </div>
-                        </div>
-                    </div>
                     <div class="prev-next">
                         <a class="prev" href="#">«匆匆</a>
                         <a class="next" href="#">桨声灯影里的秦淮河»</a>
                     </div>
-                    <div class="comment-wrap">
-                        <div class="top">
-                            <div class="column">
-                                <input class="name" type="text" placeholder="请输入姓名"/>
+                    <div id="articleCommentsWrap">
+                        <div class="author-describe" th:each="comment,commentStat : ${commentList}" th:object="${comment}">
+                            <div class="left">
+                                <img src="../../static/images/defaut_face_01.jpeg" alt="头像">
                             </div>
-                            <div class="column">
-                                <input class="email" type="text" placeholder="请输入邮箱"/>
-                            </div>
-                            <div class="column">
-                                <input class="site" type="text" placeholder="请输入您的网址"/>
+                            <div class="right">
+                                <div class="content">
+                                    <p class="author">[[${commentStat.index} + 1]]楼  [[*{user.username}]] [[${#dates.format(comment.createTime, 'yyyy-MM-dd HH:mm')}]] </p>
+                                    <p class="describe">[[*{content}]]</p>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="comment-wrap">
                         <div class="middle">
-                            <textarea placeholder="请发表你的评论或留言~"></textarea>
+                            <textarea id="commentContent" placeholder="请发表你的评论或留言~"></textarea>
                         </div>
                         <div class="bottom">
-                            <input type="submit" value="发表评论"/>
+                            <input id="commentBtn" type="button" value="发表评论"/>
                         </div>
                     </div>
                 </div>
@@ -192,5 +187,9 @@
 <!--/* footer start */-->
 <div th:replace="~{fragments/footer :: footer}"></div>
 <!--/* header end */-->
+
+<script>
+    var articleId = [[${article.id}]];
+</script>
 </body>
 </html>

@@ -25,6 +25,7 @@ import site.yangpan.core.util.ConstraintViolationExceptionHandler;
 import site.yangpan.core.vo.Response;
 
 /**
+ * 评论controller
  * Created by yangpn on 2017-08-06 23:24
  */
 @Controller
@@ -40,14 +41,14 @@ public class CommentController {
     /**
      * 获取评论列表
      *
-     * @param blogId
+     * @param articleId
      * @param model
      * @return
      */
-    @GetMapping
-    public String listComments(@RequestParam(value = "blogId", required = true) Long blogId, Model model) {
-        Blog blog = blogService.getBlogById(blogId);
-        List<Comment> comments = blog.getComments();
+    @GetMapping("/article/{articleId}")
+    public String listComments(@PathVariable(value = "articleId", required = true) Long articleId, Model model) {
+        Blog blog = blogService.getBlogById(articleId);
+        List<Comment> commentList = blog.getComments();
 
         // 判断操作用户是否是评论的所有者
         String commentOwner = "";
@@ -58,31 +59,28 @@ public class CommentController {
                 commentOwner = principal.getUsername();
             }
         }
-
         model.addAttribute("commentOwner", commentOwner);
-        model.addAttribute("comments", comments);
-        return "/userspace/blog :: #mainContainerRepleace";
+        model.addAttribute("commentList", commentList);
+        return "/article/article :: #articleCommentsWrap";
     }
 
     /**
      * 发表评论
      *
-     * @param blogId
+     * @param articleId
      * @param commentContent
      * @return
      */
-    @PostMapping
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER')")  // 指定角色权限才能操作方法
-    public ResponseEntity<Response> createComment(Long blogId, String commentContent) {
-
+    @PostMapping("/article/{articleId}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER')")//指定角色权限才能操作方法
+    public ResponseEntity<Response> createComment(@PathVariable("articleId") Long articleId, String commentContent) {
         try {
-            blogService.createComment(blogId, commentContent);
+            blogService.createComment(articleId, commentContent);
         } catch (ConstraintViolationException e) {
             return ResponseEntity.ok().body(new Response(false, ConstraintViolationExceptionHandler.getMessage(e)));
         } catch (Exception e) {
             return ResponseEntity.ok().body(new Response(false, e.getMessage()));
         }
-
         return ResponseEntity.ok().body(new Response(true, "处理成功", null));
     }
 
