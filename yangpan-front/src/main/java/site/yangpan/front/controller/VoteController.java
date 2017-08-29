@@ -34,21 +34,19 @@ public class VoteController {
     /**
      * 发表点赞
      *
-     * @param blogId
+     * @param articleId
      * @return
      */
-    @PostMapping
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER')")  // 指定角色权限才能操作方法
-    public ResponseEntity<Response> createVote(Long blogId) {
-
+    @PostMapping("/article/{articleId}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER')")//指定角色权限才能操作方法
+    public ResponseEntity<Response> createVote(@PathVariable("articleId") Long articleId) {
         try {
-            blogService.createVote(blogId);
+            blogService.createVote(articleId);
         } catch (ConstraintViolationException e) {
             return ResponseEntity.ok().body(new Response(false, ConstraintViolationExceptionHandler.getMessage(e)));
         } catch (Exception e) {
             return ResponseEntity.ok().body(new Response(false, e.getMessage()));
         }
-
         return ResponseEntity.ok().body(new Response(true, "点赞成功", null));
     }
 
@@ -57,9 +55,9 @@ public class VoteController {
      *
      * @return
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/cancel/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER')")  // 指定角色权限才能操作方法
-    public ResponseEntity<Response> delete(@PathVariable("id") Long id, Long blogId) {
+    public ResponseEntity<Response> delete(@PathVariable("id") Long id, Long articleId) {
 
         boolean isOwner = false;
         User user = voteService.getVoteById(id).getUser();
@@ -78,7 +76,7 @@ public class VoteController {
         }
 
         try {
-            blogService.removeVote(blogId, id);
+            blogService.removeVote(articleId, id);
             voteService.removeVote(id);
         } catch (ConstraintViolationException e) {
             return ResponseEntity.ok().body(new Response(false, ConstraintViolationExceptionHandler.getMessage(e)));

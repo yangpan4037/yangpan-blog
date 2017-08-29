@@ -91,7 +91,7 @@ public class CommentController {
      */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER')")  // 指定角色权限才能操作方法
-    public ResponseEntity<Response> delete(@PathVariable("id") Long id, Long blogId) {
+    public ResponseEntity<Response> delete(@PathVariable("id") Long id, Long articleId) {
 
         boolean isOwner = false;
         User user = commentService.getCommentById(id).getUser();
@@ -110,7 +110,7 @@ public class CommentController {
         }
 
         try {
-            blogService.removeComment(blogId, id);
+            blogService.removeComment(articleId, id);
             commentService.removeComment(id);
         } catch (ConstraintViolationException e) {
             return ResponseEntity.ok().body(new Response(false, ConstraintViolationExceptionHandler.getMessage(e)));
@@ -118,6 +118,6 @@ public class CommentController {
             return ResponseEntity.ok().body(new Response(false, e.getMessage()));
         }
 
-        return ResponseEntity.ok().body(new Response(true, "处理成功", null));
+        return ResponseEntity.ok().body(new Response(true, "删除评论成功！", null));
     }
 }

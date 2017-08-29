@@ -3,6 +3,7 @@ package site.yangpan.core.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import site.yangpan.core.domain.Blog;
 import site.yangpan.core.domain.Catalog;
 import site.yangpan.core.domain.User;
@@ -57,5 +58,23 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
      * @return
      */
     Page<Blog> findByCatalog(Catalog catalog, Pageable pageable);
+
+    /**
+     * 查询下一篇
+     *
+     * @param id
+     * @return
+     */
+    @Query(value = "select * from blog where id > ?1 order by id asc limit 1", nativeQuery = true)
+    Blog findNextByCurrentId(Long id);
+
+    /**
+     * 查询上一篇
+     *
+     * @param id
+     * @return
+     */
+    @Query(value = "select * from blog where id < ?1 order by id asc limit 1", nativeQuery = true)
+    Blog findPrevByCurrentId(Long id);
 }
 

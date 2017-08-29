@@ -100,4 +100,20 @@ public interface BlogService {
      * @return
      */
     void removeVote(Long blogId, Long voteId);
+
+    /**
+     * 查询下一篇
+     *
+     * @param id
+     * @return
+     */
+    Blog findNextByCurrentId(Long id);
+
+    /**
+     * 查询上一篇
+     *
+     * @param id
+     * @return
+     */
+    Blog findPrevByCurrentId(Long id);
 }

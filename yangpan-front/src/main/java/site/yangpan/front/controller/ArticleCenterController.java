@@ -202,7 +202,7 @@ public class ArticleCenterController {
         User principal = null;
         Blog article = blogService.getBlogById(id);
 
-        // 每次读取，简单的可以认为阅读量增加1次
+        //每次读取，简单的可以认为阅读量增加1次
         blogService.readingIncrease(id);
 
         // 判断操作用户是否是博客的所有者
@@ -227,9 +227,15 @@ public class ArticleCenterController {
             }
         }
 
+        //查询上一篇和下一篇
+        Blog nextArticle = blogService.findNextByCurrentId(id);
+        Blog prevArticle = blogService.findPrevByCurrentId(id);
+
         model.addAttribute("isBlogOwner", isBlogOwner);
         model.addAttribute("article",article);
         model.addAttribute("currentVote",currentVote);
+        model.addAttribute("nextArticle",nextArticle);
+        model.addAttribute("prevArticle",prevArticle);
 
         return new ModelAndView("/article/article","model",model);
     }

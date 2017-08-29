@@ -54,6 +54,8 @@ $(function(){
 
 	//退出
     $("#headerLogoutBtn").click(function(){
+        var csrfToken = $("meta[name='_csrf']").attr("content");
+        var csrfHeader = $("meta[name='_csrf_header']").attr("content");
         var dialogLayer = layer.msg('请稍后。。',{
             icon: 16,
             shade: 0.01
@@ -63,10 +65,10 @@ $(function(){
             dataType:"json",
             type: 'POST',
             data:{
-                "_csrf":"[[${_csrf.token}]]"
+                "_csrf":csrfHeader
             },
             beforeSend: function(request) {
-                request.setRequestHeader('[[${_csrf.token}]]', '[[${_csrf.headerName}]]'); //添加CSRF Token
+                request.setRequestHeader(csrfHeader, csrfToken);
             },
             success: function(result){
                 layer.close(dialogLayer);
