@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<dl data-th-fragment="rightMenu" class="article-body-right-content">
+    <dt class="stair">文章中心</dt>
+    <dd th:class="${#httpServletRequest.getRequestURI()} eq '/article/'+${user.username}+'/center' ? 'second active' : 'second'">
+        <i class="iconfont">&#xe647;</i>
+        <a th:href="'/article/'+${user.username}+'/center'">文章管理</a>
+    </dd>
+    <dd th:class="${#httpServletRequest.getRequestURI()} eq '/article/'+${user.username}+'/category' ? 'second active' : 'second'">
+        <i class="iconfont">&#xe624;</i>
+        <a th:href="'/article/'+${user.username}+'/category'">分类管理</a>
+    </dd>
+    <dd th:class="${#httpServletRequest.getRequestURI()} eq '/article/'+${user.username}+'/addArticle' ? 'second active' : 'second'">
+        <i class="iconfont">&#xe624;</i>
+        <a th:href="'/article/'+${user.username}+'/addArticle'">发表文章</a>
+    </dd>
+</dl>
+</body>
+</html>

@@ -4,15 +4,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import site.yangpan.core.domain.Blog;
+import site.yangpan.core.domain.Article;
 import site.yangpan.core.domain.Catalog;
 import site.yangpan.core.domain.User;
 
 /**
- * 博文持久层接口
+ * 文章持久层接口
  * Created by yangpn on 2017-08-06 22:41
  */
-public interface BlogRepository extends JpaRepository<Blog, Long> {
+public interface ArticleRepository extends JpaRepository<Article, Long> {
     /**
      * 根据用户名分页查询用户列表（最新）
      * 由 findByUserAndTitleLikeOrTagsLikeOrderByCreateTimeDesc 代替，可以根据标签进行查询
@@ -24,7 +24,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
      * @see findByTitleLikeOrTagsLikeAndUserOrderByCreateTimeDesc
      */
     @Deprecated
-    Page<Blog> findByUserAndTitleLikeOrderByCreateTimeDesc(User user, String title, Pageable pageable);
+    Page<Article> findByUserAndTitleLikeOrderByCreateTimeDesc(User user, String title, Pageable pageable);
 
     /**
      * 根据用户名分页查询用户列表
@@ -35,7 +35,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
      * @param pageable
      * @return
      */
-    Page<Blog> findByUserAndTitleLike(User user, String title, Pageable pageable);
+    Page<Article> findByUserAndTitleLike(User user, String title, Pageable pageable);
 
     /**
      * 根据用户名分页查询用户列表
@@ -46,7 +46,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
      * @param pageable
      * @return
      */
-    Page<Blog> findByTitleLikeAndUserOrTagsLikeAndUserOrderByCreateTimeDesc(String title, User user, String tags, User user2, Pageable pageable);
+    Page<Article> findByTitleLikeAndUserOrTagsLikeAndUserOrderByCreateTimeDesc(String title, User user, String tags, User user2, Pageable pageable);
 
     /**
      * 根据用户名分页查询用户列表
@@ -57,7 +57,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
      * @param pageable
      * @return
      */
-    Page<Blog> findByCatalog(Catalog catalog, Pageable pageable);
+    Page<Article> findByCatalog(Catalog catalog, Pageable pageable);
 
     /**
      * 查询下一篇
@@ -65,8 +65,8 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
      * @param id
      * @return
      */
-    @Query(value = "select * from blog where id > ?1 order by id asc limit 1", nativeQuery = true)
-    Blog findNextByCurrentId(Long id);
+    @Query(value = "select * from article where id > ?1 order by id asc limit 1", nativeQuery = true)
+    Article findNextByCurrentId(Long id);
 
     /**
      * 查询上一篇
@@ -74,7 +74,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
      * @param id
      * @return
      */
-    @Query(value = "select * from blog where id < ?1 order by id asc limit 1", nativeQuery = true)
-    Blog findPrevByCurrentId(Long id);
+    @Query(value = "select * from article where id < ?1 order by id desc limit 1", nativeQuery = true)
+    Article findPrevByCurrentId(Long id);
 }
 

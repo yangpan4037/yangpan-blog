@@ -26,21 +26,21 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import com.github.rjeschke.txtmark.Processor;
 
 /**
- * 博文实体
+ * 文章实体类
  * Created by yangpn on 2017-08-06 22:31
  */
 @Entity // 实体
-@Document(indexName = "blog", type = "blog")
-public class Blog implements Serializable {
+@Document(indexName = "article", type = "article")
+public class Article implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id // 主键
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
+    @Id //主键
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//自增长策略
     private Long id; // 用户的唯一标识
 
     @NotEmpty(message = "标题不能为空")
     @Size(min=2, max=50)
-    @Column(nullable = false, length = 50) // 映射为字段，值不能为空
+    @Column(nullable = false, length = 50) //映射为字段，值不能为空
     private String title;
 
     @NotEmpty(message = "摘要不能为空")
@@ -48,45 +48,52 @@ public class Blog implements Serializable {
     @Column(nullable = false) // 映射为字段，值不能为空
     private String summary;
 
-    @Lob  // 大对象，映射 MySQL 的 Long Text 类型
+    /**内容*/
+    @Lob  //大对象，映射 MySQL 的 Long Text 类型
     @Basic(fetch=FetchType.LAZY) // 懒加载
     @NotEmpty(message = "内容不能为空")
     @Size(min=2)
     @Column(nullable = false) // 映射为字段，值不能为空
     private String content;
 
-    @Lob  // 大对象，映射 MySQL 的 Long Text 类型
-    @Basic(fetch=FetchType.LAZY) // 懒加载
+    /**将md转为html*/
+    @Lob//大对象，映射 MySQL 的 Long Text 类型
+    @Basic(fetch=FetchType.LAZY) //懒加载
     @NotEmpty(message = "内容不能为空")
     @Size(min=2)
-    @Column(nullable = false) // 映射为字段，值不能为空
-    private String htmlContent; // 将 md 转为 html
+    @Column(nullable = false) //映射为字段，值不能为空
+    private String htmlContent;
 
+    /**用户*/
     @OneToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
 
-    @Column(nullable = false) // 映射为字段，值不能为空
-    @org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
+    /**创建时间*/
+    @Column(nullable = false)//映射为字段，值不能为空
+    @org.hibernate.annotations.CreationTimestamp//由数据库自动创建时间
     private Timestamp createTime;
 
+    /** 访问量、阅读量*/
     @Column(name="readSize")
-    private Integer readSize = 0; // 访问量、阅读量
+    private Integer readSize = 0;
 
+    /**评论量*/
     @Column(name="commentSize")
-    private Integer commentSize = 0;  // 评论量
+    private Integer commentSize = 0;
 
+    /**点赞量*/
     @Column(name="voteSize")
-    private Integer voteSize = 0;  // 点赞量
+    private Integer voteSize = 0;
 
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "blog_comment", joinColumns = @JoinColumn(name = "blog_id", referencedColumnName = "id"),
+    @JoinTable(name = "article_comment", joinColumns = @JoinColumn(name = "article_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "comment_id", referencedColumnName = "id"))
     private List<Comment> comments;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "blog_vote", joinColumns = @JoinColumn(name = "blog_id", referencedColumnName = "id"),
+    @JoinTable(name = "article_vote", joinColumns = @JoinColumn(name = "article_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "vote_id", referencedColumnName = "id"))
     private List<Vote> votes;
 
@@ -97,10 +104,10 @@ public class Blog implements Serializable {
     @Column(name="tags", length = 100)
     private String tags;  // 标签
 
-    protected Blog() {
+    protected Article() {
         // TODO Auto-generated constructor stub
     }
-    public Blog(String title, String summary,String content) {
+    public Article(String title, String summary, String content) {
         this.title = title;
         this.summary = summary;
         this.content = content;

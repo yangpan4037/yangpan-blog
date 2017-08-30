@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import site.yangpan.core.domain.Blog;
+import site.yangpan.core.domain.Article;
 import site.yangpan.core.domain.Comment;
 import site.yangpan.core.domain.User;
-import site.yangpan.core.service.BlogService;
+import site.yangpan.core.service.ArticleService;
 import site.yangpan.core.service.CommentService;
 import site.yangpan.core.util.ConstraintViolationExceptionHandler;
 import site.yangpan.core.vo.Response;
@@ -33,7 +32,7 @@ import site.yangpan.core.vo.Response;
 public class CommentController {
 
     @Autowired
-    private BlogService blogService;
+    private ArticleService blogService;
 
     @Autowired
     private CommentService commentService;
@@ -47,8 +46,8 @@ public class CommentController {
      */
     @GetMapping("/article/{articleId}")
     public String listComments(@PathVariable(value = "articleId", required = true) Long articleId, Model model) {
-        Blog blog = blogService.getBlogById(articleId);
-        List<Comment> commentList = blog.getComments();
+        Article article = blogService.getArticleById(articleId);
+        List<Comment> commentList = article.getComments();
 
         // 判断操作用户是否是评论的所有者
         String commentOwner = "";

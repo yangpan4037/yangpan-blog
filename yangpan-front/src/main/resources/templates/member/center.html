@@ -1,74 +1,26 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 	<meta charset="UTF-8">
 	<title>个人中心</title>
-	<link rel="stylesheet" type="text/css" href="../../static/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="../../static/css/global.css">
-	<link rel="stylesheet" type="text/css" href="../../static/css/member.css">
-	<script type="text/javascript" src="../../static/plugs/jquery.1.10.2.js"></script>
-	<script type="text/javascript" src="../../static/js/global.js"></script>
-	<script type="text/javascript" src="../../static/js/member.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/css/global.css">
+	<link rel="stylesheet" type="text/css" href="/css/member.css">
+	<script type="text/javascript" src="/plugs/jquery.1.10.2.js"></script>
+	<script type="text/javascript" src="/js/global.js"></script>
+	<script type="text/javascript" src="/js/member/center.js"></script>
 </head>
 <body>
 
-	<!-- header start -->
-	<div class="header">
-		<div class="media-auto-width">
-			<div class="left">
-				<a href="../login/login.html" class="login">亲，请登录</a>
-				<a href="../login/register.html" class="register">现在注册</a>
-			</div>
-			<ul class="right">
-				<li>
-					<div class="search-wrap">
-						<form action="#">
-							<input class="search-text" type="text" placeholder="请输入搜索内容。">
-							<input class="search-btn iconfont" type="submit" value="&#xe613;" />
-						</form>
-					</div>
-				</li>
-				<li>
-					<a href="">首页</a>
-				</li>
-				<li>
-					<a href="">最新</a>
-				</li>
-				<li>
-					<a href="">最热</a>
-				</li>
-				<li>
-					<a href="">写文章</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<!-- header end -->
+	<!--/* header start */-->
+	<div th:replace="~{fragments/header :: header}"></div>
+	<!--/* header end */-->
 
-	<!-- header-nav-wrap start -->
-	<div class="header-nav-wrap">
-		<div class="media-auto-width">
-			<a class="logo" href="../index.html">
-				<img src="" alt="logo">
-			</a>
-			<div class="nav">
-				<a class="active" href="#">个人中心</a>
-				<a href="../article/article.html">文章中心</a>
-				<a href="#">消息中心</a>
-			</div>
-			<div class="right">
-				<a href="#">
-					<i class="iconfont">&#xe641;</i>
-					<span>帮助</span>
-				</a>
-				<a href="#">
-					<i class="iconfont">&#xe608;</i>
-					<span>设置</span>
-				</a>
-			</div>
-		</div>
-	</div>
-	<!-- header-nav-wrap end -->
+	<!--/* userHeadMenu start */-->
+	<div th:replace="~{fragments/header :: userHeadMenu}"></div>
+	<!--/* userHeadMenu end */-->
 
 	<!-- member-body-wrap start -->
 	<div class="member-body-wrap">
@@ -79,19 +31,19 @@
 						<div class="left">
 							<a class="face-wrap">
 								<span class="face-space">
-									<img class="face" src="../../static/images/defaut_face_01.jpeg" alt="face">
+									<img class="face" src="/images/defaut_face_01.jpeg" alt="face">
 								</span>
 							</a>
 							<div class="other-info">
-								<span class="name">华丽逆。转”</span>
-								<span class="say-hi">下午好！</span>
+								<span class="name">[[${user.username}]]</span>
+								<span id="sayHello" class="say-hi">say hello！</span>
 								<a class="amend" href="#">修改个人信息>></a>
 							</div>
 						</div>
 						<div class="right">
 							<p class="info">
 								<span class="title">真实姓名：</span>
-								<em class="value">华丽逆转</em>
+								<em class="value">[[${user.realname}]]</em>
 								<a class="color" href="#">修改</a>
 							</p>
 							<p class="info">
@@ -122,7 +74,7 @@
 				        	    <li class="layout-middle-wrap">
 								    <div class="layout-middle-left">
 								        <a href="#" class="cover">
-								        	<img src="../../static/pic/article_cover_01.jpg" alt="">
+								        	<img src="/pic/article_cover_01.jpg" alt="">
 								        </a>
 								    </div>
 								    <div class="layout-middle-right">
@@ -149,7 +101,7 @@
 								<li class="layout-middle-wrap">
 								    <div class="layout-middle-left">
 								        <a href="#" class="cover">
-								        	<img src="../../static/pic/article_cover_02.jpg" alt="">
+								        	<img src="/pic/article_cover_02.jpg" alt="">
 								        </a>
 								    </div>
 								    <div class="layout-middle-right">
@@ -219,23 +171,8 @@
 	</div>
 	<!-- member-body-wrap end -->
 
-	<!-- footer start -->
-	<div class="footer" id="footer">
-		<div class="media-auto-width">
-			<div class="foot-tag">
-				<a href="#">联系斯特</a>
-				<a href="#">用户反馈</a>
-				<a href="#">关于斯特</a>
-				<a href="#">新浪微博</a>
-				<a href="#">帮助中心</a>
-			</div>
-			<div class="copyright">
-				<span>© yangan 春花秋实</span>
-				<a href="#">蜀ICP备12345678号</a>
-				<span>Copyright  20017-2017  All  Rights  Reserver</span>
-			</div>
-		</div>
-	</div>
-	<!-- footer end -->
+	<!--/* footer start */-->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+	<!--/* header end */-->
 </body>
 </html>

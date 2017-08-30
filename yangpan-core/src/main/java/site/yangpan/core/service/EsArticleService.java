@@ -3,7 +3,7 @@ package site.yangpan.core.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import site.yangpan.core.domain.User;
-import site.yangpan.core.domain.es.EsBlog;
+import site.yangpan.core.domain.es.EsArticle;
 import site.yangpan.core.vo.TagVO;
 
 import java.util.List;
@@ -12,31 +12,31 @@ import java.util.List;
  * 博文全文检索业务层接口
  * Created by yangpn on 2017-08-06 22:53
  */
-public interface EsBlogService {
+public interface EsArticleService {
 
     /**
-     * 删除Blog
+     * 删除Article
      *
      * @param id
      * @return
      */
-    void removeEsBlog(String id);
+    void removeEsArticle(String id);
 
     /**
-     * 更新 EsBlog
+     * 更新 EsArticle
      *
-     * @param esBlog
+     * @param esArticle
      * @return
      */
-    EsBlog updateEsBlog(EsBlog esBlog);
+    EsArticle updateEsArticle(EsArticle esArticle);
 
     /**
-     * 根据id获取Blog
+     * 根据id获取Article
      *
-     * @param blogId
+     * @param ArticleId
      * @return
      */
-    EsBlog getEsBlogByBlogId(Long blogId);
+    EsArticle getEsArticleByArticleId(Long ArticleId);
 
     /**
      * 最新博客列表，分页
@@ -45,7 +45,7 @@ public interface EsBlogService {
      * @param pageable
      * @return
      */
-    Page<EsBlog> listNewestEsBlogs(String keyword, Pageable pageable);
+    Page<EsArticle> listNewestEsArticles(String keyword, Pageable pageable);
 
     /**
      * 最热博客列表，分页
@@ -54,7 +54,7 @@ public interface EsBlogService {
      * @param pageable
      * @return
      */
-    Page<EsBlog> listHotestEsBlogs(String keyword, Pageable pageable);
+    Page<EsArticle> listHotestEsArticles(String keyword, Pageable pageable);
 
     /**
      * 博客列表，分页
@@ -62,21 +62,21 @@ public interface EsBlogService {
      * @param pageable
      * @return
      */
-    Page<EsBlog> listEsBlogs(Pageable pageable);
+    Page<EsArticle> listEsArticles(Pageable pageable);
 
     /**
      * 最新前5
      *
      * @return
      */
-    List<EsBlog> listTop5NewestEsBlogs();
+    List<EsArticle> listTop5NewestEsArticles();
 
     /**
      * 最热前5
      *
      * @return
      */
-    List<EsBlog> listTop5HotestEsBlogs();
+    List<EsArticle> listTop5HotestEsArticles();
 
     /**
      * 最热前 30 标签

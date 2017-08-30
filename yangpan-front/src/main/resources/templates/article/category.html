@@ -22,31 +22,9 @@
 	<div th:replace="~{fragments/header :: header}"></div>
 	<!--/* header end */-->
 
-	<!-- header-nav-wrap start -->
-	<div class="header-nav-wrap">
-		<div class="media-auto-width">
-			<a class="logo" href="../index.html">
-				<img src="" alt="logo">
-			</a>
-			<div class="nav">
-				<a href="../member/member.html">个人中心</a>
-				<a class="active" href="#">文章中心</a>
-				<a href="#">消息中心</a>
-			</div>
-			<div class="right">
-				<a href="#">
-					<i class="iconfont">&#xe641;</i>
-					<span>帮助</span>
-				</a>
-				<a href="#">
-					<i class="iconfont">&#xe608;</i>
-					<span>设置</span>
-				</a>
-			</div>
-		</div>
-	</div>
-	<!-- header-nav-wrap end -->
-
+	<!--/* userHeadMenu start */-->
+	<div th:replace="~{fragments/header :: userHeadMenu}"></div>
+	<!--/* userHeadMenu end */-->
 
 	<!-- article-body-wrap start -->
 	<div class="article-body-wrap">
@@ -87,21 +65,9 @@
 				</div>
 			</div>
 			<div class="article-body-right">
-				<dl class="article-body-right-content">
-					<dt class="stair">文章中心</dt>
-					<dd class="second">
-						<i class="iconfont">&#xe647;</i>
-						<a href="article.html">文章管理</a>
-					</dd>
-					<dd class="second active">
-						<i class="iconfont">&#xe624;</i>
-						<a href="category.html">分类管理</a>
-					</dd>
-					<dd class="second">
-						<i class="iconfont">&#xe624;</i>
-						<a href="contribute.html">发表文章</a>
-					</dd>
-				</dl>
+				<!--/* 右侧菜单 */-->
+				<div th:replace="~{article/fragments :: rightMenu}">...</div>
+				<!--/* 右侧菜单 */-->
 			</div>
 		</div>
 		

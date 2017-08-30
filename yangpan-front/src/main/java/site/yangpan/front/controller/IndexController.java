@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import site.yangpan.core.domain.Banner;
 import site.yangpan.core.domain.User;
 import site.yangpan.core.domain.enums.BannerTypeEnum;
-import site.yangpan.core.domain.es.EsBlog;
+import site.yangpan.core.domain.es.EsArticle;
 import site.yangpan.core.service.BannerService;
-import site.yangpan.core.service.EsBlogService;
+import site.yangpan.core.service.EsArticleService;
 import site.yangpan.core.vo.TagVO;
 
 /**
@@ -33,7 +33,7 @@ public class IndexController {
      * 注入文章全文检索service
      */
     @Autowired
-    private EsBlogService esBlogService;
+    private EsArticleService esArticleService;
 
     /**
      * 注入banner service
@@ -60,23 +60,23 @@ public class IndexController {
             @RequestParam(value = "pageIndex", required = false, defaultValue = "0") int pageIndex,
             @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
             Model model) {
-        Page<EsBlog> page = null;
-        List<EsBlog> articleList = null;
+        Page<EsArticle> page = null;
+        List<EsArticle> articleList = null;
         boolean isEmpty = true;//系统初始化时，没有博客数据
         try {
             if (order.equals("hot")) {//最热查询
                 Sort sort = new Sort(Direction.DESC, "readSize", "commentSize", "voteSize", "createTime");
                 Pageable pageable = new PageRequest(pageIndex, pageSize, sort);
-                page = esBlogService.listHotestEsBlogs(keyword, pageable);
+                page = esArticleService.listHotestEsArticles(keyword, pageable);
             } else if (order.equals("new")) {//最新查询
                 Sort sort = new Sort(Direction.DESC, "createTime");
                 Pageable pageable = new PageRequest(pageIndex, pageSize, sort);
-                page = esBlogService.listNewestEsBlogs(keyword, pageable);
+                page = esArticleService.listNewestEsArticles(keyword, pageable);
             }
             isEmpty = false;
         } catch (Exception e) {
             Pageable pageable = new PageRequest(pageIndex, pageSize);
-            page = esBlogService.listEsBlogs(pageable);
+            page = esArticleService.listEsArticles(pageable);
         }
         //当前所在页面数据列表
         articleList = page.getContent();
@@ -92,28 +92,28 @@ public class IndexController {
 
         // 首次访问页面才加载
         if (!async && !isEmpty) {
-            List<EsBlog> newArticleList = esBlogService.listTop5NewestEsBlogs();
+            List<EsArticle> newArticleList = esArticleService.listTop5NewestEsArticles();
             model.addAttribute("newArticleList", newArticleList);
-            List<EsBlog> hotArticleList = esBlogService.listTop5HotestEsBlogs();
+            List<EsArticle> hotArticleList = esArticleService.listTop5HotestEsArticles();
             model.addAttribute("hotArticleList", hotArticleList);
-            List<TagVO> hotTagList = esBlogService.listTop30Tags();
+            List<TagVO> hotTagList = esArticleService.listTop30Tags();
             model.addAttribute("hotTagList", hotTagList);
-            List<User> activeUserList = esBlogService.listTop12Users();
+            List<User> activeUserList = esArticleService.listTop12Users();
             model.addAttribute("activeUserList", activeUserList);
         }
         return (async == true ? "/index :: #articleListWrap" : "/index");
     }
 
     @GetMapping("/newest")
-    public String listNewestEsBlogs(Model model) {
-        List<EsBlog> newest = esBlogService.listTop5NewestEsBlogs();
+    public String listNewestEsArticles(Model model) {
+        List<EsArticle> newest = esArticleService.listTop5NewestEsArticles();
         model.addAttribute("newest", newest);
         return "newest";
     }
 
     @GetMapping("/hotest")
-    public String listHotestEsBlogs(Model model) {
-        List<EsBlog> hotest = esBlogService.listTop5HotestEsBlogs();
+    public String listHotestEsArticles(Model model) {
+        List<EsArticle> hotest = esArticleService.listTop5HotestEsArticles();
         model.addAttribute("hotest", hotest);
         return "hotest";
     }

@@ -20,9 +20,9 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 import site.yangpan.core.domain.User;
-import site.yangpan.core.domain.es.EsBlog;
-import site.yangpan.core.repository.es.EsBlogRepository;
-import site.yangpan.core.service.EsBlogService;
+import site.yangpan.core.domain.es.EsArticle;
+import site.yangpan.core.repository.es.EsArticleRepository;
+import site.yangpan.core.service.EsArticleService;
 import site.yangpan.core.service.UserService;
 import site.yangpan.core.vo.TagVO;
 
@@ -37,9 +37,9 @@ import static org.elasticsearch.search.aggregations.AggregationBuilders.terms;
  * Created by yangpn on 2017-08-06 22:56
  */
 @Service
-public class EsBlogServiceImpl implements EsBlogService {
+public class EsArticleServiceImpl implements EsArticleService {
     @Autowired
-    private EsBlogRepository esBlogRepository;
+    private EsArticleRepository esArticleRepository;
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
     @Autowired
@@ -49,62 +49,62 @@ public class EsBlogServiceImpl implements EsBlogService {
     private static final String EMPTY_KEYWORD = "";
 
     /* (non-Javadoc)
-     * @see com.waylau.spring.boot.blog.service.EsBlogService#removeEsBlog(java.lang.String)
+     * @see com.waylau.spring.boot.blog.service.EsArticleService#removeEsArticle(java.lang.String)
      */
     @Override
-    public void removeEsBlog(String id) {
-        esBlogRepository.delete(id);
+    public void removeEsArticle(String id) {
+        esArticleRepository.delete(id);
     }
 
     /* (non-Javadoc)
-     * @see com.waylau.spring.boot.blog.service.EsBlogService#updateEsBlog(com.waylau.spring.boot.blog.domain.es.EsBlog)
+     * @see com.waylau.spring.boot.blog.service.EsArticleService#updateEsArticle(com.waylau.spring.boot.blog.domain.es.EsArticle)
      */
     @Override
-    public EsBlog updateEsBlog(EsBlog esBlog) {
-        return esBlogRepository.save(esBlog);
+    public EsArticle updateEsArticle(EsArticle esArticle) {
+        return esArticleRepository.save(esArticle);
     }
 
     /* (non-Javadoc)
-     * @see com.waylau.spring.boot.blog.service.EsBlogService#getEsBlogByBlogId(java.lang.Long)
+     * @see com.waylau.spring.boot.blog.service.EsArticleService#getEsArticleByArticleId(java.lang.Long)
      */
     @Override
-    public EsBlog getEsBlogByBlogId(Long blogId) {
-        return esBlogRepository.findByBlogId(blogId);
+    public EsArticle getEsArticleByArticleId(Long ArticleId) {
+        return esArticleRepository.findByArticleId(ArticleId);
     }
 
     /* (non-Javadoc)
-     * @see com.waylau.spring.boot.blog.service.EsBlogService#listNewestEsBlogs(java.lang.String, org.springframework.data.domain.Pageable)
+     * @see com.waylau.spring.boot.blog.service.EsArticleService#listNewestEsArticles(java.lang.String, org.springframework.data.domain.Pageable)
      */
     @Override
-    public Page<EsBlog> listNewestEsBlogs(String keyword, Pageable pageable) throws SearchParseException {
-        Page<EsBlog> pages = null;
+    public Page<EsArticle> listNewestEsArticles(String keyword, Pageable pageable) throws SearchParseException {
+        Page<EsArticle> pages = null;
         Sort sort = new Sort(Direction.DESC, "createTime");
         if (pageable.getSort() == null) {
             pageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), sort);
         }
 
-        pages = esBlogRepository.findDistinctEsBlogByTitleContainingOrSummaryContainingOrContentContainingOrTagsContaining(keyword, keyword, keyword, keyword, pageable);
+        pages = esArticleRepository.findDistinctEsArticleByTitleContainingOrSummaryContainingOrContentContainingOrTagsContaining(keyword, keyword, keyword, keyword, pageable);
 
         return pages;
     }
 
     /* (non-Javadoc)
-     * @see com.waylau.spring.boot.blog.service.EsBlogService#listHotestEsBlogs(java.lang.String, org.springframework.data.domain.Pageable)
+     * @see com.waylau.spring.boot.blog.service.EsArticleService#listHotestEsArticles(java.lang.String, org.springframework.data.domain.Pageable)
      */
     @Override
-    public Page<EsBlog> listHotestEsBlogs(String keyword, Pageable pageable) throws SearchParseException {
+    public Page<EsArticle> listHotestEsArticles(String keyword, Pageable pageable) throws SearchParseException {
 
         Sort sort = new Sort(Direction.DESC, "readSize", "commentSize", "voteSize", "createTime");
         if (pageable.getSort() == null) {
             pageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), sort);
         }
 
-        return esBlogRepository.findDistinctEsBlogByTitleContainingOrSummaryContainingOrContentContainingOrTagsContaining(keyword, keyword, keyword, keyword, pageable);
+        return esArticleRepository.findDistinctEsArticleByTitleContainingOrSummaryContainingOrContentContainingOrTagsContaining(keyword, keyword, keyword, keyword, pageable);
     }
 
     @Override
-    public Page<EsBlog> listEsBlogs(Pageable pageable) {
-        return esBlogRepository.findAll(pageable);
+    public Page<EsArticle> listEsArticles(Pageable pageable) {
+        return esArticleRepository.findAll(pageable);
     }
 
 
@@ -114,8 +114,8 @@ public class EsBlogServiceImpl implements EsBlogService {
      * @return
      */
     @Override
-    public List<EsBlog> listTop5NewestEsBlogs() {
-        Page<EsBlog> page = this.listHotestEsBlogs(EMPTY_KEYWORD, TOP_5_PAGEABLE);
+    public List<EsArticle> listTop5NewestEsArticles() {
+        Page<EsArticle> page = this.listHotestEsArticles(EMPTY_KEYWORD, TOP_5_PAGEABLE);
         return page.getContent();
     }
 
@@ -125,8 +125,8 @@ public class EsBlogServiceImpl implements EsBlogService {
      * @return
      */
     @Override
-    public List<EsBlog> listTop5HotestEsBlogs() {
-        Page<EsBlog> page = this.listHotestEsBlogs(EMPTY_KEYWORD, TOP_5_PAGEABLE);
+    public List<EsArticle> listTop5HotestEsArticles() {
+        Page<EsArticle> page = this.listHotestEsArticles(EMPTY_KEYWORD, TOP_5_PAGEABLE);
         return page.getContent();
     }
 
@@ -138,7 +138,7 @@ public class EsBlogServiceImpl implements EsBlogService {
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(matchAllQuery())
                 .withSearchType(SearchType.QUERY_THEN_FETCH)
-                .withIndices("blog").withTypes("blog")
+                .withIndices("article").withTypes("article")
                 .addAggregation(terms("tags").field("tags").order(Terms.Order.count(false)).size(30))
                 .build();
         // when
@@ -169,7 +169,7 @@ public class EsBlogServiceImpl implements EsBlogService {
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(matchAllQuery())
                 .withSearchType(SearchType.QUERY_THEN_FETCH)
-                .withIndices("blog").withTypes("blog")
+                .withIndices("article").withTypes("article")
                 .addAggregation(terms("users").field("username").order(Terms.Order.count(false)).size(12))
                 .build();
         // when

@@ -5,9 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>文章</title>
-    <!-- CSRF -->
     <meta name="_csrf" th:content="${_csrf.token}"/>
-    <!-- default header name is X-CSRF-TOKEN -->
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <!--/* 公共css */-->
     <link th:replace="fragments/link"/>
@@ -22,30 +20,6 @@
 <div th:replace="~{fragments/header :: header}"></div>
 <!--/* header end */-->
 
-<!-- header-nav-wrap start -->
-<div class="header-nav-wrap">
-    <div class="media-auto-width">
-        <a class="logo" href="../index.html">
-            <img src="" alt="logo">
-        </a>
-        <div class="nav">
-            <a href="../member/member.html">个人中心</a>
-            <a class="active" href="#">文章中心</a>
-            <a href="#">消息中心</a>
-        </div>
-        <div class="right">
-            <a href="#">
-                <i class="iconfont">&#xe641;</i>
-                <span>帮助</span>
-            </a>
-            <a href="#">
-                <i class="iconfont">&#xe608;</i>
-                <span>设置</span>
-            </a>
-        </div>
-    </div>
-</div>
-<!-- header-nav-wrap end -->
 
 <!-- article-body-wrap start -->
 <div class="article-body-wrap article-page">

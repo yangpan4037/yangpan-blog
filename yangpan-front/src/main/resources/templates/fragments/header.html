@@ -42,5 +42,31 @@
         </div>
     </div>
     <!-- header end -->
+
+
+    <!-- header-nav-wrap start -->
+    <div data-th-fragment="userHeadMenu" class="header-nav-wrap">
+        <div class="media-auto-width">
+            <a class="logo" href="../index.html">
+                <img src="" alt="logo">
+            </a>
+            <div class="nav">
+                <a th:class="${#httpServletRequest.getRequestURI()} eq '/member/'+${user.username}+'/center' ? 'active' : ''" th:href="'/member/'+${user.username}+'/center'">个人中心</a>
+                <a th:class="${#httpServletRequest.getRequestURI()} eq '/article/'+${user.username}+'/center' ? 'active' : ''" th:href="'/article/'+${user.username}+'/center'">文章中心</a>
+                <a href="javascript:void(0);">消息中心</a>
+            </div>
+            <div class="right">
+                <a href="#">
+                    <i class="iconfont">&#xe641;</i>
+                    <span>帮助</span>
+                </a>
+                <a href="#">
+                    <i class="iconfont">&#xe608;</i>
+                    <span>设置</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- header-nav-wrap end -->
 </body>
 </html>

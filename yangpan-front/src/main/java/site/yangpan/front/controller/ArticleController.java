@@ -12,11 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import site.yangpan.core.domain.Blog;
+import site.yangpan.core.domain.Article;
 import site.yangpan.core.domain.Catalog;
 import site.yangpan.core.domain.User;
 import site.yangpan.core.domain.Vote;
-import site.yangpan.core.service.BlogService;
+import site.yangpan.core.service.ArticleService;
 import site.yangpan.core.service.CatalogService;
 import site.yangpan.core.util.ConstraintViolationExceptionHandler;
 import site.yangpan.core.vo.CatalogVO;
@@ -31,7 +31,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/article/{username}")
-public class ArticleCenterController {
+public class ArticleController {
 
     //用户详情service
     @Autowired
@@ -43,7 +43,7 @@ public class ArticleCenterController {
 
     //文章service
     @Autowired
-    private BlogService blogService;
+    private ArticleService blogService;
 
     /**
      * 分类管理
@@ -80,7 +80,7 @@ public class ArticleCenterController {
      * @return
      */
     @PostMapping("/addCategory")
-    @PreAuthorize("authentication.name.equals(#catalogVO.username)")// 指定用户才能操作方法
+    @PreAuthorize("authentication.name.equals(#catalogVO.username)")
     public ResponseEntity<Response> create(@RequestBody CatalogVO catalogVO) {
         String username = catalogVO.getUsername();
         Catalog catalog = catalogVO.getCatalog();
@@ -108,13 +108,13 @@ public class ArticleCenterController {
         User user = (User) userDetailsService.loadUserByUsername(username);
         List<Catalog> categoryList = catalogService.listCatalogs(user);
         model.addAttribute("user", user);
-        model.addAttribute("blog", new Blog(null, null, null));
+        model.addAttribute("article", new Article(null, null, null));
         model.addAttribute("categoryList", categoryList);
         return new ModelAndView("article/contribute", "model", model);
     }
 
     /**
-     * 编辑博客
+     * 编辑文章
      *
      * @param username
      * @param id
@@ -122,12 +122,12 @@ public class ArticleCenterController {
      * @return
      */
     @GetMapping("/editArticle/{id}")
-    public ModelAndView editBlog(@PathVariable("username") String username, @PathVariable("id") Long id, Model model) {
+    public ModelAndView editArticle(@PathVariable("username") String username, @PathVariable("id") Long id, Model model) {
         // 获取用户分类列表
         User user = (User) userDetailsService.loadUserByUsername(username);
         List<Catalog> categoryList = catalogService.listCatalogs(user);
         model.addAttribute("user", user);
-        model.addAttribute("blog", blogService.getBlogById(id));
+        model.addAttribute("article", blogService.getArticleById(id));
         model.addAttribute("categoryList", categoryList);
         return new ModelAndView("article/contribute", "model", model);
     }
@@ -137,30 +137,30 @@ public class ArticleCenterController {
      * 保存文章
      *
      * @param username
-     * @param blog
+     * @param article
      * @return
      */
     @PostMapping("/saveArticle")
     @PreAuthorize("authentication.name.equals(#username)")
-    public ResponseEntity<Response> saveBlog(@PathVariable("username") String username, @RequestBody Blog blog) {
+    public ResponseEntity<Response> saveArticle(@PathVariable("username") String username, @RequestBody Article article) {
         // 对 Catalog 进行空处理
-        if (blog.getCatalog().getId() == null) {
+        if (article.getCatalog().getId() == null) {
             return ResponseEntity.ok().body(new Response(false, "未选择分类"));
         }
         try {
             // 判断是修改还是新增
-            if (blog.getId() != null) {
-                Blog orignalBlog = blogService.getBlogById(blog.getId());
-                orignalBlog.setTitle(blog.getTitle());
-                orignalBlog.setContent(blog.getContent());
-                orignalBlog.setSummary(blog.getSummary());
-                orignalBlog.setCatalog(blog.getCatalog());
-                orignalBlog.setTags(blog.getTags());
-                blogService.saveBlog(orignalBlog);
+            if (article.getId() != null) {
+                Article orignalArticle = blogService.getArticleById(article.getId());
+                orignalArticle.setTitle(article.getTitle());
+                orignalArticle.setContent(article.getContent());
+                orignalArticle.setSummary(article.getSummary());
+                orignalArticle.setCatalog(article.getCatalog());
+                orignalArticle.setTags(article.getTags());
+                blogService.saveArticle(orignalArticle);
             } else {
                 User user = (User) userDetailsService.loadUserByUsername(username);
-                blog.setUser(user);
-                blogService.saveBlog(blog);
+                article.setUser(user);
+                blogService.saveArticle(article);
             }
 
         } catch (ConstraintViolationException e) {
@@ -169,7 +169,7 @@ public class ArticleCenterController {
             return ResponseEntity.ok().body(new Response(false, e.getMessage()));
         }
 
-        String redirectUrl = "/article/" + username + "/editArticle/" + blog.getId();
+        String redirectUrl = "/article/" + username + "/editArticle/" + article.getId();
         return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
     }
 
@@ -180,12 +180,13 @@ public class ArticleCenterController {
      * @param username
      * @return
      */
-    @GetMapping("/articleManager")
+    @GetMapping("/center")
     public ModelAndView articleManager(@PathVariable("username") String username,Model model) {
         User  user = (User)userDetailsService.loadUserByUsername(username);
         String keyword = "";
         Pageable pageable = new PageRequest(0, 5);//默认加载5条
-        Page<Blog> page = blogService.listBlogsByTitleVoteAndSort(user, keyword, pageable);
+        Page<Article> page = blogService.listArticlesByTitleVoteAndSort(user, keyword, pageable);
+        model.addAttribute("user",user);
         model.addAttribute("page",page);
         model.addAttribute("defaultArticleList",page.getContent());
         return new ModelAndView("article/articleManager", "model", model);
@@ -198,20 +199,20 @@ public class ArticleCenterController {
      * @return
      */
     @GetMapping("/article/{id}")
-    public ModelAndView getBlogById(@PathVariable("username") String username,@PathVariable("id") Long id, Model model) {
+    public ModelAndView getArticleById(@PathVariable("username") String username,@PathVariable("id") Long id, Model model) {
         User principal = null;
-        Blog article = blogService.getBlogById(id);
+        Article article = blogService.getArticleById(id);
 
         //每次读取，简单的可以认为阅读量增加1次
         blogService.readingIncrease(id);
 
         // 判断操作用户是否是博客的所有者
-        boolean isBlogOwner = false;
+        boolean isArticleOwner = false;
         if (SecurityContextHolder.getContext().getAuthentication() !=null && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
                 &&  !SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser")) {
             principal = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if (principal !=null && username.equals(principal.getUsername())) {
-                isBlogOwner = true;
+                isArticleOwner = true;
             }
         }
 
@@ -228,10 +229,10 @@ public class ArticleCenterController {
         }
 
         //查询上一篇和下一篇
-        Blog nextArticle = blogService.findNextByCurrentId(id);
-        Blog prevArticle = blogService.findPrevByCurrentId(id);
+        Article nextArticle = blogService.findNextByCurrentId(id);
+        Article prevArticle = blogService.findPrevByCurrentId(id);
 
-        model.addAttribute("isBlogOwner", isBlogOwner);
+        model.addAttribute("isArticleOwner", isArticleOwner);
         model.addAttribute("article",article);
         model.addAttribute("currentVote",currentVote);
         model.addAttribute("nextArticle",nextArticle);

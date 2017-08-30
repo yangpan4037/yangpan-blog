@@ -19,7 +19,7 @@ $(function () {
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
-                "id": $('#blogId').val(),
+                "id": $.trim($('#articleId').val()),
                 "title": $.trim($('#title').val()),
                 "summary": $.trim($('#summary').val()),
                 "content": $.trim($('#content').val()),

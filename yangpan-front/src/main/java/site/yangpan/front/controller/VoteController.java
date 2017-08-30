@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import site.yangpan.core.domain.User;
-import site.yangpan.core.service.BlogService;
+import site.yangpan.core.service.ArticleService;
 import site.yangpan.core.service.VoteService;
 import site.yangpan.core.util.ConstraintViolationExceptionHandler;
 import site.yangpan.core.vo.Response;
@@ -26,7 +26,7 @@ import javax.validation.ConstraintViolationException;
 public class VoteController {
 
     @Autowired
-    private BlogService blogService;
+    private ArticleService blogService;
 
     @Autowired
     private VoteService voteService;

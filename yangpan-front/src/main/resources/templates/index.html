@@ -50,10 +50,10 @@
                         </div>
                         <div class="item-right">
                             <div class="item-content">
-                                <a class="item-title" th:href="'/article/' + *{username} + '/article/'+ *{blogId}"
+                                <a class="item-title" th:href="'/article/' + *{username} + '/article/'+ *{articleId}"
                                    th:title="*{title}">[[*{title}]]</a>
                                 <p class="item-info">
-                                    <a class="author" title="作者">[[*{username}]]</a>
+                                    <a class="author" title="作者">[[*{username}]]</a>Id
                                     <span>, [[${#dates.format(hotArticles.createTime, 'yyyy-MM-dd HH:mm')}]]</span>
                                 </p>
                             </div>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="item-right">
                             <div class="item-content">
-                                <a class="item-title" th:href="'/article/' + *{username} + '/article/'+ *{blogId}"
+                                <a class="item-title" th:href="'/article/' + *{username} + '/article/'+ *{articleId}"
                                    th:title="*{title}">[[*{title}]]</a>
                                 <p class="item-info">
                                     <a class="author" title="作者">[[*{username}]]</a>
@@ -91,7 +91,7 @@
                     <li class="layout-middle-wrap" th:each="dataList : ${articleList}">
                         <div class="layout-middle-left">
                             <a class="cover"
-                               th:href="'/article/' + ${dataList.username} + '/article/'+ ${dataList.blogId}"
+                               th:href="'/article/' + ${dataList.username} + '/article/'+ ${dataList.articleId}"
                                th:title="${dataList.title}">
                                 <img src="../static/pic/article_cover_01.jpg" alt="封面">
                             </a>
@@ -99,7 +99,7 @@
                         <div class="layout-middle-right">
                             <div class="layout-middle-right-content">
                                 <a class="title"
-                                   th:href="'/article/' + ${dataList.username} + '/article/'+ ${dataList.blogId}"
+                                   th:href="'/article/' + ${dataList.username} + '/article/'+ ${dataList.articleId}"
                                    th:title="${dataList.title}">[[${dataList.title}]]</a>
                                 <p class="info">
                                     <span class="iconfont">&#xe652;</span> yangpan
@@ -109,7 +109,7 @@
                                 <p class="summary">[[${dataList.summary}]]</p>
                                 <div class="bottom">
                                     <div class="left">
-                                        <span class="category">分类:随笔 </span>
+                                        <span class="category">分类: </span>
                                     </div>
                                     <div class="right">
                                         <span class="iconfont look">&#xe61b; [[${dataList.readSize}]]</span>
