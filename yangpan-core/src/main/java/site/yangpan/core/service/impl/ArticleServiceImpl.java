@@ -29,7 +29,6 @@ public class ArticleServiceImpl implements ArticleService {
     public Article saveArticle(Article article) {
         boolean isNew = (article.getId() == null);
         EsArticle esArticle = null;
-
         Article returnArticle = blogRepository.save(article);
 
         if (isNew) {
@@ -85,7 +84,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void readingIncrease(Long id) {
         Article article = blogRepository.findOne(id);
-        article.setReadSize(article.getCommentSize() + 1);
+        article.setReadSize(article.getReadSize() + 1);
         this.saveArticle(article);
     }
 

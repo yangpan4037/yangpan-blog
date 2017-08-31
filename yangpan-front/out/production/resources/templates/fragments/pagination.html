@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<!--/* 分页小于5全部显示 */-->
+<div class="yangpan-pagination" data-th-fragment="pagination" data-th-object="${page}"
+     data-th-if="${page.totalPages le 5}">
+    <a href="#">上一页</a>
+    <a href="#" data-th-each="i : ${#numbers.sequence(1, page.totalPages)}"
+       data-th-classappend="${(page.number + 1) eq i} ? 'active' : ''">[[${i}]]</a>
+    <a href="#">下一页</a>
+    到 <input type="text"> 页
+    每页 <input type="text"> 条
+    共[[${page.totalElements}]]条数据
+</div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>首页</title>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link th:replace="fragments/link"/>
+    <script th:replace="fragments/script"/>
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <script type="text/javascript" src="/js/index.js"></script>
+</head>
+<body>
+
+<!--/* header start */-->
+<div th:replace="~{fragments/header :: header}"></div>
+<!--/* header end */-->
+
+<!-- banner-outer-wrap start -->
+<div class="banner-outer-wrap">
+    <div class="banner-wrap media-auto-width">
+        <ul class="banner">
+            <li th:each="banner : ${bannerList}">
+                <a th:href="${banner.url}">
+                    <img th:src="${banner.pic}"/>
+                </a>
+            </li>
+        </ul>
+        <a class="iconfont arrows prev" href="javascript:void(0);">&#xe601;</a>
+        <a class="iconfont arrows next" href="javascript:void(0);">&#xe602;</a>
+    </div>
+</div>
+<!-- banner-outer-wrap end -->
+
+<!-- yangpan-layout-wrap start -->
+<div class="yangpan-layout-wrap media-auto-width">
+    <div class="yangpan-layout">
+
+        <!-- yangpan-layout-left start -->
+        <div class="yangpan-layout-left">
+            <div class="module-wrap">
+                <div class="module-title">热门文章</div>
+                <ul class="module-content" th:each="hotArticles , hotblogStat : ${hotArticleList}"
+                    th:object="${hotArticles}">
+                    <li class="item">
+                        <div class="item-left">
+                            <img class="face" src="../static/images/defaut_face_01.jpeg" alt="头像">
+                        </div>
+                        <div class="item-right">
+                            <div class="item-content">
+                                <a class="item-title" th:href="'/article/' + *{username} + '/article/'+ *{articleId}"
+                                   th:title="*{title}">[[*{title}]]</a>
+                                <p class="item-info">
+                                    <a class="author" title="作者">[[*{username}]]</a>Id
+                                    <span>, [[${#dates.format(hotArticles.createTime, 'yyyy-MM-dd HH:mm')}]]</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="module-wrap">
+                <div class="module-title">最新发布</div>
+                <ul class="module-content" th:each="newArticles : ${newArticleList}" th:object="${newArticles}">
+                    <li class="item">
+                        <div class="item-left">
+                            <img class="face" src="../static/images/defaut_face_06.jpg" alt="头像">
+                        </div>
+                        <div class="item-right">
+                            <div class="item-content">
+                                <a class="item-title" th:href="'/article/' + *{username} + '/article/'+ *{articleId}"
+                                   th:title="*{title}">[[*{title}]]</a>
+                                <p class="item-info">
+                                    <a class="author" title="作者">[[*{username}]]</a>
+                                    <span>, [[${#dates.format(newArticles.createTime, 'yyyy-MM-dd HH:mm')}]]</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- yangpan-layout-left end -->
+
+        <!-- yangpan-layout-middle start -->
+        <div class="yangpan-layout-middle" id="articleCallbackWrap">
+            <div class="yangpan-layout-content" id="articleListWrap">
+                <ul>
+                    <li class="layout-middle-wrap" th:each="dataList : ${articleList}">
+                        <div class="layout-middle-left">
+                            <a class="cover"
+                               th:href="'/article/' + ${dataList.username} + '/article/'+ ${dataList.articleId}"
+                               th:title="${dataList.title}">
+                                <img src="../static/pic/article_cover_01.jpg" alt="封面">
+                            </a>
+                        </div>
+                        <div class="layout-middle-right">
+                            <div class="layout-middle-right-content">
+                                <a class="title"
+                                   th:href="'/article/' + ${dataList.username} + '/article/'+ ${dataList.articleId}"
+                                   th:title="${dataList.title}">[[${dataList.title}]]</a>
+                                <p class="info">
+                                    <span class="iconfont">&#xe652;</span> yangpan
+                                    <span class="iconfont">&#xe600;</span> [[${#dates.format(dataList.createTime,
+                                    'yyyy-MM-dd HH:mm')}]]
+                                </p>
+                                <p class="summary">[[${dataList.summary}]]</p>
+                                <div class="bottom">
+                                    <div class="left">
+                                        <span class="category">分类: </span>
+                                    </div>
+                                    <div class="right">
+                                        <span class="iconfont look">&#xe61b; [[${dataList.readSize}]]</span>
+                                        <span class="iconfont vote">&#xe60c; [[${dataList.voteSize}]]</span>
+                                        <span class="iconfont comment">&#xe692; [[${dataList.commentSize}]]</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <!--/* 分页 */-->
+                <div th:replace="~{fragments/pagination :: pagination}">...</div>
+                <!--/* 分页 */-->
+            </div>
+        </div>
+        <!-- yangpan-layout-middle end -->
+
+        <!-- yangpan-layout-right start -->
+        <div class="yangpan-layout-right">
+            <div class="module-two-wrap">
+                <div class="module-title">活跃用户</div>
+                <div class="module-two-content">
+                    <a class="item" th:each="activeUsers: ${activeUserList}" th:object="${activeUsers}">
+                        <img class="face" th:src="*{avatar} == null ? '/images/defaut_face_01.jpeg' : *{avatar}"
+                             alt="头像">
+                        <span class="name">[[${activeUsers.username}]]</span>
+                    </a>
+                </div>
+            </div>
+            <div class="module-three-wrap">
+                <div class="module-title">热门标签</div>
+                <div class="module-three-content" id="hotTags">
+                    <a class="item" href="#" th:each="hotTags : ${hotTagList}">[[${hotTags.name}]]</a>
+                </div>
+            </div>
+        </div>
+        <!-- yangpan-layout-right end -->
+
+    </div>
+</div>
+<!-- yangpan-layout-wrap end -->
+
+<!-- <div style="height:100px;background:red;">zcxzcxzczx</div> -->
+
+<!--/* footer start */-->
+<div th:replace="~{fragments/footer :: footer}"></div>
+<!--/* header end */-->
+
+</body>
+</html>

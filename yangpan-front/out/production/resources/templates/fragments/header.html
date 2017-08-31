@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- header start -->
+    <div data-th-fragment="header" class="header">
+        <div class="media-auto-width">
+            <div class="left" sec:authorize="isAuthenticated()">
+                欢迎您！<a class="username" th:href="@{'/member/' + ${#authentication.name}}" sec:authentication="name"></a>。
+                <a id="headerLogoutBtn" href="javascript:void(0);">退出</a>
+            </div>
+            <div class="left" sec:authorize="isAnonymous()">
+                <a href="/login/page" class="login">亲，请登录</a>
+                <a href="/register/page" class="register">现在注册</a>
+            </div>
+
+            <ul class="right">
+                <li>
+                    <div class="search-wrap">
+                        <input id="headerSearchKeyword" class="search-text" type="text" placeholder="请输入搜索内容。">
+                        <input id="headerSearchKeywordBtn" class="search-btn iconfont" type="button" value="&#xe613;" />
+                    </div>
+                </li>
+                <li>
+                    <a href="/index">首页</a>
+                </li>
+                <li>
+                    <a class="header-article-state-btn" href="javascript:void(0);" order="new">最新</a>
+                </li>
+                <li>
+                    <a class="header-article-state-btn" href="javascript:void(0);" order="hot">最热</a>
+                </li>
+                <li>
+                    <a sec:authorize="isAuthenticated()" th:href="@{'/article/' + ${#authentication.name} + '/addArticle'}">写文章</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- header end -->
+
+
+    <!-- header-nav-wrap start -->
+    <div data-th-fragment="userHeadMenu" class="header-nav-wrap">
+        <div class="media-auto-width">
+            <a class="logo" href="../index.html">
+                <img src="" alt="logo">
+            </a>
+            <div class="nav">
+                <a th:class="${#httpServletRequest.getRequestURI()} eq '/member/'+${user.username}+'/center' ? 'active' : ''" th:href="'/member/'+${user.username}+'/center'">个人中心</a>
+                <a th:class="${#httpServletRequest.getRequestURI()} eq '/article/'+${user.username}+'/center' ? 'active' : ''" th:href="'/article/'+${user.username}+'/center'">文章中心</a>
+                <a href="javascript:void(0);">消息中心</a>
+            </div>
+            <div class="right">
+                <a href="#">
+                    <i class="iconfont">&#xe641;</i>
+                    <span>帮助</span>
+                </a>
+                <a href="#">
+                    <i class="iconfont">&#xe608;</i>
+                    <span>设置</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- header-nav-wrap end -->
+</body>
+</html>
